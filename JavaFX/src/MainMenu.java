@@ -1,3 +1,4 @@
+import javafx.animation.FadeTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -9,15 +10,26 @@ import javafx.scene.text.Text;
 
 public class MainMenu {
 
-    Button playButton, instructionsButton, exitButton;
+    private Button playButton, instructionsButton, exitButton;
 
     public Scene window() {
         playButton = new Button("Play");
-        instructionsButton = new Button("How To Play");
-        exitButton = new Button("Exit");
+        playButton.setFont(Font.font("OCR A Extended", 20));
+        playButton.setStyle("-fx-background-color: #3a3a3a");
+        playButton.setTextFill(Color.WHITE);
 
-        Text text = new Text ("Interconnected Isolation");
-        text.setFont(Font.font("Trebuchet MS", 70));
+        instructionsButton = new Button("How To Play");
+        instructionsButton.setFont(Font.font("OCR A Extended", 20));
+        instructionsButton.setStyle("-fx-background-color: #3a3a3a");
+        instructionsButton.setTextFill(Color.WHITE);
+
+        exitButton = new Button("Exit");
+        exitButton.setFont(Font.font("OCR A Extended", 20));
+        exitButton.setStyle("-fx-background-color: #3a3a3a");
+        exitButton.setTextFill(Color.WHITE);
+
+        Text text = new Text ("Interconnected Isolation\n");
+        text.setFont(Font.font("OCR A Extended", 70));
         text.setFill(Color.WHITE);
 
         VBox layout1 = new VBox(70);
@@ -26,5 +38,17 @@ public class MainMenu {
         layout1.getChildren().addAll(text, playButton, instructionsButton, exitButton);
         layout1.setStyle("-fx-background-color: black");
         return new Scene(layout1, 1280, 720);
+    }
+
+    public Button getPlayButton() {
+        return playButton;
+    }
+
+    public Button getInstructionsButton() {
+        return instructionsButton;
+    }
+
+    public Button getExitButton() {
+        return exitButton;
     }
 }
