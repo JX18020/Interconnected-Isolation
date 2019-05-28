@@ -15,14 +15,6 @@ public class InterconnectedIsolation extends Application {
     Stage window;
     Scene splashScreen, mainMenu, instructions, level1, level2, level3;
 
-    Random rnd = new Random();
-
-    Pane playfieldLayer;
-
-    List<Player> player = new ArrayList<>();
-
-    Image playerImage;
-
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
@@ -56,40 +48,8 @@ public class InterconnectedIsolation extends Application {
         window.setScene(splashScreen);
         window.show();
         timer.schedule(task, 4000l);
-
-        Group root = new Group();
-        playfieldLayer = new Pane();
-
-        root.getChildren().add(playfieldLayer);
-
-        level1 = new Scene (root, Settings.SCENE_WIDTH, Settings.SCENE_HEIGHT);
-
-        window.setScene(level1);
-        loadGame();
-        createPlayer();
-
-        AnimationTimer gameLoop = new AnimationTimer() {
-            @Override
-            public void handle(long now) {
-                player.forEach(sprite -> sprite.processInput());
-
-                player.forEach(sprite -> sprite.move());
-
-                player.forEach(sprite -> sprite.updateUI());
-
-            }
-        };
-
-        gameLoop.start();
     }
 
-    private void loadGame() {
-        playerImage = new Image(getClass().getResource("player.png").toExternalForm());
-    }
-
-    private void createPlayer() {
-        Input input = new Input(scene);
-    }
     private void closeProgram() {
         boolean answer = ConfirmBox.display("Exit", "Are you sure you want to exit?");
         if (answer)
