@@ -1,7 +1,9 @@
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.util.*;
 
@@ -13,29 +15,20 @@ public class InterconnectedIsolation extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         window = primaryStage;
-        window.setTitle("Interconnected Isolation");
         window.setOnCloseRequest(e -> {
             e.consume();
             closeProgram();
         });
+        window.setTitle("Interconnected Isolation");
 
         SplashScreen splash = new SplashScreen();
         splashScreen = splash.window();
 
         MainMenu menu = new MainMenu();
         mainMenu = menu.window();
-
-        Instructions howToPlay = new Instructions();
-        instructions = howToPlay.window();
-
-        Level1 l1 = new Level1();
-        level1 = l1.window();
-
-        menu.getPlayButton().setOnAction(e -> window.setScene(level1));
+        menu.getPlayButton().setOnAction(e -> new Level1(window).display());
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
-
-        howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
@@ -46,6 +39,7 @@ public class InterconnectedIsolation extends Application {
         window.setScene(splashScreen);
         window.show();
         timer.schedule(task, 4000l);
+        window.show();
     }
 
     private void closeProgram() {
