@@ -3,9 +3,11 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 
+import java.io.IOException;
+
 public abstract class Level {
-    private Scene level;
-    private BorderPane layout;
+    Scene level;
+    BorderPane layout;
     private Image bgImage;
 
     public Level () {
@@ -14,10 +16,7 @@ public abstract class Level {
         level = new Scene (layout, 1280, 720, Color.BLACK);
     }
 
-    public abstract Scene window();
+    public abstract Scene window() throws IOException;
 
-    public Scene getLevel() {
-        return level;
-    }
 
 }
