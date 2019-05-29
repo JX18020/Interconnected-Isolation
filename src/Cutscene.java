@@ -1,2 +1,2 @@
-public class Cutscene extends Level {
+public class Cutscene {
 }
