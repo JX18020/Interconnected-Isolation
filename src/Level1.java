@@ -28,6 +28,6 @@ public class Level1 extends GameLoop {
     @Override
     public void initStage() {
         player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-        player.reposition(scene.getWidth()/2 - 20);
+        player.reposition(scene.getWidth()/2 - 20, scene.getHeight() - 40);
     }
 }

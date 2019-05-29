@@ -44,8 +44,9 @@ public class Player {
         return playerView.getBoundsInParent().getMaxX();
     }
 
-    public void reposition(double x) {
+    public void reposition(double x, double y) {
         playerView.setTranslateX(x);
+        playerView.setTranslateY(y);
     }
 
     public void moveRight() {
