@@ -37,23 +37,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Level1.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Level2.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="96">
+              <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Level3.java">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Level1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="32">
-              <caret line="2" selection-end-line="15" />
+            <state relative-caret-position="92">
+              <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -79,8 +79,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="269">
-              <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="60" />
+            <state relative-caret-position="1085">
+              <caret line="76" column="39" lean-forward="true" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -91,8 +91,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+            <state relative-caret-position="688">
+              <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -146,8 +146,8 @@
         <option value="$PROJECT_DIR$/src/Level3.java" />
         <option value="$PROJECT_DIR$/src/InteractionPoint.java" />
         <option value="$PROJECT_DIR$/src/InterconnectedIsolation.java" />
-        <option value="$PROJECT_DIR$/src/GameLoop.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
+        <option value="$PROJECT_DIR$/src/GameLoop.java" />
         <option value="$PROJECT_DIR$/src/Level1.java" />
       </list>
     </option>
@@ -185,6 +185,12 @@
               <item name="Interconnected-Isolation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Interconnected-Isolation" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Interconnected-Isolation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Interconnected-Isolation" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Interconnected-Isolation" type="b2602c69:ProjectViewProjectNode" />
@@ -241,12 +247,12 @@
       <updated>1559152727351</updated>
       <workItem from="1559152729120" duration="6397000" />
       <workItem from="1559161739615" duration="4787000" />
-      <workItem from="1559223250747" duration="1697000" />
+      <workItem from="1559223250747" duration="2596000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12881000" />
+    <option name="totallyTimeSpent" value="13780000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -261,7 +267,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.2552011" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.152349" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -328,24 +334,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Level.java" />
     <entry file="file://$PROJECT_DIR$/src/Input.java" />
-    <entry file="file://$PROJECT_DIR$/src/Level2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Level3.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
           <caret line="2" selection-end-line="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -363,10 +355,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Instructions.java">
+    <entry file="file://$PROJECT_DIR$/src/Level2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="18" column="55" lean-forward="true" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+        <state relative-caret-position="96">
+          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -387,20 +379,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
+    <entry file="file://$PROJECT_DIR$/src/Instructions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="269">
-          <caret line="75" column="32" lean-forward="true" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="60" />
+        <state relative-caret-position="64">
+          <caret line="18" column="55" lean-forward="true" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="31" column="8" selection-start-line="31" selection-start-column="8" selection-end-line="31" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="688">
+          <caret line="67" column="5" lean-forward="true" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
+    <entry file="file://$PROJECT_DIR$/assets/images/scene1_background.png">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="32" column="35" selection-start-line="32" selection-start-column="35" selection-end-line="32" selection-end-column="35" />
+        <state relative-caret-position="1085">
+          <caret line="76" column="39" lean-forward="true" selection-start-line="76" selection-start-column="39" selection-end-line="76" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -409,8 +418,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Level1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="24" column="48" selection-start-line="24" selection-start-column="48" selection-end-line="24" selection-end-column="48" />
+        <state relative-caret-position="92">
+          <caret line="15" column="31" selection-start-line="15" selection-start-column="31" selection-end-line="15" selection-end-column="31" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -11,7 +11,10 @@ public class Player {
     double courseHeight;
     double stateSpeed;
 
-    Image playerChar;
+    Image playerRight;
+    Image playerLeft;
+    Image playerRightBag;
+    Image playerLeftBag;
     ImageView playerView;
 
     private boolean stateOnRightEdgeOfScreen;
@@ -26,11 +29,12 @@ public class Player {
         stateSpeed = 5;
 
         try {
-            playerChar = new Image(new FileInputStream("assets/images/player.png"));
+            playerRight = new Image(new FileInputStream("assets/images/player.png"));
+            playerLeft = 
         } catch (IOException e) {
         }
         playerView = new ImageView(playerChar);
-        playerView.setFitHeight(300);
+        playerView.setFitHeight(320);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
     }
