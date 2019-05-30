@@ -9,7 +9,7 @@ import java.util.*;
 
 public class InterconnectedIsolation extends Application {
 
-    Stage window;
+    static Stage window;
     Scene splashScreen, mainMenu, instructions, level1, level2, level3;
 
     @Override
@@ -24,8 +24,13 @@ public class InterconnectedIsolation extends Application {
         SplashScreen splash = new SplashScreen();
         splashScreen = splash.window();
 
+        Instructions howToPlay = new Instructions();
+        instructions = howToPlay.window();
+
         MainMenu menu = new MainMenu();
         mainMenu = menu.window();
+
+        howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
         menu.getPlayButton().setOnAction(e -> new Level1(window).display());
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
@@ -42,7 +47,7 @@ public class InterconnectedIsolation extends Application {
         window.show();
     }
 
-    private void closeProgram() {
+    public static void closeProgram() {
         boolean answer = ConfirmBox.display("Exit", "Are you sure you want to exit?");
         if (answer)
             window.close();

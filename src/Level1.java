@@ -22,12 +22,14 @@ public class Level1 extends GameLoop {
         backgroundView = new ImageView(background);
         backgroundView.setFitHeight(720);
         backgroundView.setPreserveRatio(true);
+        backgroundView.fitHeightProperty().bind(scene.heightProperty());
         componentsGroup.getChildren().add(backgroundView);
     }
 
     @Override
     public void initStage() {
         player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-        player.reposition(scene.getWidth()/2 - 20, scene.getHeight() - 40);
+        player.reposition(scene.getWidth()/2 - 20, scene.getHeight() - 330);
     }
+
 }

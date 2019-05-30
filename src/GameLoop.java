@@ -30,12 +30,7 @@ public abstract class GameLoop {
     private boolean leftPressed;
 
     public GameLoop(Stage primaryStage, boolean scrollable) {
-        primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-            @Override
-            public void handle(WindowEvent event) {
-                System.exit(0);
-            }
-        });
+        primaryStage.setOnCloseRequest(e -> InterconnectedIsolation.closeProgram());
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, 1280, 720);
@@ -48,7 +43,8 @@ public abstract class GameLoop {
 
         try {
             initBackground();
-        } catch (IOException e) {}
+        } catch (IOException e) {
+        }
 
         Rectangle rightBounds = new Rectangle();
         rightBounds.setHeight(scene.getHeight());
@@ -69,7 +65,7 @@ public abstract class GameLoop {
             public void handle(long now) {
                 if (scrollable) {
                     if (player.playerView.getBoundsInParent().getMaxX() >= rightBounds.getBoundsInParent().getMinX() - componentsGroup.getTranslateX() - 400) {
-                        if (componentsGroup.getTranslateX() >= -(stageWidth - 1105))
+                        if (componentsGroup.getTranslateX() >= -(stageWidth - 1280))
                             componentsGroup.setTranslateX(componentsGroup.getTranslateX() - player.getSpeed());
                     } else if (player.playerView.getBoundsInParent().getMinX() <= leftBounds.getBoundsInParent().getMaxX() - componentsGroup.getTranslateX() + 400) {
                         if (componentsGroup.getTranslateX() <= -5)
@@ -89,17 +85,19 @@ public abstract class GameLoop {
     }
 
     public abstract void initStage();
+
     public abstract void initBackground() throws IOException;
 
     EventHandler onPressHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            switch(event.getCode()) {
+            switch (event.getCode()) {
                 case D:
                     rightPressed = true;
+                    break;
                 case A:
                     leftPressed = true;
-                break;
+                    break;
             }
         }
     };
@@ -107,9 +105,10 @@ public abstract class GameLoop {
     EventHandler onReleaseHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            switch(event.getCode()) {
+            switch (event.getCode()) {
                 case D:
                     rightPressed = false;
+                    break;
                 case A:
                     leftPressed = false;
                     break;

@@ -29,9 +29,8 @@ public class Player {
             playerChar = new Image(new FileInputStream("assets/images/player.png"));
         } catch (IOException e) {
         }
-
-        playerView = new ImageView();
-        playerView.setFitHeight(150);
+        playerView = new ImageView(playerChar);
+        playerView.setFitHeight(300);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
     }
