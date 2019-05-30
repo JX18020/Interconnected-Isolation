@@ -28,7 +28,7 @@ public class MainMenu {
         exitButton.setStyle("-fx-background-color: #3a3a3a");
         exitButton.setTextFill(Color.WHITE);
 
-        Text text = new Text ("Interconnected Isolation\n");
+        Text text = new Text("Interconnected Isolation\n");
         text.setFont(Font.font("OCR A Extended", 70));
         text.setFill(Color.WHITE);
 

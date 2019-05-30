@@ -7,15 +7,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class Player {
-    double courseWidth;
-    double courseHeight;
-    double stateSpeed;
+    private double courseWidth;
+    private double courseHeight;
+    private double stateSpeed;
 
-    Image playerRight;
-    Image playerLeft;
-    Image playerRightBag;
-    Image playerLeftBag;
+    private Image playerRight;
+    private Image playerLeft;
     ImageView playerView;
+
+    boolean hasBag;
 
     private boolean stateOnRightEdgeOfScreen;
     private boolean stateOnLeftEdgeOfScreen;
@@ -30,10 +30,10 @@ public class Player {
 
         try {
             playerRight = new Image(new FileInputStream("assets/images/player.png"));
-            playerLeft = 
+            playerLeft = new Image(new FileInputStream("assets/images/player_flip.png"));
         } catch (IOException e) {
         }
-        playerView = new ImageView(playerChar);
+        playerView = new ImageView(playerRight);
         playerView.setFitHeight(320);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
@@ -45,6 +45,10 @@ public class Player {
 
     public double getMaxX() {
         return playerView.getBoundsInParent().getMaxX();
+    }
+
+    public double getAverageX() {
+        return (playerView.getBoundsInParent().getMaxX() + playerView.getBoundsInParent().getMinX()) / 2;
     }
 
     public void reposition(double x, double y) {
@@ -64,8 +68,7 @@ public class Player {
         if (playerView.getBoundsInParent().getMaxX() >= courseWidth) {
             stateOnRightEdgeOfScreen = true;
             return stateOnRightEdgeOfScreen;
-        }
-        else {
+        } else {
             stateOnRightEdgeOfScreen = false;
             return stateOnRightEdgeOfScreen;
         }
@@ -75,8 +78,7 @@ public class Player {
         if (playerView.getBoundsInParent().getMinX() <= 0) {
             stateOnLeftEdgeOfScreen = true;
             return stateOnLeftEdgeOfScreen;
-        }
-        else {
+        } else {
             stateOnLeftEdgeOfScreen = false;
             return stateOnLeftEdgeOfScreen;
         }
@@ -108,5 +110,13 @@ public class Player {
 
     public boolean getCanMoveLeft() {
         return canMoveLeft;
+    }
+
+    public Image getPlayerRight() {
+        return playerRight;
+    }
+
+    public Image getPlayerLeft() {
+        return playerLeft;
     }
 }

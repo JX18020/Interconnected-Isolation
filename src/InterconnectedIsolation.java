@@ -31,7 +31,7 @@ public class InterconnectedIsolation extends Application {
         mainMenu = menu.window();
 
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
-        menu.getPlayButton().setOnAction(e -> new Level1(window).display());
+        menu.getPlayButton().setOnAction(e -> new Level1(window, 2298, 720, 2).display());
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
 
