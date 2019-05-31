@@ -11,17 +11,23 @@ import javafx.scene.text.Text;
 
 public class ChooseName {
 
-    String name;
+    private String name;
 
     private Button confirm, back;
+    private TextField choose;
+    private Text error;
 
     public Scene window() {
+
+        error = new Text ("Your name may not contain special characters or numbers.");
+        error.setFont(Font.font("OCR A Extended", 20));
+        error.setFill(Color.BLACK);
 
         Text prompt = new Text ("Enter your name:");
         prompt.setFont(Font.font("OCR A Extended", 50));
         prompt.setFill(Color.WHITE);
 
-        TextField choose = new TextField();
+        choose = new TextField();
 
         confirm = new Button("Confirm");
         confirm.setFont(Font.font("OCR A Extended", 20));
@@ -42,7 +48,7 @@ public class ChooseName {
 
         layout1.setAlignment(Pos.CENTER);
         layout1.setPadding(new Insets(10, 400, 10, 400));
-        layout1.getChildren().addAll(prompt, choose, layout2);
+        layout1.getChildren().addAll(prompt, error, choose, layout2);
         layout1.setStyle("-fx-background-color: black");
 
         return new Scene (layout1, 1280, 720);
@@ -52,11 +58,23 @@ public class ChooseName {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public Button getConfirm() {
         return confirm;
     }
 
     public Button getBack() {
         return back;
+    }
+
+    public TextField getChoose() {
+        return choose;
+    }
+
+    public Text getError() {
+        return error;
     }
 }

@@ -2,6 +2,7 @@ import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -38,7 +39,18 @@ public class InterconnectedIsolation extends Application {
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
         choose.getBack().setOnAction(e -> window.setScene(mainMenu));
-        choose.getConfirm().setOnAction(e -> new Level1(window, 2298, 720, 2).display());
+        choose.getConfirm().setOnAction(e -> {
+            boolean error = false;
+            choose.setName(choose.getChoose().getText());
+            for (int i = 0; i < choose.getName().length(); i++) {
+                if ((choose.getName().charAt(i) < 65 || choose.getName().charAt(i) > 90 && choose.getName().charAt(i) < 97 || choose.getName().charAt(i) > 122) && choose.getName().charAt(i) != 32 && choose.getName().charAt(i) != 39 && choose.getName().charAt(i) != 45) {
+                    choose.getError().setFill(Color.WHITE);
+                    error = true;
+                }
+            }
+            if (!error)
+                new Level1(window, 2298, 720, 2).display();
+        });
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
