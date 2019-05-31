@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -41,7 +42,7 @@ public abstract class GameLoop {
 
         scene.setOnKeyPressed(onPressHandler);
         scene.setOnKeyReleased(onReleaseHandler);
-
+        scene.setOnMouseClicked(onMouseHandler);
         try {
             initBackground(sceneNum);
         } catch (IOException e) {
@@ -117,7 +118,6 @@ public abstract class GameLoop {
     public abstract void initStage();
 
     public abstract void initBackground(int sceneNum) throws IOException;
-
     EventHandler onPressHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -131,7 +131,15 @@ public abstract class GameLoop {
             }
         }
     };
-
+    EventHandler onMouseHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            int x = (int)(event.getSceneX()-componentsGroup.getTranslateX()), y = (int)event.getSceneY();
+            if (x >= 485 && x <= 726 && y >= 169 && y <= 278) System.out.println("Clicked on the microwave!");
+            else if (x >= player.playerView.getTranslateX() && x <= player.playerView.getTranslateX()+39)
+                System.out.println("Clicked on player!");
+        }
+    };
     EventHandler onReleaseHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -156,6 +164,6 @@ public abstract class GameLoop {
 
     public void display() {
         stage.setScene(scene);
-        stage.centerOnScreen();
+       // stage.centerOnScreen();
     }
 }
