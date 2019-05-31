@@ -10,7 +10,7 @@ import java.util.*;
 public class InterconnectedIsolation extends Application {
 
     static Stage window;
-    Scene splashScreen, mainMenu, instructions, level1, level2, level3;
+    Scene splashScreen, mainMenu, instructions, chooseName, level1, level2, level3;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -30,10 +30,15 @@ public class InterconnectedIsolation extends Application {
         MainMenu menu = new MainMenu();
         mainMenu = menu.window();
 
+        ChooseName choose = new ChooseName();
+        chooseName = choose.window();
+
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
-        menu.getPlayButton().setOnAction(e -> new Level1(window, 2298, 720, 2).display());
+        menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
+        choose.getBack().setOnAction(e -> window.setScene(mainMenu));
+        choose.getConfirm().setOnAction(e -> new Level1(window, 2298, 720, 2).display());
 
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {

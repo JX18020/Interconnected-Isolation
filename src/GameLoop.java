@@ -66,10 +66,10 @@ public abstract class GameLoop {
             @Override
             public void handle(long now) {
                 if (scrollable) {
-                    if (Math.floor(player.playerView.getBoundsInParent().getMaxX()) >= Math.floor(rightBounds.getBoundsInParent().getMinX() - componentsGroup.getTranslateX() - 600)) {
+                    if (Math.floor(player.playerView.getBoundsInParent().getMaxX()) >= Math.floor(rightBounds.getBoundsInParent().getMinX() - componentsGroup.getTranslateX() - 570)) {
                         if (Math.floor(componentsGroup.getTranslateX()) >= -(stageWidth - 1280))
                             componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() - player.getSpeed()));
-                    } else if (Math.floor(player.playerView.getBoundsInParent().getMinX()) <= Math.floor(leftBounds.getBoundsInParent().getMaxX() - componentsGroup.getTranslateX() + 600)) {
+                    } else if (Math.floor(player.playerView.getBoundsInParent().getMinX()) <= Math.floor(leftBounds.getBoundsInParent().getMaxX() - componentsGroup.getTranslateX() + 570)) {
                         if (Math.floor(componentsGroup.getTranslateX()) <= -5)
                             componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() + player.getSpeed()));
                     }
@@ -79,13 +79,10 @@ public abstract class GameLoop {
                 if (rightPressed && player.getCanMoveRight()) {
                     player.playerView.setImage(player.getPlayerRight());
                     player.moveRight();
-                }
-
-                else if (leftPressed && player.getCanMoveLeft()) {
+                } else if (leftPressed && player.getCanMoveLeft()) {
                     player.playerView.setImage(player.getPlayerLeft());
                     player.moveLeft();
-                }
-                else player.playerView.setImage(player.getPlayerStand());
+                } else player.playerView.setImage(player.getPlayerStand());
             }
         }.start();
     }
@@ -104,13 +101,13 @@ public abstract class GameLoop {
     }
 
     public boolean checkForCollisionOnRight() {
-        if (player.getMaxX() >= stageWidth+20)
+        if (player.getMaxX() >= stageWidth - 20)
             return true;
         return false;
     }
 
     public boolean checkForCollisionOnLeft() {
-        if (player.getMinX() <= 0)
+        if (player.getMinX() <= 120)
             return true;
         return false;
     }
@@ -118,6 +115,7 @@ public abstract class GameLoop {
     public abstract void initStage();
 
     public abstract void initBackground(int sceneNum) throws IOException;
+
     EventHandler onPressHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -134,9 +132,9 @@ public abstract class GameLoop {
     EventHandler onMouseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            int x = (int)(event.getSceneX()-componentsGroup.getTranslateX()), y = (int)event.getSceneY();
+            int x = (int) (event.getSceneX() - componentsGroup.getTranslateX()), y = (int) event.getSceneY();
             if (x >= 485 && x <= 726 && y >= 169 && y <= 278) System.out.println("Clicked on the microwave!");
-            else if (x >= player.playerView.getTranslateX() && x <= player.playerView.getTranslateX()+39)
+            else if (x >= player.playerView.getTranslateX() && x <= player.playerView.getTranslateX() + 39)
                 System.out.println("Clicked on player!");
         }
     };
@@ -164,6 +162,6 @@ public abstract class GameLoop {
 
     public void display() {
         stage.setScene(scene);
-       // stage.centerOnScreen();
+        // stage.centerOnScreen();
     }
 }

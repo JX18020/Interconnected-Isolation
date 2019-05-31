@@ -23,16 +23,20 @@ public class Player {
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
     private int rightAnimation = 0, leftAnimation = 0, rightcnt = 0, leftcnt = 0;
+
     public Player(Group componentsGroup, double cWidth, double cHeight) {
         courseWidth = cWidth;
         courseHeight = cHeight;
         stateSpeed = 5;
-        animation = new ArrayList<>();animation2=new ArrayList<>();
+        animation = new ArrayList<>();
+        animation2 = new ArrayList<>();
         try {
             playerStandL = (new Image(new FileInputStream("assets/images/player_flip.png")));
             playerStand = (new Image(new FileInputStream("assets/images/player.png")));
-            for (int x = 1; x <= 8; x++) animation2.add(new Image(new FileInputStream("assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
-            for (int x = 1; x <= 8; x++) animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
+            for (int x = 1; x <= 8; x++)
+                animation2.add(new Image(new FileInputStream("assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
+            for (int x = 1; x <= 8; x++)
+                animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
         } catch (IOException e) {
             System.out.println("oopsio");
         }
@@ -117,20 +121,34 @@ public class Player {
     }
 
     public Image getPlayerRight() {
-        if (++rightcnt == 5) {rightcnt = 0; rightAnimation++;}
-        leftAnimation = 0;rightAnimation%=8;leftcnt=0;
+        if (++rightcnt == 5) {
+            rightcnt = 0;
+            rightAnimation++;
+        }
+        leftAnimation = 0;
+        rightAnimation %= 8;
+        leftcnt = 0;
         facingRight = true;
         return animation.get(rightAnimation);
     }
 
     public Image getPlayerLeft() {
-        if (++leftcnt == 5) {leftcnt = 0; leftAnimation++;}
-        rightAnimation = 0;leftAnimation%=8;rightcnt=0;
+        if (++leftcnt == 5) {
+            leftcnt = 0;
+            leftAnimation++;
+        }
+        rightAnimation = 0;
+        leftAnimation %= 8;
+        rightcnt = 0;
         facingRight = false;
         return animation2.get(leftAnimation);
     }
+
     public Image getPlayerStand() {
-        leftcnt = 0;rightcnt = 0;leftAnimation=0;rightAnimation=0;
+        leftcnt = 0;
+        rightcnt = 0;
+        leftAnimation = 0;
+        rightAnimation = 0;
         return facingRight ? playerStand : playerStandL;
     }
 }
