@@ -11,12 +11,12 @@ public class Player {
     private double courseWidth;
     private double courseHeight;
     private double stateSpeed;
-    private ArrayList<Image> animation;
-    private Image playerStand;
+    private ArrayList<Image> animation, animation2;
+    private Image playerStand, playerStandL;
     ImageView playerView;
 
     boolean hasBag;
-
+    private boolean facingRight;
     private boolean stateOnRightEdgeOfScreen;
     private boolean stateOnLeftEdgeOfScreen;
 
@@ -27,16 +27,20 @@ public class Player {
         courseWidth = cWidth;
         courseHeight = cHeight;
         stateSpeed = 5;
-        animation = new ArrayList<>();
+        animation = new ArrayList<>();animation2=new ArrayList<>();
         try {
-            playerStand = (new Image(new FileInputStream("assets/images/player.png"),195,481,true,true));
+            playerStandL = (new Image(new FileInputStream("assets/images/player_flip.png")));
+            playerStand = (new Image(new FileInputStream("assets/images/player.png")));
+            for (int x = 1; x <= 8; x++) animation2.add(new Image(new FileInputStream("assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
             for (int x = 1; x <= 8; x++) animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
         } catch (IOException e) {
+            System.out.println("oopsio");
         }
         playerView = new ImageView(playerStand);
         playerView.setFitHeight(320);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
+        facingRight = true;
     }
 
     public double getMinX() {
@@ -52,8 +56,8 @@ public class Player {
     }
 
     public void reposition(double x, double y) {
-        playerView.setTranslateX(x);
-        playerView.setTranslateY(y);
+        playerView.setTranslateX(Math.floor(x));
+        playerView.setTranslateY(Math.floor(y));
     }
 
     public void moveRight() {
@@ -114,17 +118,19 @@ public class Player {
 
     public Image getPlayerRight() {
         if (++rightcnt == 5) {rightcnt = 0; rightAnimation++;}
-        leftAnimation = 0;rightAnimation %= 8;leftcnt = 0;
+        leftAnimation = 0;rightAnimation%=8;leftcnt=0;
+        facingRight = true;
         return animation.get(rightAnimation);
     }
 
     public Image getPlayerLeft() {
         if (++leftcnt == 5) {leftcnt = 0; leftAnimation++;}
         rightAnimation = 0;leftAnimation%=8;rightcnt=0;
-        return animation.get(leftAnimation);
+        facingRight = false;
+        return animation2.get(leftAnimation);
     }
     public Image getPlayerStand() {
         leftcnt = 0;rightcnt = 0;leftAnimation=0;rightAnimation=0;
-        return playerStand;
+        return facingRight ? playerStand : playerStandL;
     }
 }
