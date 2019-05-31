@@ -5,14 +5,14 @@ import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class Player {
     private double courseWidth;
     private double courseHeight;
     private double stateSpeed;
-
-    private Image playerRight;
-    private Image playerLeft;
+    private ArrayList<Image> animation;
+    private Image playerStand;
     ImageView playerView;
 
     boolean hasBag;
@@ -22,18 +22,18 @@ public class Player {
 
     private boolean canMoveRight = true;
     private boolean canMoveLeft = true;
-
+    private int rightAnimation = 0, leftAnimation = 0, rightcnt = 0, leftcnt = 0;
     public Player(Group componentsGroup, double cWidth, double cHeight) {
         courseWidth = cWidth;
         courseHeight = cHeight;
         stateSpeed = 5;
-
+        animation = new ArrayList<>();
         try {
-            playerRight = new Image(new FileInputStream("assets/images/player.png"));
-            playerLeft = new Image(new FileInputStream("assets/images/player_flip.png"));
+            playerStand = (new Image(new FileInputStream("assets/images/player.png"),195,481,true,true));
+            for (int x = 1; x <= 8; x++) animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
         } catch (IOException e) {
         }
-        playerView = new ImageView(playerRight);
+        playerView = new ImageView(playerStand);
         playerView.setFitHeight(320);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
@@ -57,11 +57,11 @@ public class Player {
     }
 
     public void moveRight() {
-        playerView.setTranslateX(playerView.getTranslateX() + stateSpeed);
+        playerView.setTranslateX(Math.floor(playerView.getTranslateX() + stateSpeed));
     }
 
     public void moveLeft() {
-        playerView.setTranslateX(playerView.getTranslateX() - stateSpeed);
+        playerView.setTranslateX(Math.floor(playerView.getTranslateX() - stateSpeed));
     }
 
     public boolean isOnRightEdge() {
@@ -113,10 +113,18 @@ public class Player {
     }
 
     public Image getPlayerRight() {
-        return playerRight;
+        if (++rightcnt == 5) {rightcnt = 0; rightAnimation++;}
+        leftAnimation = 0;rightAnimation %= 8;leftcnt = 0;
+        return animation.get(rightAnimation);
     }
 
     public Image getPlayerLeft() {
-        return playerLeft;
+        if (++leftcnt == 5) {leftcnt = 0; leftAnimation++;}
+        rightAnimation = 0;leftAnimation%=8;rightcnt=0;
+        return animation.get(leftAnimation);
+    }
+    public Image getPlayerStand() {
+        leftcnt = 0;rightcnt = 0;leftAnimation=0;rightAnimation=0;
+        return playerStand;
     }
 }
