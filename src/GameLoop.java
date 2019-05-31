@@ -65,12 +65,12 @@ public abstract class GameLoop {
             @Override
             public void handle(long now) {
                 if (scrollable) {
-                    if (player.playerView.getBoundsInParent().getMaxX() >= rightBounds.getBoundsInParent().getMinX() - componentsGroup.getTranslateX() - 400) {
-                        if (componentsGroup.getTranslateX() >= -(stageWidth - 1280))
-                            componentsGroup.setTranslateX(componentsGroup.getTranslateX() - player.getSpeed());
-                    } else if (player.playerView.getBoundsInParent().getMinX() <= leftBounds.getBoundsInParent().getMaxX() - componentsGroup.getTranslateX() + 400) {
-                        if (componentsGroup.getTranslateX() <= -5)
-                            componentsGroup.setTranslateX(componentsGroup.getTranslateX() + player.getSpeed());
+                    if (Math.floor(player.playerView.getBoundsInParent().getMaxX()) >= Math.floor(rightBounds.getBoundsInParent().getMinX() - componentsGroup.getTranslateX() - 600)) {
+                        if (Math.floor(componentsGroup.getTranslateX()) >= -(stageWidth - 1280))
+                            componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() - player.getSpeed()));
+                    } else if (Math.floor(player.playerView.getBoundsInParent().getMinX()) <= Math.floor(leftBounds.getBoundsInParent().getMaxX() - componentsGroup.getTranslateX() + 600)) {
+                        if (Math.floor(componentsGroup.getTranslateX()) <= -5)
+                            componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() + player.getSpeed()));
                     }
                 }
                 checkForCollisions();
@@ -80,10 +80,11 @@ public abstract class GameLoop {
                     player.moveRight();
                 }
 
-                if (leftPressed && player.getCanMoveLeft()) {
+                else if (leftPressed && player.getCanMoveLeft()) {
                     player.playerView.setImage(player.getPlayerLeft());
                     player.moveLeft();
                 }
+                else player.playerView.setImage(player.getPlayerStand());
             }
         }.start();
     }
@@ -102,13 +103,13 @@ public abstract class GameLoop {
     }
 
     public boolean checkForCollisionOnRight() {
-        if (player.getMaxX() >= stageWidth - 10)
+        if (player.getMaxX() >= stageWidth+20)
             return true;
         return false;
     }
 
     public boolean checkForCollisionOnLeft() {
-        if (player.getMinX() <= 150)
+        if (player.getMinX() <= 0)
             return true;
         return false;
     }
