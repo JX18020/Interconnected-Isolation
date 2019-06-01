@@ -11,11 +11,11 @@ public class Player {
     private double courseWidth;
     private double courseHeight;
     private double stateSpeed;
-    private ArrayList<Image> animation, animation2;
-    private Image playerStand, playerStandL;
+    private ArrayList<Image> animation, animation2, animation3, animation4;
+    private Image playerStand, playerStandL, playerStandBag, playerStandBagL;
     ImageView playerView;
 
-    boolean hasBag;
+    static boolean hasBag;
     private boolean facingRight;
     private boolean stateOnRightEdgeOfScreen;
     private boolean stateOnLeftEdgeOfScreen;
@@ -30,17 +30,28 @@ public class Player {
         stateSpeed = 5;
         animation = new ArrayList<>();
         animation2 = new ArrayList<>();
+        animation3 = new ArrayList<>();
+        animation4 = new ArrayList<>();
         try {
-            playerStandL = (new Image(new FileInputStream("assets/images/player_flip.png")));
-            playerStand = (new Image(new FileInputStream("assets/images/player.png")));
+            playerStandL = new Image(new FileInputStream("assets/images/player_flip.png"));
+            playerStand = new Image(new FileInputStream("assets/images/player.png"));
+            playerStandBagL = new Image(new FileInputStream("assets/images/player_bag_flip.png"));
+            playerStandBag = new Image(new FileInputStream("assets/images/player_bag.png"));
             for (int x = 1; x <= 8; x++)
                 animation2.add(new Image(new FileInputStream("assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
             for (int x = 1; x <= 8; x++)
                 animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
+            for (int x = 1; x <= 8; x++)
+                animation4.add(new Image(new FileInputStream("assets/images/walk_cycle_player_bag_left/player_walking_bag_" + x + ".png")));
+            for (int x = 1; x <= 8; x++)
+                animation3.add(new Image(new FileInputStream("assets/images/walk_cycle_player_bag/player_walking_bag_" + x + ".png")));
         } catch (IOException e) {
             System.out.println("oopsio");
         }
-        playerView = new ImageView(playerStand);
+        if (hasBag)
+            playerView = new ImageView(playerStandBag);
+        else
+            playerView = new ImageView(playerStand);
         playerView.setFitHeight(320);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
@@ -129,6 +140,8 @@ public class Player {
         rightAnimation %= 8;
         leftcnt = 0;
         facingRight = true;
+        if (hasBag)
+            return animation3.get(rightAnimation);
         return animation.get(rightAnimation);
     }
 
@@ -141,6 +154,8 @@ public class Player {
         leftAnimation %= 8;
         rightcnt = 0;
         facingRight = false;
+        if (hasBag)
+            return animation4.get(leftAnimation);
         return animation2.get(leftAnimation);
     }
 
@@ -149,6 +164,8 @@ public class Player {
         rightcnt = 0;
         leftAnimation = 0;
         rightAnimation = 0;
+        if (hasBag)
+            return facingRight ? playerStandBag : playerStandBagL;
         return facingRight ? playerStand : playerStandL;
     }
 }

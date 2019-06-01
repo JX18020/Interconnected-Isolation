@@ -18,6 +18,7 @@ public class Level1 extends GameLoop {
     }
 
     public void initBackground(int sceneNum) throws IOException {
+        Player.hasBag = true;
         if (sceneNum == 2) {
             background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
             canInteract = false;
