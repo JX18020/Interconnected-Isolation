@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public abstract class GameLoop {
@@ -23,8 +24,11 @@ public abstract class GameLoop {
     Group root;
     Group boundsGroup;
     Group componentsGroup;
-    Image background;
-    ImageView backgroundView;
+
+    ImageView arrow;
+    ImageView arrowRed;
+
+    private int sceneNum;
 
     private double stageWidth;
     private double stageHeight;
@@ -33,6 +37,20 @@ public abstract class GameLoop {
 
     private boolean rightPressed;
     private boolean leftPressed;
+    private boolean ePressed;
+
+    boolean canInteract;
+    boolean canExit;
+
+    private boolean hasArrow;
+    private boolean hasArrowRed;
+    private boolean nearDoor;
+    private boolean nearMicrowave;
+
+    boolean enteredDoor;
+
+    private int flowSceneNum;
+
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum) {
         primaryStage.setOnCloseRequest(e -> InterconnectedIsolation.closeProgram());
@@ -46,10 +64,18 @@ public abstract class GameLoop {
         scene.setOnKeyPressed(onPressHandler);
         scene.setOnKeyReleased(onReleaseHandler);
         scene.setOnMouseClicked(onMouseHandler);
+
+        this.sceneNum = sceneNum;
         try {
+            arrow = new ImageView(new Image(new FileInputStream("assets/images/arrow.png")));
+            arrowRed = new ImageView(new Image(new FileInputStream("assets/images/arrow_red.png")));
             initBackground(sceneNum);
         } catch (IOException e) {
         }
+        arrow.setFitWidth(40);
+        arrow.setPreserveRatio(true);
+        arrowRed.setFitWidth(40);
+        arrowRed.setPreserveRatio(true);
 
         Rectangle rightBounds = new Rectangle();
         rightBounds.setHeight(scene.getHeight());
@@ -78,6 +104,36 @@ public abstract class GameLoop {
                     }
                 }
                 checkForCollisions();
+
+                if (checkForInteraction() && canInteract) {
+                    if (!hasArrow) {
+                        componentsGroup.getChildren().add(arrow);
+                        hasArrow = true;
+                    }
+                    if (nearMicrowave && ePressed) {
+                        System.out.println("microwave");
+                    }
+                } else {
+                    componentsGroup.getChildren().remove(arrow);
+                    hasArrow = false;
+                }
+
+                if (checkForDoor() && canExit) {
+                    if (!hasArrowRed) {
+                        componentsGroup.getChildren().add(arrowRed);
+                        hasArrowRed = true;
+                    }
+                    if (ePressed) {
+                        enteredDoor = true;
+                        stop();
+                        flowSceneNum++;
+                        if (flowSceneNum == 1)
+                            new Level1(InterconnectedIsolation.window, 2298, 720, 1).display();
+                    }
+                } else {
+                    componentsGroup.getChildren().remove(arrowRed);
+                    hasArrowRed = false;
+                }
 
                 if (rightPressed && player.getCanMoveRight()) {
                     player.playerView.setImage(player.getPlayerRight());
@@ -115,6 +171,32 @@ public abstract class GameLoop {
         return false;
     }
 
+    public boolean checkForInteraction() {
+        if (sceneNum == 2) {
+            if (player.getAverageX() > 510 && player.getAverageX() < 670) {
+                nearMicrowave = true;
+                arrow.setX(580);
+                arrow.setY(100);
+            } else {
+                nearMicrowave = false;
+            }
+        }
+        return nearMicrowave;
+    }
+
+    public boolean checkForDoor() {
+        if (sceneNum == 2) {
+            if (player.getAverageX() > 2020 && player.getAverageX() < 2220) {
+                nearDoor = true;
+                arrowRed.setX(2100);
+                arrowRed.setY(190);
+            } else {
+                nearDoor = false;
+            }
+        }
+        return nearDoor;
+    }
+
     public abstract void initStage();
 
     public abstract void initBackground(int sceneNum) throws IOException;
@@ -129,14 +211,20 @@ public abstract class GameLoop {
                 case A:
                     leftPressed = true;
                     break;
+                case E:
+                    ePressed = true;
+                    break;
+
             }
         }
     };
+
     EventHandler onMouseHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             int x = (int) (event.getSceneX() - componentsGroup.getTranslateX()), y = (int) event.getSceneY();
-            if (x >= 485 && x <= 726 && y >= 169 && y <= 278) System.out.println("Clicked on the microwave!");
+            if (x >= 485 && x <= 726 && y >= 169 && y <= 278)
+                System.out.println("Clicked on the microwave!");
             else if (x >= player.playerView.getTranslateX() && x <= player.playerView.getTranslateX() + 39)
                 System.out.println("Clicked on player!");
         }
@@ -151,6 +239,9 @@ public abstract class GameLoop {
                 case A:
                     leftPressed = false;
                     break;
+                case E:
+                    ePressed = false;
+                    break;
             }
         }
     };
@@ -159,8 +250,8 @@ public abstract class GameLoop {
         stageWidth = width;
     }
 
-    public void setStageHeight(int height) {
-        stageHeight = height;
+    public void setStageHeight(double stageHeight) {
+        this.stageHeight = stageHeight;
     }
 
     public void display() {

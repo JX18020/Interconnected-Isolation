@@ -13,6 +13,7 @@ public class InterconnectedIsolation extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         window = primaryStage;
         window.setOnCloseRequest(e -> {
             e.consume();
@@ -32,6 +33,9 @@ public class InterconnectedIsolation extends Application {
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
 
+        Level1 level1 = new Level1(window, 2298, 720, 2);
+
+
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
         menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
@@ -50,7 +54,7 @@ public class InterconnectedIsolation extends Application {
                 }
             }
             if (!error)
-                new Level1(window, 2298, 720, 2).display();
+                level1.display();
         });
 
         Timer timer = new Timer();
