@@ -1,4 +1,5 @@
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -8,9 +9,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import javafx.util.Duration;
 
 import java.io.IOException;
 
@@ -35,7 +38,7 @@ public abstract class GameLoop {
         primaryStage.setOnCloseRequest(e -> InterconnectedIsolation.closeProgram());
         stage = primaryStage;
         root = new Group();
-        scene = new Scene(root, 1280, 720);
+        scene = new Scene(root, 1280, 720, Color.BLACK);
         componentsGroup = new Group();
         boundsGroup = new Group();
         root.getChildren().addAll(componentsGroup, boundsGroup);
@@ -161,6 +164,10 @@ public abstract class GameLoop {
     }
 
     public void display() {
+        FadeTransition fade = new FadeTransition(Duration.millis(4000), componentsGroup);
+        fade.setFromValue(0);
+        fade.setToValue(1);
+        fade.play();
         stage.setScene(scene);
         // stage.centerOnScreen();
     }

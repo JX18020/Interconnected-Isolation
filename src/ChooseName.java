@@ -28,6 +28,7 @@ public class ChooseName {
         prompt.setFill(Color.WHITE);
 
         choose = new TextField();
+        choose.setAlignment(Pos.CENTER);
 
         confirm = new Button("Confirm");
         confirm.setFont(Font.font("OCR A Extended", 20));

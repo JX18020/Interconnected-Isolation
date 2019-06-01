@@ -1,17 +1,15 @@
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.util.*;
 
 public class InterconnectedIsolation extends Application {
 
     static Stage window;
-    Scene splashScreen, mainMenu, instructions, chooseName, level1, level2, level3;
+    Scene splashScreen, mainMenu, instructions, chooseName;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -38,7 +36,10 @@ public class InterconnectedIsolation extends Application {
         menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
         menu.getExitButton().setOnAction(e -> closeProgram());
-        choose.getBack().setOnAction(e -> window.setScene(mainMenu));
+        choose.getBack().setOnAction(e -> {
+            choose.getError().setFill(Color.BLACK);
+            window.setScene(mainMenu);
+        });
         choose.getConfirm().setOnAction(e -> {
             boolean error = false;
             choose.setName(choose.getChoose().getText());
