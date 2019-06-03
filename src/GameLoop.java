@@ -39,8 +39,8 @@ public abstract class GameLoop {
     private boolean leftPressed;
     private boolean ePressed;
 
-    boolean canInteract;
-    boolean canExit;
+    private boolean canInteract;
+    private boolean canExit;
 
     private boolean hasArrow;
     private boolean hasArrowRed;
@@ -126,13 +126,14 @@ public abstract class GameLoop {
                     if (ePressed) {
                         enteredDoor = true;
                         stop();
-                        flowSceneNum++;
                         if (flowSceneNum == 1)
-                            new Level1(InterconnectedIsolation.window, 2298, 720, 1).display();
+                            componentsGroup.getChildren().remove(arrowRed);
+                            new Level1(InterconnectedIsolation.window, 2405, 720, 1).display();
                     }
                 } else {
                     componentsGroup.getChildren().remove(arrowRed);
                     hasArrowRed = false;
+                    nearDoor = false;
                 }
 
                 if (rightPressed && player.getCanMoveRight()) {
@@ -189,7 +190,15 @@ public abstract class GameLoop {
             if (player.getAverageX() > 2020 && player.getAverageX() < 2220) {
                 nearDoor = true;
                 arrowRed.setX(2100);
-                arrowRed.setY(190);
+                arrowRed.setY(130);
+            } else {
+                nearDoor = false;
+            }
+        } else {
+            if (player.getAverageX() > 130 && player.getAverageX() < 230) {
+                nearDoor = true;
+                arrowRed.setX(150);
+                arrowRed.setY(130);
             } else {
                 nearDoor = false;
             }
@@ -252,6 +261,18 @@ public abstract class GameLoop {
 
     public void setStageHeight(double stageHeight) {
         this.stageHeight = stageHeight;
+    }
+
+    public void setCanExit(boolean canExit) {
+        this.canExit = canExit;
+    }
+
+    public void setCanInteract(boolean canInteract) {
+        this.canInteract = canInteract;
+    }
+
+    public void setFlowSceneNum(int flowSceneNum) {
+        this.flowSceneNum = flowSceneNum;
     }
 
     public void display() {

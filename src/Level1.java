@@ -21,13 +21,15 @@ public class Level1 extends GameLoop {
         Player.hasBag = true;
         if (sceneNum == 2) {
             background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
-            canInteract = false;
-            canExit = true;
+            setCanInteract(false);
+            setCanExit(true);
+            setFlowSceneNum(1);
         }
         else {
             background = new Image(new FileInputStream("assets/images/scene1_background.png"));
-            canInteract = true;
-            canExit = false;
+            setCanInteract(true);
+            setCanExit(false);
+            setFlowSceneNum(2);
         }
         backgroundView = new ImageView(background);
         backgroundView.setPreserveRatio(true);
