@@ -6,6 +6,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Creates instructions screen
+ *
+ * @author Julia Xie
+ * @version May 23, 2019
+ */
 public class Instructions {
 
     private Button backToMenu;

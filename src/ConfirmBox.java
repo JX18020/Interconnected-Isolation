@@ -6,6 +6,12 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
+/**
+ * Creates comfirm popup
+ *
+ * @author Julia Xie
+ * @version May 17, 2019
+ */
 public class ConfirmBox {
 
     static boolean answer;

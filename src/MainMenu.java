@@ -8,6 +8,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ * Creates main menu screen
+ *
+ * @author Julia Xie
+ * @version May 27, 2019
+ */
 public class MainMenu {
 
     private Button playButton, instructionsButton, exitButton;

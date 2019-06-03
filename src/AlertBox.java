@@ -6,6 +6,12 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
+/**
+ * Creates an alert popup
+ *
+ * @author Julia XIe
+ * @version May 17, 2019
+ */
 public class AlertBox {
     public static void display(String title, String message) {
         Stage window = new Stage();

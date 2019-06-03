@@ -9,6 +9,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
+/**
+ *  Creates choosing name menu screen
+ *
+ * @author Julia Xie
+ * @version May 31, 2019
+ */
 public class ChooseName {
 
     private String name;

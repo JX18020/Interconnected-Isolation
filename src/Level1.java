@@ -6,6 +6,12 @@ import javafx.stage.Stage;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Controls the flow of Level1
+ *
+ * @author Julia Xie
+ * @version June 3
+ */
 public class Level1 extends GameLoop {
 
     Image background;

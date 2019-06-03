@@ -18,6 +18,14 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Keeps track of all the camera movements and player movements
+ *
+ * @author Julia Xie
+ * @author Christopher Trevisan
+ *
+ * @version June 3, 2019
+ */
 public abstract class GameLoop {
     private Stage stage;
     Scene scene;

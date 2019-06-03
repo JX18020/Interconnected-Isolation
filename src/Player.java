@@ -7,6 +7,12 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Represents a player
+ *
+ * @author Julia XIe
+ * @version June 1, 2019
+ */
 public class Player {
     private double courseWidth;
     private double courseHeight;

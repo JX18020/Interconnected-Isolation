@@ -6,6 +6,12 @@ import javafx.stage.Stage;
 
 import java.util.*;
 
+/**
+ * Main class which runs the flow of the game
+ *
+ * @author Julia Xie
+ * @version June 3, 2019
+ */
 public class InterconnectedIsolation extends Application {
 
     static Stage window;

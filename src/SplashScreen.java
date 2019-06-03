@@ -10,6 +10,12 @@ import javafx.util.Duration;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Creates a splash screen
+ *
+ * @author Julia Xie
+ * @version May 31, 2019
+ */
 public class SplashScreen {
 
     public Scene window () throws IOException {

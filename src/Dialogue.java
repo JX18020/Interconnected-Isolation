@@ -5,6 +5,12 @@ import javafx.scene.layout.BorderPane;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+/**
+ * Creates dialogue in the dialogue box
+ *
+ * @author Julia Xie
+ * @version May 27, 2019
+ */
 public class Dialogue {
 
     private Image dialogueBox;
@@ -13,7 +19,7 @@ public class Dialogue {
 
     public Dialogue () {
         try {
-            dialogueBox = new Image(new FileInputStream("assets/images/splash_screen.png"));
+            dialogueBox = new Image(new FileInputStream("assets/images/dialogue_box.png"));
         } catch (IOException e){}
         viewDialogueBox = new ImageView(dialogueBox);
         viewDialogueBox.setFitWidth(700);
