@@ -25,8 +25,10 @@ public abstract class GameLoop {
     Group boundsGroup;
     Group componentsGroup;
 
-    ImageView arrow;
-    ImageView arrowRed;
+    private ImageView arrow;
+    private ImageView arrowRed;
+    private ImageView laundry;
+    private ImageView guitar;
 
     private int sceneNum;
 
@@ -44,10 +46,12 @@ public abstract class GameLoop {
 
     private boolean hasArrow;
     private boolean hasArrowRed;
+    private boolean hasObjects;
+
     private boolean nearDoor;
     private boolean nearMicrowave;
 
-    boolean enteredDoor;
+    private boolean enteredDoor;
 
     private int flowSceneNum;
 
@@ -105,6 +109,13 @@ public abstract class GameLoop {
                 }
                 checkForCollisions();
 
+                if (!hasObjects) {
+                    try {
+                        addObjects(flowSceneNum);
+                    } catch (IOException e) {}
+                    hasObjects = true;
+                }
+
                 if (checkForInteraction() && canInteract) {
                     if (!hasArrow) {
                         componentsGroup.getChildren().add(arrow);
@@ -126,9 +137,10 @@ public abstract class GameLoop {
                     if (ePressed) {
                         enteredDoor = true;
                         stop();
-                        if (flowSceneNum == 1)
+                        if (flowSceneNum == 1) {
                             componentsGroup.getChildren().remove(arrowRed);
                             new Level1(InterconnectedIsolation.window, 2405, 720, 1).display();
+                        }
                     }
                 } else {
                     componentsGroup.getChildren().remove(arrowRed);
@@ -204,6 +216,24 @@ public abstract class GameLoop {
             }
         }
         return nearDoor;
+    }
+
+    public void addObjects(int flowSceneNum) throws IOException{
+        if (flowSceneNum == 2) {
+            laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
+            laundry.setFitHeight(153);
+            laundry.setPreserveRatio(true);
+            laundry.setX(279);
+            laundry.setY(440);
+
+            guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
+            guitar.setFitHeight(396);
+            guitar.setPreserveRatio(true);
+            guitar.setX(800);
+            guitar.setY(600);
+
+            componentsGroup.getChildren().addAll(laundry, guitar);
+        }
     }
 
     public abstract void initStage();

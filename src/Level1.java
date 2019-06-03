@@ -26,7 +26,7 @@ public class Level1 extends GameLoop {
             setFlowSceneNum(1);
         }
         else {
-            background = new Image(new FileInputStream("assets/images/scene1_background.png"));
+            background = new Image(new FileInputStream("assets/images/scene1_daytime.png"));
             setCanInteract(true);
             setCanExit(false);
             setFlowSceneNum(2);
