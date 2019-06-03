@@ -19,16 +19,14 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public abstract class GameLoop {
-    Stage stage;
+    private Stage stage;
     Scene scene;
-    Group root;
-    Group boundsGroup;
+    private Group root;
+    private Group boundsGroup;
     Group componentsGroup;
 
     private ImageView arrow;
     private ImageView arrowRed;
-    private ImageView laundry;
-    private ImageView guitar;
 
     private int sceneNum;
 
@@ -220,13 +218,13 @@ public abstract class GameLoop {
 
     public void addObjects(int flowSceneNum) throws IOException{
         if (flowSceneNum == 2) {
-            laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
+            ImageView laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
             laundry.setX(279);
             laundry.setY(441);
 
-            guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
+            ImageView guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
             guitar.setFitHeight(396);
             guitar.setPreserveRatio(true);
             guitar.setX(800);
@@ -311,6 +309,5 @@ public abstract class GameLoop {
         fade.setToValue(1);
         fade.play();
         stage.setScene(scene);
-        // stage.centerOnScreen();
     }
 }
