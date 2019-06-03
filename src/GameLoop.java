@@ -224,7 +224,7 @@ public abstract class GameLoop {
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
             laundry.setX(279);
-            laundry.setY(440);
+            laundry.setY(441);
 
             guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
             guitar.setFitHeight(396);
@@ -232,7 +232,7 @@ public abstract class GameLoop {
             guitar.setX(800);
             guitar.setY(600);
 
-            componentsGroup.getChildren().addAll(laundry, guitar);
+            componentsGroup.getChildren().add(1, laundry);
         }
     }
 
