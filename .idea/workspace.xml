@@ -19,10 +19,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/InterconnectedIsolation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+            <state relative-caret-position="124">
+              <caret line="42" column="39" lean-forward="true" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="51" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2392#2533#0" expanded="true" />
+                <element signature="e#2532#2533#0" expanded="true" />
+                <element signature="e#2891#2892#0" expanded="true" />
                 <element signature="e#2919#2920#0" expanded="true" />
               </folding>
             </state>
@@ -32,15 +35,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="368">
-              <caret line="212" column="43" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+            <state relative-caret-position="188">
+              <caret line="179" column="87" lean-forward="true" selection-start-line="179" selection-start-column="87" selection-end-line="179" selection-end-column="87" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#11978#11979#0" expanded="true" />
-                <element signature="e#12078#12079#0" expanded="true" />
-                <element signature="e#12163#12164#0" expanded="true" />
-                <element signature="e#12264#12265#0" expanded="true" />
-                <element signature="e#12365#12366#0" expanded="true" />
+                <element signature="e#3267#6774#0" expanded="true" />
+                <element signature="e#6773#6774#0" expanded="true" />
+                <element signature="e#18433#18434#0" expanded="true" />
+                <element signature="e#18533#18534#0" expanded="true" />
+                <element signature="e#18618#18619#0" expanded="true" />
+                <element signature="e#18719#18720#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +53,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Level1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-112">
-              <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="-70">
+              <caret line="25" column="65" lean-forward="true" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Level2.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -61,8 +77,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SplashScreen.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            <state relative-caret-position="48">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
             </state>
           </provider>
         </entry>
@@ -77,22 +93,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
+            <state relative-caret-position="634">
+              <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -103,7 +107,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ConfirmBox.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
+            <state relative-caret-position="-358">
               <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -152,6 +156,7 @@
       <find>sceneNum</find>
       <find>player</find>
       <find>compo</find>
+      <find>initBack</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -168,7 +173,6 @@
         <option value="$PROJECT_DIR$/src/Room1.java" />
         <option value="$PROJECT_DIR$/src/Room.java" />
         <option value="$PROJECT_DIR$/src/Level.java" />
-        <option value="$PROJECT_DIR$/src/Level2.java" />
         <option value="$PROJECT_DIR$/src/Level3.java" />
         <option value="$PROJECT_DIR$/src/InteractionPoint.java" />
         <option value="$PROJECT_DIR$/src/Level1Room2.java" />
@@ -180,11 +184,12 @@
         <option value="$PROJECT_DIR$/src/Cutscene.java" />
         <option value="$PROJECT_DIR$/src/Dialogue.java" />
         <option value="$PROJECT_DIR$/src/Instructions.java" />
-        <option value="$PROJECT_DIR$/src/Level1.java" />
         <option value="$PROJECT_DIR$/src/MainMenu.java" />
         <option value="$PROJECT_DIR$/src/SplashScreen.java" />
         <option value="$PROJECT_DIR$/src/Player.java" />
+        <option value="$PROJECT_DIR$/src/Level1.java" />
         <option value="$PROJECT_DIR$/src/InterconnectedIsolation.java" />
+        <option value="$PROJECT_DIR$/src/Level2.java" />
         <option value="$PROJECT_DIR$/src/GameLoop.java" />
       </list>
     </option>
@@ -199,6 +204,18 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Interconnected-Isolation" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Interconnected-Isolation" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -215,18 +232,6 @@
               <item name="Interconnected-Isolation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Interconnected-Isolation" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Interconnected-Isolation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Interconnected-Isolation" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
@@ -288,12 +293,13 @@
       <workItem from="1559566617855" duration="3934000" />
       <workItem from="1559576665141" duration="3142000" />
       <workItem from="1559582622123" duration="735000" />
-      <workItem from="1559662787606" duration="2512000" />
+      <workItem from="1559662787606" duration="2702000" />
+      <workItem from="1559670820344" duration="4126000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40094000" />
+    <option name="totallyTimeSpent" value="44410000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -308,7 +314,7 @@
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.119463086" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12080537" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -414,13 +420,6 @@
     <entry file="file://$PROJECT_DIR$/assets/images/scene1_daytime.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Level2.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="23" selection-start-line="6" selection-start-column="23" selection-end-line="6" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/AlertBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -448,27 +447,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Instructions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MainMenu.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
           <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ConfirmBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -494,15 +476,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SplashScreen.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        <state relative-caret-position="48">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ConfirmBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-358">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Instructions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
+        <state relative-caret-position="634">
+          <caret line="62" column="42" lean-forward="true" selection-start-line="62" selection-start-column="42" selection-end-line="62" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Level1.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-70">
+          <caret line="25" column="65" lean-forward="true" selection-start-line="25" selection-start-column="65" selection-end-line="25" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -511,19 +520,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/InterconnectedIsolation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="64" column="16" selection-start-line="64" selection-start-column="16" selection-end-line="64" selection-end-column="16" />
+        <state relative-caret-position="124">
+          <caret line="42" column="39" lean-forward="true" selection-start-line="42" selection-start-column="39" selection-end-line="42" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#2392#2533#0" expanded="true" />
+            <element signature="e#2532#2533#0" expanded="true" />
+            <element signature="e#2891#2892#0" expanded="true" />
             <element signature="e#2919#2920#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Level1.java">
+    <entry file="file://$PROJECT_DIR$/src/Level2.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="12" column="18" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="170">
+          <caret line="21" column="29" lean-forward="true" selection-start-line="21" selection-start-column="29" selection-end-line="21" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -532,15 +544,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="212" column="43" selection-start-line="212" selection-start-column="43" selection-end-line="212" selection-end-column="43" />
+        <state relative-caret-position="188">
+          <caret line="179" column="87" lean-forward="true" selection-start-line="179" selection-start-column="87" selection-end-line="179" selection-end-column="87" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#11978#11979#0" expanded="true" />
-            <element signature="e#12078#12079#0" expanded="true" />
-            <element signature="e#12163#12164#0" expanded="true" />
-            <element signature="e#12264#12265#0" expanded="true" />
-            <element signature="e#12365#12366#0" expanded="true" />
+            <element signature="e#3267#6774#0" expanded="true" />
+            <element signature="e#6773#6774#0" expanded="true" />
+            <element signature="e#18433#18434#0" expanded="true" />
+            <element signature="e#18533#18534#0" expanded="true" />
+            <element signature="e#18618#18619#0" expanded="true" />
+            <element signature="e#18719#18720#0" expanded="true" />
           </folding>
         </state>
       </provider>

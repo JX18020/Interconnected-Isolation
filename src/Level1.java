@@ -17,8 +17,8 @@ public class Level1 extends GameLoop {
     Image background;
     ImageView backgroundView;
 
-    public Level1(Stage primaryStage, int width, int height, int scene){
-        super(primaryStage, true, scene);
+    public Level1(Stage primaryStage, int width, int height, int scene, int flowSceneNum){
+        super(primaryStage, true, scene, flowSceneNum);
         setStageWidth(width);
         setStageHeight(height);
     }
@@ -29,13 +29,11 @@ public class Level1 extends GameLoop {
             background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
             setCanInteract(false);
             setCanExit(true);
-            setFlowSceneNum(1);
         }
         else {
             background = new Image(new FileInputStream("assets/images/scene1_daytime.png"));
             setCanInteract(true);
             setCanExit(false);
-            setFlowSceneNum(2);
         }
         backgroundView = new ImageView(background);
         backgroundView.setPreserveRatio(true);
@@ -44,7 +42,7 @@ public class Level1 extends GameLoop {
     }
 
     @Override
-    public void initStage() {
+    public void initStage(int flowSceneNum) {
         player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
         player.reposition(150, scene.getHeight() - 370);
     }

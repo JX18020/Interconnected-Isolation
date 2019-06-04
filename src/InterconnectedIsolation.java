@@ -39,8 +39,8 @@ public class InterconnectedIsolation extends Application {
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
 
-        Level1 level1 = new Level1(window, 2298, 720, 2);
-        Level1 l1 = new Level1(window, 2405, 720, 1);
+        Level1 level1 = new Level1(window, 2298, 720, 2, 1);
+        Level1 l1 = new Level1(window, 2405, 720, 1, 2);
 
 
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
