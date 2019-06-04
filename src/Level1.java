@@ -10,13 +10,13 @@ import java.io.IOException;
  * Controls the flow of Level1
  *
  * @author Julia Xie
- * @version June 3
+ * @version June 3A
  */
 public class Level1 extends GameLoop {
 
     Image background;
     ImageView backgroundView;
-
+    int playerX,snum;
     public Level1(Stage primaryStage, int width, int height, int scene){
         super(primaryStage, true, scene);
         setStageWidth(width);
@@ -24,8 +24,10 @@ public class Level1 extends GameLoop {
     }
 
     public void initBackground(int sceneNum) throws IOException {
+        snum = sceneNum;
+        sceneNum &=1;
         Player.hasBag = true;
-        if (sceneNum == 2) {
+        if (sceneNum == 0) {
             background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
             setCanInteract(false);
             setCanExit(true);
@@ -34,7 +36,7 @@ public class Level1 extends GameLoop {
         else {
             background = new Image(new FileInputStream("assets/images/scene1_daytime.png"));
             setCanInteract(true);
-            setCanExit(false);
+            setCanExit(true);
             setFlowSceneNum(2);
         }
         backgroundView = new ImageView(background);
@@ -46,7 +48,7 @@ public class Level1 extends GameLoop {
     @Override
     public void initStage() {
         player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-        player.reposition(150, scene.getHeight() - 370);
+        player.reposition(snum==2?2000:150, scene.getHeight() - 370);
     }
 
 }
