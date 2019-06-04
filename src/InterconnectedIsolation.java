@@ -40,6 +40,7 @@ public class InterconnectedIsolation extends Application {
         chooseName = choose.window();
 
         Level1 level1 = new Level1(window, 2298, 720, 2);
+        Level1 l1 = new Level1(window, 2405, 720, 1);
 
 
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
@@ -59,8 +60,10 @@ public class InterconnectedIsolation extends Application {
                     error = true;
                 }
             }
-            if (!error)
+            if (!error) {
                 level1.display();
+                //l1.display();
+            }
         });
 
         Timer timer = new Timer();

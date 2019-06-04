@@ -56,6 +56,8 @@ public abstract class GameLoop {
 
     private boolean nearDoor;
     private boolean nearMicrowave;
+    private boolean nearLaundry;
+    private boolean nearGuitar;
 
     private boolean enteredDoor;
 
@@ -199,8 +201,16 @@ public abstract class GameLoop {
             } else {
                 nearMicrowave = false;
             }
+        } else {
+            if (player.getAverageX() > 320 && player.getAverageX() < 520) {
+                nearLaundry = true;
+                arrow.setX(400);
+                arrow.setY(350);
+            } else {
+                nearLaundry = false;
+            }
         }
-        return nearMicrowave;
+        return nearMicrowave || nearLaundry;
     }
 
     public boolean checkForDoor() {
@@ -225,7 +235,7 @@ public abstract class GameLoop {
     }
 
     public void addObjects(int flowSceneNum) throws IOException{
-        if (flowSceneNum == 2) {
+        if (flowSceneNum == 2 || flowSceneNum == 3) {
             ImageView laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
@@ -235,10 +245,49 @@ public abstract class GameLoop {
             ImageView guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
             guitar.setFitHeight(396);
             guitar.setPreserveRatio(true);
-            guitar.setX(800);
-            guitar.setY(600);
+            guitar.setX(774);
+            guitar.setY(205);
+
+            ImageView picture = new ImageView(new Image(new FileInputStream("assets/images/picture.png")));
+            picture.setFitHeight(63);
+            picture.setPreserveRatio(true);
+            picture.setX(1098);
+            picture.setY(369);
+
+            ImageView plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
+            plates.setFitHeight(72);
+            plates.setPreserveRatio(true);
+            plates.setX(1179);
+            plates.setY(396);
+
+            ImageView homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
+            homework.setFitHeight(72);
+            homework.setPreserveRatio(true);
+            homework.setX(1583);
+            homework.setY(396);
+
+            ImageView trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
+            trash.setFitHeight(135);
+            trash.setPreserveRatio(true);
+            trash.setX(927);
+            trash.setY(486);
 
             componentsGroup.getChildren().add(1, laundry);
+            componentsGroup.getChildren().add(1, guitar);
+            componentsGroup.getChildren().add(1, picture);
+            componentsGroup.getChildren().add(1, plates);
+            componentsGroup.getChildren().add(1, homework);
+            componentsGroup.getChildren().add(1, trash);
+
+            if (flowSceneNum == 3) {
+                ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
+                bag.setFitHeight(117);
+                bag.setPreserveRatio(true);
+                bag.setX(1565);
+                bag.setY(505);
+
+                componentsGroup.getChildren().add(1, bag);
+            }
         }
     }
 
