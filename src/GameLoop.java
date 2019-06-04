@@ -46,6 +46,7 @@ public abstract class GameLoop {
     private boolean rightPressed;
     private boolean leftPressed;
     private boolean ePressed;
+    private boolean laundryPressed;
 
     private boolean canInteract;
     private boolean canExit;
@@ -82,6 +83,7 @@ public abstract class GameLoop {
             arrow = new ImageView(new Image(new FileInputStream("assets/images/arrow.png")));
             arrowRed = new ImageView(new Image(new FileInputStream("assets/images/arrow_red.png")));
             initBackground(sceneNum);
+            this.sceneNum&=1;
         } catch (IOException e) {
         }
         arrow.setFitWidth(40);
@@ -136,7 +138,10 @@ public abstract class GameLoop {
                     componentsGroup.getChildren().remove(arrow);
                     hasArrow = false;
                 }
-
+                if (ePressed && nearLaundry &&!laundryPressed) {
+                    System.out.println("hit e on laundry");
+                    laundryPressed = true;
+                }
                 if (checkForDoor() && canExit) {
                     if (!hasArrowRed) {
                         componentsGroup.getChildren().add(arrowRed);
@@ -149,13 +154,13 @@ public abstract class GameLoop {
                             componentsGroup.getChildren().remove(arrowRed);
                             new Level1(InterconnectedIsolation.window, 2405, 720, 1).display();
                         }
+                        else new Level1(InterconnectedIsolation.window, 2298, 720, 2).display();
                     }
                 } else {
                     componentsGroup.getChildren().remove(arrowRed);
                     hasArrowRed = false;
                     nearDoor = false;
                 }
-
                 if (rightPressed && player.getCanMoveRight()) {
                     player.playerView.setImage(player.getPlayerRight());
                     player.moveRight();
@@ -193,7 +198,7 @@ public abstract class GameLoop {
     }
 
     public boolean checkForInteraction() {
-        if (sceneNum == 2) {
+        if (sceneNum == 0) {
             if (player.getAverageX() > 510 && player.getAverageX() < 670) {
                 nearMicrowave = true;
                 arrow.setX(580);
@@ -214,7 +219,7 @@ public abstract class GameLoop {
     }
 
     public boolean checkForDoor() {
-        if (sceneNum == 2) {
+        if (sceneNum == 0) {
             if (player.getAverageX() > 2020 && player.getAverageX() < 2220) {
                 nearDoor = true;
                 arrowRed.setX(2100);
@@ -300,10 +305,10 @@ public abstract class GameLoop {
         public void handle(KeyEvent event) {
             switch (event.getCode()) {
                 case D:
-                    rightPressed = true;
+                    rightPressed = true; leftPressed = false;
                     break;
                 case A:
-                    leftPressed = true;
+                    rightPressed = false;leftPressed = true;
                     break;
                 case E:
                     ePressed = true;
@@ -335,6 +340,7 @@ public abstract class GameLoop {
                     break;
                 case E:
                     ePressed = false;
+                    laundryPressed = false;
                     break;
             }
         }
