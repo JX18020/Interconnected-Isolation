@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -13,7 +14,6 @@ import java.util.*;
  * @version June 3, 2019
  */
 public class InterconnectedIsolation extends Application {
-
     static Stage window;
     Scene splashScreen, mainMenu, instructions, chooseName;
 
@@ -39,7 +39,7 @@ public class InterconnectedIsolation extends Application {
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
 
-        Level1 level1 = new Level1(window, 2298, 720, 2);
+        Level1 level1 = new Level1(window, 2298, 720, 4);
         Level1 l1 = new Level1(window, 2405, 720, 1);
 
 
@@ -65,7 +65,9 @@ public class InterconnectedIsolation extends Application {
                 //l1.display();
             }
         });
-
+        chooseName.setOnKeyPressed(ke -> {
+            if (ke.getCode() == KeyCode.ENTER) choose.confirm.fire();
+        });
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             public void run() {
