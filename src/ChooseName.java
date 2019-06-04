@@ -1,8 +1,11 @@
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -19,7 +22,7 @@ public class ChooseName {
 
     private String name;
 
-    private Button confirm, back;
+    Button confirm, back;
     private TextField choose;
     private Text error;
 
@@ -35,6 +38,7 @@ public class ChooseName {
 
         choose = new TextField();
         choose.setAlignment(Pos.CENTER);
+        System.out.println(choose.getCharacters());
 
         confirm = new Button("Confirm");
         confirm.setFont(Font.font("OCR A Extended", 20));
