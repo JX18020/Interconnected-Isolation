@@ -193,6 +193,7 @@ public abstract class GameLoop {
                             System.out.println("bed");
                         } else if (nearDresser) {
                             System.out.println("dresser");
+                            interactedDresser = true;
                         }
                     }
                 } else {
@@ -307,42 +308,42 @@ public abstract class GameLoop {
                 nearToaster = false;
             }
         } else {
-            if (player.getAverageX() > 320 && player.getAverageX() < 520) {
+            if (player.getAverageX() > 320 && player.getAverageX() < 520 && !interactedLaundry) {
                 nearLaundry = true;
                 arrow.setX(400);
                 arrow.setY(350);
             } else {
                 nearLaundry = false;
             }
-            if (player.getAverageX() > 550 && player.getAverageX() < 750) {
+            if (player.getAverageX() > 550 && player.getAverageX() < 750 && !interactedWindow) {
                 nearWindow = true;
                 arrow.setX(630);
                 arrow.setY(200);
             } else {
                 nearWindow = false;
             }
-            if (player.getAverageX() > 780 && player.getAverageX() < 900) {
+            if (player.getAverageX() > 780 && player.getAverageX() < 900 && !interactedGuitar) {
                 nearGuitar = true;
                 arrow.setX(820);
                 arrow.setY(120);
             } else {
                 nearGuitar = false;
             }
-            if (player.getAverageX() > 950 && player.getAverageX() < 1060) {
+            if (player.getAverageX() > 950 && player.getAverageX() < 1060 && !interactedTrash) {
                 nearTrash = true;
                 arrow.setX(985);
                 arrow.setY(400);
             } else {
                 nearTrash = false;
             }
-            if (player.getAverageX() > 1100 && player.getAverageX() < 1150) {
+            if (player.getAverageX() > 1100 && player.getAverageX() < 1150 && !interactedPicture) {
                 nearPicture = true;
                 arrow.setX(1105);
                 arrow.setY(270);
             } else {
                 nearPicture = false;
             }
-            if (player.getAverageX() > 1190 && player.getAverageX() < 1280) {
+            if (player.getAverageX() > 1190 && player.getAverageX() < 1280 && !interactedPlates) {
                 nearPlates = true;
                 arrow.setX(1215);
                 arrow.setY(300);
@@ -356,21 +357,21 @@ public abstract class GameLoop {
             } else {
                 nearComputer = false;
             }
-            if (player.getAverageX() > 1600 && player.getAverageX() < 1680) {
+            if (player.getAverageX() > 1600 && player.getAverageX() < 1680 && !interactedHomework) {
                 nearHomework = true;
                 arrow.setX(1620);
                 arrow.setY(300);
             } else {
                 nearHomework = false;
             }
-            if (player.getAverageX() > 1840 && player.getAverageX() < 2180) {
+            if (player.getAverageX() > 1840 && player.getAverageX() < 2180 && !interactedBed) {
                 nearBed = true;
                 arrow.setX(1990);
                 arrow.setY(290);
             } else {
                 nearBed = false;
             }
-            if (player.getAverageX() > 2250) {
+            if (player.getAverageX() > 2250 && !interactedDresser) {
                 nearDresser = true;
                 arrow.setX(2300);
                 arrow.setY(330);
