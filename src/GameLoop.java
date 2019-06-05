@@ -18,6 +18,8 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -90,13 +92,18 @@ public abstract class GameLoop {
     private boolean interactedHomework;
     private boolean interactedBed;
     private boolean interactedDresser;
-
+    private boolean interactedComputer;
+    ArrayList<ArrayList<Obj>> objects;
     private boolean talkedToMom;
 
     private int flowSceneNum;
 
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
+
+        objects = new ArrayList<>();
+        objects.add(new ArrayList<>(Arrays.asList(new Obj[] {new Obj(510,670,100,"temporary microwave text."),new Obj(740,820,250,"Seat"), new Obj(890,980,130,"Jars"),new Obj(1070,1200,230,"fruit"),new Obj(1300,1410,190,"mom"),new Obj(1480,1560,80,"knives"),new Obj(1680,1730,120,"toaster")})));
+        objects.add(new ArrayList<>(Arrays.asList(new Obj[] {new Obj(320,520,350,"laundry"),new Obj(550,750,200,"window"),new Obj(780,900,120,"guitar"),new Obj(950,1060,400,"trash"),new Obj(1100,1150,270,"picture"),new Obj(1190,1280,300,"plates"),new Obj(1340,1490,230,"computer"),new Obj(1600,1680,300,"homework"),new Obj(1840,2180,290,"bed"),new Obj(2250,2405,330,"dressed")})));
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, 1280, 720, Color.BLACK);
@@ -171,7 +178,14 @@ public abstract class GameLoop {
                         hasArrow = true;
                     }
                     if (ePressed) {
-                        if (nearMicrowave) {
+                        for (Obj o : objects.get(sceneNum&1)) {
+                            if (o.near) {
+                                o.interacted = true;
+                                dialogue.setDialogue(o.dialogue);
+                                break;
+                            }
+                        }
+                        /*if (nearMicrowave) {
                             System.out.println("microwave");
                         } else if (nearLaundry) {
                             interactedLaundry = true;
@@ -207,6 +221,7 @@ public abstract class GameLoop {
                                     "Should I bring them now? " +
                                     "Nah, it’s too much work.");
                         } else if (nearComputer) {
+                            interactedComputer = true;
                             dialogue.setDialogue("I should hop on soon. " +
                                     "My teammates usually get home a bit after I do. " +
                                     "They’re like my closest friends, even if I haven’t seen them in real life. " +
@@ -216,9 +231,9 @@ public abstract class GameLoop {
                                         "My teammates are probably home by now. " +
                                         "I think we were in the middle of a quest when someone had to leave? " +
                                         "I can’t really remember.");
-                                if (enterPressed) {
-                                    new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3);
-                                }
+                                //if (enterPressed) {
+                                    new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
+                                //}
                             }
                         } else if (nearHomework) {
                             interactedHomework = true;
@@ -229,7 +244,7 @@ public abstract class GameLoop {
                         } else if (nearDresser) {
                             System.out.println("dresser");
                             interactedDresser = true;
-                        }
+                        }*/
                         if (!hasDialogue) {
                             root.getChildren().add(dialogue.dialogueGroup);
                             hasDialogue = true;
@@ -301,130 +316,19 @@ public abstract class GameLoop {
     }
 
     public boolean checkForInteraction() {
-        if (sceneNum == 2) {
-            if (player.getAverageX() > 510 && player.getAverageX() < 670) {
-                nearMicrowave = true;
-                arrow.setX(580);
-                arrow.setY(100);
-            } else {
-                nearMicrowave = false;
+        boolean ret = false;
+        for (Obj o : objects.get(sceneNum&1)) {
+            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && !o.interacted) {
+                o.near = true;
+                arrow.setX((o.posl+o.posr)/2.0);
+                arrow.setY(o.arrowY);
+                ret = true;
             }
-            if (player.getAverageX() > 740 && player.getAverageX() < 820) {
-                nearSeat = true;
-                arrow.setX(760);
-                arrow.setY(250);
-            } else {
-                nearSeat = false;
-            }
-            if (player.getAverageX() > 890 && player.getAverageX() < 980) {
-                nearJars = true;
-                arrow.setX(915);
-                arrow.setY(130);
-            } else {
-                nearJars = false;
-            }
-            if (player.getAverageX() > 1070 && player.getAverageX() < 1200) {
-                nearFruit = true;
-                arrow.setX(1115);
-                arrow.setY(230);
-            } else {
-                nearFruit = false;
-            }
-            if (player.getAverageX() > 1300 && player.getAverageX() < 1410) {
-                nearMom = true;
-                arrow.setX(1335);
-                arrow.setY(190);
-            } else {
-                nearMom = false;
-            }
-            if (player.getAverageX() > 1480 && player.getAverageX() < 1560) {
-                nearKnives = true;
-                arrow.setX(1500);
-                arrow.setY(80);
-            } else {
-                nearKnives = false;
-            }
-            if (player.getAverageX() > 1680 && player.getAverageX() < 1730) {
-                nearToaster = true;
-                arrow.setX(1685);
-                arrow.setY(120);
-            } else {
-                nearToaster = false;
-            }
-        } else {
-            if (player.getAverageX() > 320 && player.getAverageX() < 520 && !interactedLaundry) {
-                nearLaundry = true;
-                arrow.setX(400);
-                arrow.setY(350);
-            } else {
-                nearLaundry = false;
-            }
-            if (player.getAverageX() > 550 && player.getAverageX() < 750 && !interactedWindow) {
-                nearWindow = true;
-                arrow.setX(630);
-                arrow.setY(200);
-            } else {
-                nearWindow = false;
-            }
-            if (player.getAverageX() > 780 && player.getAverageX() < 900 && !interactedGuitar) {
-                nearGuitar = true;
-                arrow.setX(820);
-                arrow.setY(120);
-            } else {
-                nearGuitar = false;
-            }
-            if (player.getAverageX() > 950 && player.getAverageX() < 1060 && !interactedTrash) {
-                nearTrash = true;
-                arrow.setX(985);
-                arrow.setY(400);
-            } else {
-                nearTrash = false;
-            }
-            if (player.getAverageX() > 1100 && player.getAverageX() < 1150 && !interactedPicture) {
-                nearPicture = true;
-                arrow.setX(1105);
-                arrow.setY(270);
-            } else {
-                nearPicture = false;
-            }
-            if (player.getAverageX() > 1190 && player.getAverageX() < 1280 && !interactedPlates) {
-                nearPlates = true;
-                arrow.setX(1215);
-                arrow.setY(300);
-            } else {
-                nearPlates = false;
-            }
-            if (player.getAverageX() > 1340 && player.getAverageX() < 1490) {
-                nearComputer = true;
-                arrow.setX(1395);
-                arrow.setY(230);
-            } else {
-                nearComputer = false;
-            }
-            if (player.getAverageX() > 1600 && player.getAverageX() < 1680 && !interactedHomework) {
-                nearHomework = true;
-                arrow.setX(1620);
-                arrow.setY(300);
-            } else {
-                nearHomework = false;
-            }
-            if (player.getAverageX() > 1840 && player.getAverageX() < 2180 && !interactedBed) {
-                nearBed = true;
-                arrow.setX(1990);
-                arrow.setY(290);
-            } else {
-                nearBed = false;
-            }
-            if (player.getAverageX() > 2250 && !interactedDresser) {
-                nearDresser = true;
-                arrow.setX(2300);
-                arrow.setY(330);
-            } else {
-                nearDresser = false;
+            else {
+                o.near = false;
             }
         }
-        return nearLaundry || nearWindow || nearGuitar || nearTrash || nearPicture || nearPlates || nearComputer || nearHomework || nearBed || nearDresser ||
-                nearMicrowave || nearSeat || nearJars || nearFruit || nearMom || nearKnives || nearToaster;
+        return ret;
     }
 
     public boolean checkForDoor() {
