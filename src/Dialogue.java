@@ -34,8 +34,9 @@ public class Dialogue {
     public void setDialogue(String dialogue) {
         Text text = new Text(dialogue);
         text.setX(300);
-        text.setY(620);
-        text.setFont(Font.font("OCR A Extended", 18));
+        text.setY(610);
+        text.setFont(Font.font("OCR A Extended", 17));
+        text.setWrappingWidth(670);
         dialogueGroup = new Group(viewDialogueBox, text);
     }
 }
