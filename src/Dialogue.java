@@ -1,6 +1,8 @@
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -15,7 +17,7 @@ public class Dialogue {
 
     private Image dialogueBox;
     private ImageView viewDialogueBox;
-    private BorderPane layout;
+    Group dialogueGroup;
 
     public Dialogue () {
         try {
@@ -24,14 +26,16 @@ public class Dialogue {
         viewDialogueBox = new ImageView(dialogueBox);
         viewDialogueBox.setFitWidth(700);
         viewDialogueBox.setPreserveRatio(true);
-        viewDialogueBox.setX(200);
-        viewDialogueBox.setY(0);
-        layout = new BorderPane();
+        viewDialogueBox.setX(280);
+        viewDialogueBox.setY(580);
+        dialogueGroup = new Group (viewDialogueBox);
     }
-    public void showDialogue (String dialogue) {
-        layout.getChildren().add(viewDialogueBox);
-    }
-    public void removeDialogue() {
-        layout.getChildren().remove(viewDialogueBox);
+
+    public void setDialogue(String dialogue) {
+        Text text = new Text(dialogue);
+        text.setX(300);
+        text.setY(620);
+        text.setFont(Font.font("OCR A Extended", 18));
+        dialogueGroup = new Group(viewDialogueBox, text);
     }
 }

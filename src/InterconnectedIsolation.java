@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -61,9 +62,13 @@ public class InterconnectedIsolation extends Application {
                 }
             }
             if (!error) {
-                level1.display();
-                //l1.display();
+                //level1.display();
+                l1.display();
             }
+        });
+
+        chooseName.setOnKeyPressed(ke -> {
+            if (ke.getCode() == KeyCode.ENTER) choose.getConfirm().fire();
         });
 
         Timer timer = new Timer();

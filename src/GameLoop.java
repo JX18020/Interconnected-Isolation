@@ -1,5 +1,6 @@
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
@@ -17,6 +18,8 @@ import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Keeps track of all the camera movements and player movements
@@ -42,9 +45,12 @@ public abstract class GameLoop {
 
     Player player;
 
+    Dialogue dialogue;
+
     private boolean rightPressed;
     private boolean leftPressed;
     private boolean ePressed;
+    private boolean enterPressed;
 
     private boolean canInteract;
     private boolean canExit;
@@ -52,6 +58,7 @@ public abstract class GameLoop {
     private boolean hasArrow;
     private boolean hasArrowRed;
     private boolean hasObjects;
+    private boolean hasDialogue;
 
     private boolean nearDoor;
 
@@ -84,13 +91,12 @@ public abstract class GameLoop {
     private boolean interactedBed;
     private boolean interactedDresser;
 
-    private boolean enteredDoor;
+    private boolean talkedToMom;
 
     private int flowSceneNum;
 
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
-        primaryStage.setOnCloseRequest(e -> InterconnectedIsolation.closeProgram());
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, 1280, 720, Color.BLACK);
@@ -100,7 +106,6 @@ public abstract class GameLoop {
 
         scene.setOnKeyPressed(onPressHandler);
         scene.setOnKeyReleased(onReleaseHandler);
-        scene.setOnMouseClicked(onMouseHandler);
 
         this.sceneNum = sceneNum;
         this.flowSceneNum = flowSceneNum;
@@ -127,6 +132,8 @@ public abstract class GameLoop {
 
         boundsGroup.getChildren().addAll(leftBounds, rightBounds);
 
+        dialogue = new Dialogue();
+
         initStage(flowSceneNum);
 
         new AnimationTimer() {
@@ -151,6 +158,10 @@ public abstract class GameLoop {
                     hasObjects = true;
                 }
 
+                if (flowSceneNum == 1 && !talkedToMom) {
+
+                }
+
                 if (checkForInteraction() && canInteract) {
                     if (!hasArrow) {
                         if (sceneNum == 1)
@@ -164,10 +175,10 @@ public abstract class GameLoop {
                             System.out.println("microwave");
                         } else if (nearLaundry) {
                             interactedLaundry = true;
-                            System.out.println("laundry");
+                            dialogue.setDialogue("Laundry");
                         } else if (nearWindow) {
                             interactedWindow = true;
-                            System.out.println("window");
+                            dialogue.setDialogue("Window");
                         } else if (nearGuitar) {
                             interactedGuitar = true;
                             System.out.println("guitar");
@@ -195,10 +206,20 @@ public abstract class GameLoop {
                             System.out.println("dresser");
                             interactedDresser = true;
                         }
+                        if (!hasDialogue) {
+                            root.getChildren().add(dialogue.dialogueGroup);
+                            hasDialogue = true;
+                        }
                     }
                 } else {
                     componentsGroup.getChildren().remove(arrow);
                     hasArrow = false;
+                }
+
+
+                if (enterPressed) {
+                    root.getChildren().remove(dialogue.dialogueGroup);
+                    hasDialogue = false;
                 }
 
                 if (checkForDoor() && canExit) {
@@ -207,7 +228,6 @@ public abstract class GameLoop {
                         hasArrowRed = true;
                     }
                     if (ePressed) {
-                        enteredDoor = true;
                         stop();
                         if (flowSceneNum == 1) {
                             componentsGroup.getChildren().remove(arrowRed);
@@ -468,43 +488,50 @@ public abstract class GameLoop {
     EventHandler onPressHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            switch (event.getCode()) {
-                case D:
-                    rightPressed = true;
+            if (!hasDialogue) {
+                switch (event.getCode()) {
+                    case D:
+                    case RIGHT:
+                        rightPressed = true;
+                        leftPressed = false;
+                        break;
+                    case A:
+                    case LEFT:
+                        leftPressed = true;
+                        rightPressed = false;
+                        break;
+                    case E:
+                        ePressed = true;
+                        break;
+                }
+            }
+            switch(event.getCode()) {
+                case ENTER:
+                case SPACE:
+                    enterPressed = true;
                     break;
-                case A:
-                    leftPressed = true;
-                    break;
-                case E:
-                    ePressed = true;
-                    break;
-
             }
         }
     };
 
-    EventHandler onMouseHandler = new EventHandler<MouseEvent>() {
-        @Override
-        public void handle(MouseEvent event) {
-            int x = (int) (event.getSceneX() - componentsGroup.getTranslateX()), y = (int) event.getSceneY();
-            if (x >= 485 && x <= 726 && y >= 169 && y <= 278)
-                System.out.println("Clicked on the microwave!");
-            else if (x >= player.playerView.getTranslateX() && x <= player.playerView.getTranslateX() + 39)
-                System.out.println("Clicked on player!");
-        }
-    };
     EventHandler onReleaseHandler = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
             switch (event.getCode()) {
                 case D:
+                case RIGHT:
                     rightPressed = false;
                     break;
                 case A:
+                case LEFT:
                     leftPressed = false;
                     break;
                 case E:
                     ePressed = false;
+                    break;
+                case ENTER:
+                case SPACE:
+                    enterPressed = false;
                     break;
             }
         }
