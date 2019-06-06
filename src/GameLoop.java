@@ -68,36 +68,8 @@ public abstract class GameLoop {
     private boolean hasChoices;
     private boolean nearDoor;
 
-    private boolean nearLaundry;
-    private boolean nearWindow;
-    private boolean nearGuitar;
-    private boolean nearTrash;
-    private boolean nearPicture;
-    private boolean nearPlates;
-    private boolean nearComputer;
-    private boolean nearHomework;
-    private boolean nearBed;
-    private boolean nearDresser;
-
-    private boolean nearMicrowave;
-    private boolean nearJars;
-    private boolean nearSeat;
-    private boolean nearFruit;
-    private boolean nearMom;
-    private boolean nearKnives;
-    private boolean nearToaster;
-
-    private boolean interactedLaundry;
-    private boolean interactedWindow;
-    private boolean interactedGuitar;
-    private boolean interactedTrash;
-    private boolean interactedPicture;
-    private boolean interactedPlates;
-    private boolean interactedHomework;
-    private boolean interactedBed;
-    private boolean interactedDresser;
-    private boolean interactedComputer;
     ArrayList<ArrayList<Obj>> objects;
+    
     private boolean talkedToMom;
 
     private int flowSceneNum;

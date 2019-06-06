@@ -21,7 +21,7 @@ public class Instructions {
         text1.setFont(Font.font("OCR A Extended", 60));
         text1.setFill(Color.WHITE);
 
-        Text text2 = new Text("\n\nPress A to move left\n\nPress D to move right\n\nPress E to interact\n\n");
+        Text text2 = new Text("\n\nPress A or left arrow to move left\n\nPress D or right arrow to move right\n\nPress E to interact\n\nPress ENTER or SPACE to progress dialogue\n\nChoose dialogue using the Z, X, and C keys\n\n");
         text2.setFont(Font.font("OCR A Extended", 40));
         text2.setFill(Color.WHITE);
 
