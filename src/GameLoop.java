@@ -48,11 +48,15 @@ public abstract class GameLoop {
     Player player;
 
     Dialogue dialogue;
+    DialogueOption dOptionZ, dOptionC, dOptionX;
 
     private boolean rightPressed;
     private boolean leftPressed;
     private boolean ePressed;
     private boolean enterPressed;
+    private boolean zPressed;
+    private boolean xPressed;
+    private boolean cPressed;
 
     private boolean canInteract;
     private boolean canExit;
@@ -61,7 +65,7 @@ public abstract class GameLoop {
     private boolean hasArrowRed;
     private boolean hasObjects;
     private boolean hasDialogue;
-
+    private boolean hasChoices;
     private boolean nearDoor;
 
     private boolean nearLaundry;
@@ -140,6 +144,9 @@ public abstract class GameLoop {
         boundsGroup.getChildren().addAll(leftBounds, rightBounds);
 
         dialogue = new Dialogue();
+        dOptionZ = new DialogueOption('a');
+        dOptionX = new DialogueOption('b');
+        dOptionC = new DialogueOption('c');
 
         initStage(flowSceneNum);
 
@@ -180,8 +187,31 @@ public abstract class GameLoop {
                     if (ePressed) {
                         for (Obj o : objects.get(sceneNum&1)) {
                             if (o.near) {
+                                boolean allDone = false;
                                 o.interacted = true;
-                                dialogue.setDialogue(o.dialogue);
+                                if (o.dialogue.equals("computer")) {
+                                    allDone = true;
+                                    for (Obj o2: objects.get(sceneNum&1)) {
+                                        if (o2 != o && !o2.interacted) {
+                                            allDone = false;
+                                            break;
+                                        }
+                                    }
+                                    if (allDone) {
+                                        dialogue.setDialogue("Okay time to hop on. " +
+                                                "My teammates are probably home by now. " +
+                                                "I think we were in the middle of a quest when someone had to leave? " +
+                                                "I can’t really remember.");
+                                    }
+                                    else {
+                                        dialogue.setDialogue("I should hop on soon. " +
+                                                "My teammates usually get home a bit after I do. " +
+                                                "They’re like my closest friends, even if I haven’t seen them in real life. " +
+                                                "People at school don’t know me like they do.");
+                                    }
+                                }
+                                else dialogue.setDialogue(o.dialogue);
+                                if (allDone) new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
                                 break;
                             }
                         }
@@ -246,7 +276,13 @@ public abstract class GameLoop {
                             interactedDresser = true;
                         }*/
                         if (!hasDialogue) {
+                            dOptionC.setOption("This is option C.");
+                            dOptionX.setOption("This is option X.");
+                            dOptionZ.setOption("This is option Z.");
                             root.getChildren().add(dialogue.dialogueGroup);
+                            root.getChildren().add(dOptionC.optionGroup);
+                            root.getChildren().add(dOptionX.optionGroup);
+                            root.getChildren().add(dOptionZ.optionGroup);
                             hasDialogue = true;
                         }
                     }
@@ -256,8 +292,12 @@ public abstract class GameLoop {
                 }
 
 
-                if (enterPressed) {
+                if (enterPressed || zPressed || xPressed || cPressed) {
+                    if (!enterPressed) System.out.println ("Option " + (zPressed ? "Z" : (xPressed ? "X" : "C")) + " was pressed.");
                     root.getChildren().remove(dialogue.dialogueGroup);
+                    root.getChildren().remove(dOptionC.optionGroup);
+                    root.getChildren().remove(dOptionX.optionGroup);
+                    root.getChildren().remove(dOptionZ.optionGroup);
                     hasDialogue = false;
                 }
 
@@ -438,6 +478,15 @@ public abstract class GameLoop {
                 case SPACE:
                     enterPressed = true;
                     break;
+                case Z:
+                    zPressed = true;
+                    break;
+                case X:
+                    xPressed = true;
+                    break;
+                case C:
+                    cPressed = true;
+                    break;
             }
         }
     };
@@ -460,6 +509,15 @@ public abstract class GameLoop {
                 case ENTER:
                 case SPACE:
                     enterPressed = false;
+                    break;
+                case Z:
+                    zPressed = false;
+                    break;
+                case X:
+                    xPressed = false;
+                    break;
+                case C:
+                    cPressed = false;
                     break;
             }
         }
