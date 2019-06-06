@@ -66,20 +66,77 @@ public abstract class GameLoop {
     private boolean hasObjects;
     private boolean hasDialogue;
     private boolean hasChoices;
+    private boolean isChoice;
     private boolean nearDoor;
 
     ArrayList<ArrayList<Obj>> objects;
-    
+
     private boolean talkedToMom;
 
     private int flowSceneNum;
+    private int flowDialogueNum;
 
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
 
         objects = new ArrayList<>();
-        objects.add(new ArrayList<>(Arrays.asList(new Obj[] {new Obj(510,670,100,"temporary microwave text."),new Obj(740,820,250,"Seat"), new Obj(890,980,130,"Jars"),new Obj(1070,1200,230,"fruit"),new Obj(1300,1410,190,"mom"),new Obj(1480,1560,80,"knives"),new Obj(1680,1730,120,"toaster")})));
-        objects.add(new ArrayList<>(Arrays.asList(new Obj[] {new Obj(320,520,350,"laundry"),new Obj(550,750,200,"window"),new Obj(780,900,120,"guitar"),new Obj(950,1060,400,"trash"),new Obj(1100,1150,270,"picture"),new Obj(1190,1280,300,"plates"),new Obj(1340,1490,230,"computer"),new Obj(1600,1680,300,"homework"),new Obj(1840,2180,290,"bed"),new Obj(2250,2405,330,"dressed")})));
+        objects.add(new ArrayList<>(Arrays.asList(new Obj[]{
+                new Obj("microwave", 510, 670, 100, "temporary microwave text."),
+                new Obj("seat", 740, 820, 250, "Seat"),
+                new Obj("jars", 890, 980, 130, "Jars"),
+                new Obj("fruit", 1070, 1200, 230, "fruit"),
+                new Obj("mom", 1300, 1410, 190, "mom"),
+                new Obj("knives", 1480, 1560, 80, "knives"),
+                new Obj("toaster", 1680, 1730, 120, "toaster")})));
+        objects.add(new ArrayList<>(Arrays.asList(new Obj[]{
+                new Obj("laundry", 320, 520, 350,
+                        "These clothes have been sitting here for a long time. " +
+                                "I’ve sort of gotten used to it. " +
+                                "I mean it’s not bothering me, " +
+                                "I don’t have that many clothes to begin with."),
+                new Obj("window", 550, 750, 200,
+                        "Mom took off the blinds a couple weeks ago. " +
+                                "She said I need more natural light in my room. " +
+                                "I don’t really like it. " +
+                                "It makes it so there’s always a glare on my monitor."),
+                new Obj("guitar", 780, 900, 120,
+                        "I haven’t touched this thing in years. " +
+                                "It’s probably way out of tune by now. " +
+                                "I could tune it but that’s too much work and it’s not like I’m going to play it anytime soon. " +
+                                "I’d rather play games with my friends, not make my fingers hurt."),
+                new Obj("trash", 950, 1060, 400,
+                        "I should probably empty this thing. " +
+                                "It’s all just paper and food wrappers. " +
+                                "Maybe later."),
+                new Obj("picture", 1100, 1150, 270,
+                        "I haven’t talked to these guys in so long. " +
+                                "I remember when we took this picture. " +
+                                "We went camping and we almost lit the tent on fire. " +
+                                "Fun times."),
+                new Obj("plates", 1190, 1280, 300,
+                        "I keep forgetting to bring these to the kitchen. " +
+                                "They just keep piling up. " +
+                                "Should I bring them now? " +
+                                "Nah, it’s too much work."),
+                new Obj("computer", 1340, 1490, 230, "computer"),
+                new Obj("homework", 1600, 1680, 300,
+                        "Ugh I hate homework. " +
+                                "I hate school. " +
+                                "I don’t even know why I go. " +
+                                "I’m never happy when I’m there, my teachers hate me, and my friends think my hobbies are weird. " +
+                                "I mean hobby. " +
+                                "Singular."),
+                new Obj("bed", 1840, 2180, 290,
+                        "Sleep is so overrated. " +
+                                "Why sleep when you game and have fun? " +
+                                "Like I’m not even conscious when I sleep so how can I enjoy it? " +
+                                "I guess that’s the definition of sleeping. " +
+                                "Being unconscious I mean."),
+                new Obj("dresser", 2250, 2405, 330, "Why do I even have this? " +
+                        "There are barely any clothes in here. " +
+                        "I mean it sort of makes a good nightstand right? " +
+                        "I’m too lazy to move it anyways.")
+        })));
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, 1280, 720, Color.BLACK);
@@ -157,13 +214,13 @@ public abstract class GameLoop {
                         hasArrow = true;
                     }
                     if (ePressed) {
-                        for (Obj o : objects.get(sceneNum&1)) {
+                        for (Obj o : objects.get(sceneNum & 1)) {
                             if (o.near) {
                                 boolean allDone = false;
                                 o.interacted = true;
-                                if (o.dialogue.equals("computer")) {
+                                if (o.objName.equals("computer")) {
                                     allDone = true;
-                                    for (Obj o2: objects.get(sceneNum&1)) {
+                                    for (Obj o2 : objects.get(sceneNum & 1)) {
                                         if (o2 != o && !o2.interacted) {
                                             allDone = false;
                                             break;
@@ -174,27 +231,25 @@ public abstract class GameLoop {
                                                 "My teammates are probably home by now. " +
                                                 "I think we were in the middle of a quest when someone had to leave? " +
                                                 "I can’t really remember.");
-                                    }
-                                    else {
+                                    } else {
                                         dialogue.setDialogue("I should hop on soon. " +
                                                 "My teammates usually get home a bit after I do. " +
                                                 "They’re like my closest friends, even if I haven’t seen them in real life. " +
                                                 "People at school don’t know me like they do.");
                                     }
-                                }
-                                else dialogue.setDialogue(o.dialogue);
+                                } else dialogue.setDialogue(o.dialogue);
                                 if (allDone) new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
                                 break;
                             }
                         }
                         if (!hasDialogue) {
-                            dOptionC.setOption("This is option C.");
-                            dOptionX.setOption("This is option X.");
-                            dOptionZ.setOption("This is option Z.");
-                            root.getChildren().add(dialogue.dialogueGroup);
-                            root.getChildren().add(dOptionC.optionGroup);
-                            root.getChildren().add(dOptionX.optionGroup);
-                            root.getChildren().add(dOptionZ.optionGroup);
+                            if (!isChoice)
+                                root.getChildren().add(dialogue.dialogueGroup);
+                            else {
+                                root.getChildren().add(dOptionC.optionGroup);
+                                root.getChildren().add(dOptionX.optionGroup);
+                                root.getChildren().add(dOptionZ.optionGroup);
+                            }
                             hasDialogue = true;
                         }
                     }
@@ -203,9 +258,17 @@ public abstract class GameLoop {
                     hasArrow = false;
                 }
 
+                if (flowSceneNum == 4 && !hasDialogue) {
+                    switch (flowDialogueNum) {
+                        case 0:
+
+                    }
+                }
+
 
                 if (enterPressed || zPressed || xPressed || cPressed) {
-                    if (!enterPressed) System.out.println ("Option " + (zPressed ? "Z" : (xPressed ? "X" : "C")) + " was pressed.");
+                    if (!enterPressed)
+                        System.out.println("Option " + (zPressed ? "Z" : (xPressed ? "X" : "C")) + " was pressed.");
                     root.getChildren().remove(dialogue.dialogueGroup);
                     root.getChildren().remove(dOptionC.optionGroup);
                     root.getChildren().remove(dOptionX.optionGroup);
@@ -269,10 +332,10 @@ public abstract class GameLoop {
 
     public boolean checkForInteraction() {
         boolean ret = false;
-        for (Obj o : objects.get(sceneNum&1)) {
-            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && !o.interacted) {
+        for (Obj o : objects.get(sceneNum & 1)) {
+            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted || o.objName.equals("computer"))) {
                 o.near = true;
-                arrow.setX((o.posl+o.posr)/2.0);
+                arrow.setX((o.posl + o.posr) / 2.0);
                 arrow.setY(o.arrowY);
                 ret = true;
             }
@@ -385,7 +448,7 @@ public abstract class GameLoop {
                         break;
                 }
             }
-            switch(event.getCode()) {
+            switch (event.getCode()) {
                 case ENTER:
                 case SPACE:
                     enterPressed = true;
