@@ -215,66 +215,6 @@ public abstract class GameLoop {
                                 break;
                             }
                         }
-                        /*if (nearMicrowave) {
-                            System.out.println("microwave");
-                        } else if (nearLaundry) {
-                            interactedLaundry = true;
-                            dialogue.setDialogue("These clothes have been sitting here for a long time. " +
-                                    "I’ve sort of gotten used to it. I mean it’s not bothering me, I don’t have that many clothes to begin with.");
-                        } else if (nearWindow) {
-                            interactedWindow = true;
-                            dialogue.setDialogue("Mom took off the blinds a couple weeks ago. " +
-                                    "She said I need more natural light in my room. " +
-                                    "I don’t really like it. " +
-                                    "It makes it so there’s always a glare on my monitor");
-                        } else if (nearGuitar) {
-                            interactedGuitar = true;
-                            dialogue.setDialogue("I haven’t touched this thing in years. " +
-                                    "It’s probably way out of tune by now. " +
-                                    "I could tune it but that’s too much work and it’s not like I’m going to play it anytime soon. " +
-                                    "I’d rather play games with my friends, not make my fingers hurt.");
-                        } else if (nearTrash) {
-                            interactedTrash = true;
-                            dialogue.setDialogue("I should probably empty this thing. " +
-                                    "It’s all just paper and food wrappers. " +
-                                    "Maybe later.");
-                        } else if (nearPicture) {
-                            interactedPicture = true;
-                            dialogue.setDialogue("I haven’t talked to these guys in so long. " +
-                                    "I remember when we took this picture. " +
-                                    "We went camping and we almost lit the tent on fire. " +
-                                    "Fun times.");
-                        } else if (nearPlates) {
-                            interactedPlates = true;
-                            dialogue.setDialogue("I keep forgetting to bring these to the kitchen. " +
-                                    "They just keep piling up. " +
-                                    "Should I bring them now? " +
-                                    "Nah, it’s too much work.");
-                        } else if (nearComputer) {
-                            interactedComputer = true;
-                            dialogue.setDialogue("I should hop on soon. " +
-                                    "My teammates usually get home a bit after I do. " +
-                                    "They’re like my closest friends, even if I haven’t seen them in real life. " +
-                                    "People at school don’t know me like they do.");
-                            if (interactedBed && interactedDresser && interactedGuitar && interactedHomework && interactedLaundry && interactedPicture && interactedPlates && interactedTrash && interactedWindow) {
-                                dialogue.setDialogue("Okay time to hop on. " +
-                                        "My teammates are probably home by now. " +
-                                        "I think we were in the middle of a quest when someone had to leave? " +
-                                        "I can’t really remember.");
-                                //if (enterPressed) {
-                                    new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
-                                //}
-                            }
-                        } else if (nearHomework) {
-                            interactedHomework = true;
-                            System.out.println("homework");
-                        } else if (nearBed) {
-                            interactedBed = true;
-                            System.out.println("bed");
-                        } else if (nearDresser) {
-                            System.out.println("dresser");
-                            interactedDresser = true;
-                        }*/
                         if (!hasDialogue) {
                             dOptionC.setOption("This is option C.");
                             dOptionX.setOption("This is option X.");
