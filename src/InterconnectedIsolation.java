@@ -63,9 +63,9 @@ public class InterconnectedIsolation extends Application {
                 }
             }
             if (!error) {
-                //level1.display();
+                level1.display();
                 //l1.display();
-                cut.display();
+                //cut.display();
             }
         });
 
