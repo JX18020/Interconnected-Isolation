@@ -18,8 +18,9 @@ public class Dialogue {
     private Image dialogueBox;
     private ImageView viewDialogueBox;
     Group dialogueGroup;
-
-    public Dialogue () {
+    private boolean options;
+    public Dialogue (boolean options) {
+        this.options = options;
         try {
             dialogueBox = new Image(new FileInputStream("assets/images/dialogue_box.png"));
         } catch (IOException e){}
@@ -27,14 +28,14 @@ public class Dialogue {
         viewDialogueBox.setFitWidth(700);
         viewDialogueBox.setPreserveRatio(true);
         viewDialogueBox.setX(280);
-        viewDialogueBox.setY(580);
+        viewDialogueBox.setY(options ? 445 : 580);
         dialogueGroup = new Group (viewDialogueBox);
     }
 
     public void setDialogue(String dialogue) {
         Text text = new Text(dialogue);
         text.setX(300);
-        text.setY(610);
+        text.setY(options ? 475 : 610);
         text.setFont(Font.font("OCR A Extended", 17));
         text.setWrappingWidth(670);
         dialogueGroup = new Group(viewDialogueBox, text);
