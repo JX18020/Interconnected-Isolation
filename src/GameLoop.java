@@ -40,7 +40,7 @@ public abstract class GameLoop {
 
     Player player;
 
-    Dialogue dialogue;
+    Dialogue dialogue, dialogueWithOptions;
     DialogueOption dOptionZ, dOptionC, dOptionX;
 
     private boolean rightPressed;
@@ -62,6 +62,7 @@ public abstract class GameLoop {
     private boolean isChoice;
     private boolean nearDoor;
     private boolean level1Done;
+    private boolean letGo;
 
     ArrayList<ArrayList<Obj>> objects;
 
@@ -75,7 +76,7 @@ public abstract class GameLoop {
     private double lastDialogue;
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
-
+        letGo = false;
         objects = new ArrayList<>();
         objects.add(new ArrayList<>(Arrays.asList(new Obj[]{
                 new Obj("microwave", 510, 670, 100, "temporary microwave text."),
@@ -169,7 +170,8 @@ public abstract class GameLoop {
 
         boundsGroup.getChildren().addAll(leftBounds, rightBounds);
 
-        dialogue = new Dialogue();
+        dialogue = new Dialogue(false);
+        dialogueWithOptions = new Dialogue(true);
         dOptionZ = new DialogueOption('a');
         dOptionX = new DialogueOption('b');
         dOptionC = new DialogueOption('c');
@@ -205,38 +207,44 @@ public abstract class GameLoop {
                 /* ------------------------------------------------------------------------------------------------------------------------------
                 This part is broken, it doesn't go in order properly
                  --------------------------------------------------------------------------------------------------------------------------------*/
-                if (flowSceneNum == 3) {
+                if (flowSceneNum == 3) {                        isChoice = true;
+
                     componentsGroup.setTranslateX(-800);
-                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200) {
+                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
                         switch (dialogueNumScene1) {
                             case 0:
-                                dialogue.setDialogue("hello");
+                                setDialogueAndOptions("Do you like this game?", "No", "No", "yag");
                                 break;
                             case 1:
-                                dialogue.setDialogue("bye");
+                                setDialogueAndOptions("Second one", "oWo","wOw","<o/");
                                 break;
                             case 2:
-                                dialogue.setDialogue("asjdflka");
+                                setDialogueAndOptions("Third one", "a","b","c");
                                 break;
                             case 3:
-                                dialogue.setDialogue("3");
+                                setDialogueAndOptions("Fourth one", "abc","def","ghi");
                                 break;
                             case 4:
-                                dialogue.setDialogue("4");
+                                setDialogueAndOptions("Last one", "d","a","b");
                                 break;
                         }
                         lastDialogue = System.currentTimeMillis();
                         if (!isChoice)
                             root.getChildren().add(dialogue.dialogueGroup);
                         else {
+                            root.getChildren().add(dialogueWithOptions.dialogueGroup);
                             root.getChildren().add(dOptionC.optionGroup);
                             root.getChildren().add(dOptionX.optionGroup);
                             root.getChildren().add(dOptionZ.optionGroup);
                         }
-                        isChoice = false;
                         hasDialogue = true;
+                        //if (dialogueNumScene1 > 4) new Level1(InterconnectedIsolation.window, 2405, 720, 1, 2).display();
                         System.out.println (dialogueNumScene1);
-                        dialogueNumScene1++;
+                        if (dialogueNumScene1++ > 4) {
+                            stop();
+                            new Level2(InterconnectedIsolation.window, 2290, 720, 1, 2).display();
+                        }
+                        letGo = false;
                     }
                 }
 
@@ -283,9 +291,10 @@ public abstract class GameLoop {
                             if (!isChoice)
                                 root.getChildren().add(dialogue.dialogueGroup);
                             else {
-                                root.getChildren().add(dOptionC.optionGroup);
-                                root.getChildren().add(dOptionX.optionGroup);
-                                root.getChildren().add(dOptionZ.optionGroup);
+                                root.getChildren().add(dialogue.dialogueGroup);
+                                //root.getChildren().add(dOptionC.optionGroup);
+                                //root.getChildren().add(dOptionX.optionGroup);
+                                //root.getChildren().add(dOptionZ.optionGroup);
                             }
                             isChoice = false;
                             hasDialogue = true;
@@ -303,7 +312,7 @@ public abstract class GameLoop {
                     }
                 }
 
-                if (level1Done && enterPressed && System.currentTimeMillis() - lastComputerUsage > 200) {
+                if (level1Done && (enterPressed || zPressed || xPressed || cPressed) && System.currentTimeMillis() - lastComputerUsage > 200) {
                     stop();
                     new Cutscene(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
                 }
@@ -313,6 +322,7 @@ public abstract class GameLoop {
                     if (!enterPressed)
                         System.out.println("Option " + (zPressed ? "Z" : (xPressed ? "X" : "C")) + " was pressed.");
                     root.getChildren().remove(dialogue.dialogueGroup);
+                    root.getChildren().remove (dialogueWithOptions.dialogueGroup);
                     root.getChildren().remove(dOptionC.optionGroup);
                     root.getChildren().remove(dOptionX.optionGroup);
                     root.getChildren().remove(dOptionZ.optionGroup);
@@ -378,7 +388,7 @@ public abstract class GameLoop {
     public boolean checkForInteraction() {
         boolean ret = false;
         for (Obj o : objects.get(sceneNum & 1)) {
-            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted || (o.objName.equals("computer") && System.currentTimeMillis() - lastComputerUsage > 200))) {
+            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted || (o.objName.equals("computer") && System.currentTimeMillis() - lastComputerUsage > 200 && !hasDialogue))) {
                 o.near = true;
                 arrow.setX((o.posl + o.posr) / 2.0);
                 arrow.setY(o.arrowY);
@@ -410,7 +420,12 @@ public abstract class GameLoop {
         }
         return nearDoor;
     }
-
+    public void setDialogueAndOptions (String a, String b, String c, String d) {
+        dialogueWithOptions.setDialogue(a);
+        dOptionZ.setOption(b);
+        dOptionX.setOption(c);
+        dOptionC.setOption(d);
+    }
     public void addObjects(int flowSceneNum) throws IOException {
         if (flowSceneNum == 2 || flowSceneNum == 3 || flowSceneNum == 4) {
             ImageView laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
@@ -538,15 +553,16 @@ public abstract class GameLoop {
                 case ENTER:
                 case SPACE:
                     enterPressed = false;
+                    letGo = true;
                     break;
                 case Z:
-                    zPressed = false;
+                    zPressed = false;letGo = true;
                     break;
                 case X:
-                    xPressed = false;
+                    xPressed = false;letGo = true;
                     break;
                 case C:
-                    cPressed = false;
+                    cPressed = false;letGo = true;
                     break;
             }
         }
