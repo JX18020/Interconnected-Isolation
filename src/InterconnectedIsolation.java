@@ -42,6 +42,7 @@ public class InterconnectedIsolation extends Application {
 
         Level1 level1 = new Level1(window, 2298, 720, 2, 1);
         Level1 l1 = new Level1(window, 2405, 720, 1, 2);
+        Cutscene cut = new Cutscene(window, 2405, 720, 1, 3);
 
 
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
@@ -63,7 +64,8 @@ public class InterconnectedIsolation extends Application {
             }
             if (!error) {
                 //level1.display();
-                l1.display();
+                //l1.display();
+                cut.display();
             }
         });
 

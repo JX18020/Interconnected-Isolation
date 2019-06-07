@@ -1,27 +1,20 @@
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Keeps track of all the camera movements and player movements
@@ -68,14 +61,18 @@ public abstract class GameLoop {
     private boolean hasChoices;
     private boolean isChoice;
     private boolean nearDoor;
+    private boolean level1Done;
 
     ArrayList<ArrayList<Obj>> objects;
 
     private boolean talkedToMom;
 
     private int flowSceneNum;
-    private int flowDialogueNum;
+    private int dialogueNumScene1 = 0;
+    private int dialogueNumScene2 = 0;
 
+    private double lastComputerUsage;
+    private double lastDialogue;
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
 
@@ -191,7 +188,8 @@ public abstract class GameLoop {
                             componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() + player.getSpeed()));
                     }
                 }
-                checkForCollisions();
+                if (flowSceneNum != 3)
+                    checkForCollisions();
 
                 if (!hasObjects) {
                     try {
@@ -205,7 +203,42 @@ public abstract class GameLoop {
 
                 }
 
-                if (checkForInteraction() && canInteract) {
+                if (flowSceneNum == 3) {
+                    componentsGroup.setTranslateX(-800);
+                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200) {
+                        switch (dialogueNumScene1) {
+                            case 0:
+                                dialogue.setDialogue("hello");
+                                break;
+                            case 1:
+                                dialogue.setDialogue("bye");
+                                break;
+                            case 2:
+                                dialogue.setDialogue("asjdflka");
+                                break;
+                            case 3:
+                                dialogue.setDialogue("3");
+                                break;
+                            case 4:
+                                dialogue.setDialogue("4");
+                                break;
+                        }
+                        lastDialogue = System.currentTimeMillis();
+                        if (!isChoice)
+                            root.getChildren().add(dialogue.dialogueGroup);
+                        else {
+                            root.getChildren().add(dOptionC.optionGroup);
+                            root.getChildren().add(dOptionX.optionGroup);
+                            root.getChildren().add(dOptionZ.optionGroup);
+                        }
+                        isChoice = false;
+                        hasDialogue = true;
+                        System.out.println (dialogueNumScene1);
+                        dialogueNumScene1++;
+                    }
+                }
+
+                if (flowSceneNum != 3 && checkForInteraction() && canInteract) {
                     if (!hasArrow) {
                         if (sceneNum == 1)
                             componentsGroup.getChildren().add(7, arrow);
@@ -237,9 +270,11 @@ public abstract class GameLoop {
                                                 "They’re like my closest friends, even if I haven’t seen them in real life. " +
                                                 "People at school don’t know me like they do.");
                                     }
+                                    lastComputerUsage = System.currentTimeMillis();
                                 } else dialogue.setDialogue(o.dialogue);
-                                if (allDone) new Level2(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
-                                break;
+                                if (allDone) {
+                                    level1Done = true;
+                                }
                             }
                         }
                         if (!hasDialogue) {
@@ -250,6 +285,7 @@ public abstract class GameLoop {
                                 root.getChildren().add(dOptionX.optionGroup);
                                 root.getChildren().add(dOptionZ.optionGroup);
                             }
+                            isChoice = false;
                             hasDialogue = true;
                         }
                     }
@@ -258,11 +294,16 @@ public abstract class GameLoop {
                     hasArrow = false;
                 }
 
-                if (flowSceneNum == 4 && !hasDialogue) {
-                    switch (flowDialogueNum) {
+                if (flowSceneNum == 5 && !hasDialogue) {
+                    switch (dialogueNumScene2) {
                         case 0:
 
                     }
+                }
+
+                if (level1Done && enterPressed && System.currentTimeMillis() - lastComputerUsage > 200) {
+                    stop();
+                    new Cutscene(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
                 }
 
 
@@ -276,7 +317,7 @@ public abstract class GameLoop {
                     hasDialogue = false;
                 }
 
-                if (checkForDoor() && canExit) {
+                if (flowSceneNum != 3 && checkForDoor() && canExit) {
                     if (!hasArrowRed) {
                         componentsGroup.getChildren().add(arrowRed);
                         hasArrowRed = true;
@@ -294,13 +335,15 @@ public abstract class GameLoop {
                     nearDoor = false;
                 }
 
-                if (rightPressed && player.getCanMoveRight()) {
-                    player.playerView.setImage(player.getPlayerRight());
-                    player.moveRight();
-                } else if (leftPressed && player.getCanMoveLeft()) {
-                    player.playerView.setImage(player.getPlayerLeft());
-                    player.moveLeft();
-                } else player.playerView.setImage(player.getPlayerStand());
+                if (flowSceneNum != 3) {
+                    if (rightPressed && player.getCanMoveRight()) {
+                        player.playerView.setImage(player.getPlayerRight());
+                        player.moveRight();
+                    } else if (leftPressed && player.getCanMoveLeft()) {
+                        player.playerView.setImage(player.getPlayerLeft());
+                        player.moveLeft();
+                    } else player.playerView.setImage(player.getPlayerStand());
+                }
             }
         }.start();
     }
@@ -333,13 +376,12 @@ public abstract class GameLoop {
     public boolean checkForInteraction() {
         boolean ret = false;
         for (Obj o : objects.get(sceneNum & 1)) {
-            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted || o.objName.equals("computer"))) {
+            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted || (o.objName.equals("computer") && System.currentTimeMillis() - lastComputerUsage > 200))) {
                 o.near = true;
                 arrow.setX((o.posl + o.posr) / 2.0);
                 arrow.setY(o.arrowY);
                 ret = true;
-            }
-            else {
+            } else {
                 o.near = false;
             }
         }
@@ -368,7 +410,7 @@ public abstract class GameLoop {
     }
 
     public void addObjects(int flowSceneNum) throws IOException {
-        if (flowSceneNum == 2 || flowSceneNum == 3) {
+        if (flowSceneNum == 2 || flowSceneNum == 3 || flowSceneNum == 4) {
             ImageView laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
@@ -412,7 +454,7 @@ public abstract class GameLoop {
             componentsGroup.getChildren().add(1, homework);
             componentsGroup.getChildren().add(1, trash);
 
-            if (flowSceneNum == 3) {
+            if (flowSceneNum == 3 || flowSceneNum == 4) {
                 ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
                 bag.setFitHeight(117);
                 bag.setPreserveRatio(true);
@@ -420,6 +462,16 @@ public abstract class GameLoop {
                 bag.setY(505);
 
                 componentsGroup.getChildren().add(1, bag);
+
+                if (flowSceneNum == 3) {
+                    ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
+                    playerAtComputer.setFitHeight(315);
+                    playerAtComputer.setPreserveRatio(true);
+                    playerAtComputer.setX(1323);
+                    playerAtComputer.setY(288);
+
+                    componentsGroup.getChildren().add(1, playerAtComputer);
+                }
             }
         }
     }
@@ -515,10 +567,14 @@ public abstract class GameLoop {
     }
 
     public void display() {
-        FadeTransition fade = new FadeTransition(Duration.millis(4000), componentsGroup);
+        FadeTransition fade = new FadeTransition(Duration.millis(2000), componentsGroup);
+        FadeTransition fade2 = new FadeTransition(Duration.millis(2000), root);
         fade.setFromValue(0);
+        fade2.setFromValue(0);
         fade.setToValue(1);
+        fade2.setToValue(1);
         fade.play();
+        fade2.play();
         stage.setScene(scene);
     }
 }

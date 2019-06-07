@@ -31,7 +31,7 @@ public class Level2 extends GameLoop {
             setCanExit(false);
         }
         else {
-            background = new Image(new FileInputStream("assets/images/scene1_daytime.png"));
+            background = new Image(new FileInputStream("assets/images/scene1_nighttime.png"));
             setCanInteract(false);
             setCanExit(true);
         }
@@ -43,7 +43,7 @@ public class Level2 extends GameLoop {
 
     @Override
     public void initStage(int flowSceneNum) {
-        if (flowSceneNum == 3) {
+        if (flowSceneNum == 4) {
             player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
             player.reposition(150, scene.getHeight() - 370);
         }
