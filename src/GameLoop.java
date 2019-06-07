@@ -202,7 +202,9 @@ public abstract class GameLoop {
                 if (flowSceneNum == 1 && !talkedToMom) {
 
                 }
-
+                /* ------------------------------------------------------------------------------------------------------------------------------
+                This part is broken, it doesn't go in order properly
+                 --------------------------------------------------------------------------------------------------------------------------------*/
                 if (flowSceneNum == 3) {
                     componentsGroup.setTranslateX(-800);
                     if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200) {

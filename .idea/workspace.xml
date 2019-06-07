@@ -31,15 +31,19 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-39">
-              <caret line="208" column="49" lean-forward="true" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
+            <state relative-caret-position="265">
+              <caret line="233" column="40" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
               <folding>
-                <element signature="e#7277#15198#0" expanded="true" />
-                <element signature="e#15197#15198#0" expanded="true" />
-                <element signature="e#22807#22808#0" expanded="true" />
-                <element signature="e#22907#22908#0" expanded="true" />
-                <element signature="e#22992#22993#0" expanded="true" />
-                <element signature="e#23093#23094#0" expanded="true" />
+                <element signature="e#7310#15954#0" expanded="true" />
+                <element signature="e#15953#15954#0" expanded="true" />
+                <element signature="e#22955#22956#0" expanded="true" />
+                <element signature="e#22989#22990#0" expanded="true" />
+                <element signature="e#23043#23044#0" expanded="true" />
+                <element signature="e#23089#23090#0" expanded="true" />
+                <element signature="e#23136#23137#0" expanded="true" />
+                <element signature="e#23174#23175#0" expanded="true" />
+                <element signature="e#23229#23230#0" expanded="true" />
+                <element signature="e#23275#23276#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -273,12 +277,12 @@
       <workItem from="1559670820344" duration="4126000" />
       <workItem from="1559752397591" duration="4291000" />
       <workItem from="1559843417148" duration="4528000" />
-      <workItem from="1559923165391" duration="5773000" />
+      <workItem from="1559923165391" duration="6019000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59244000" />
+    <option name="totallyTimeSpent" value="59490000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -506,15 +510,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-39">
-          <caret line="208" column="49" lean-forward="true" selection-start-line="208" selection-start-column="49" selection-end-line="208" selection-end-column="49" />
+        <state relative-caret-position="265">
+          <caret line="233" column="40" selection-start-line="233" selection-start-column="40" selection-end-line="233" selection-end-column="40" />
           <folding>
-            <element signature="e#7277#15198#0" expanded="true" />
-            <element signature="e#15197#15198#0" expanded="true" />
-            <element signature="e#22807#22808#0" expanded="true" />
-            <element signature="e#22907#22908#0" expanded="true" />
-            <element signature="e#22992#22993#0" expanded="true" />
-            <element signature="e#23093#23094#0" expanded="true" />
+            <element signature="e#7310#15954#0" expanded="true" />
+            <element signature="e#15953#15954#0" expanded="true" />
+            <element signature="e#22955#22956#0" expanded="true" />
+            <element signature="e#22989#22990#0" expanded="true" />
+            <element signature="e#23043#23044#0" expanded="true" />
+            <element signature="e#23089#23090#0" expanded="true" />
+            <element signature="e#23136#23137#0" expanded="true" />
+            <element signature="e#23174#23175#0" expanded="true" />
+            <element signature="e#23229#23230#0" expanded="true" />
+            <element signature="e#23275#23276#0" expanded="true" />
           </folding>
         </state>
       </provider>
