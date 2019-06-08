@@ -79,7 +79,7 @@ public abstract class GameLoop {
     private double time;
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
-        letGo = false;
+        letGo = true;
         objects = new ArrayList<>();
         objects.add(new ArrayList<>(Arrays.asList(new Obj[]{
                 new Obj("microwave", 510, 670, 100,
@@ -222,27 +222,31 @@ public abstract class GameLoop {
                         if (dialogueNum == 0) {
                             dialogue.setDialogue("Mom: Hello, " + player.getName() + "! How was school?");
                         }
-                        if (flowSceneNum == 8) {
+                        if (flowSceneNum == 9) {
                             switch (dialogueNum) {
                                 case 1:
                                     setOptions("Respond", "Ignore");
                                     break;
                                 case 2:
                                     if (dialogueChoice == 'z')
-                                        dialogue.setDialogue("It was good.");
+                                        dialogue.setDialogue("You: sIt was good.");
+                                    break;
                             }
                         }
 
                         lastDialogue = System.currentTimeMillis();
-                        hasDialogue = true;
-                        dialogueNum++;
-                        if (!isChoice)
-                            root.getChildren().add(dialogue.dialogueGroup);
-                        else
-                            root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup, dOptionC.optionGroup);
-                        letGo = false;
+                        if (flowSceneNum == 1 && dialogueNum == 0 || flowSceneNum == 9 && dialogueNum <= 2) {
+                            hasDialogue = true;
+                            if (!isChoice)
+                                root.getChildren().add(dialogue.dialogueGroup);
+                            else
+                                root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup, dOptionC.optionGroup);
+                            dialogueNum++;
+                            letGo = false;
+                        }
                     }
                 }
+
                 if (flowSceneNum == 3) {
                     componentsGroup.setTranslateX(-800);
                     if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
@@ -445,7 +449,7 @@ public abstract class GameLoop {
                                 setOptions("I just really don't like homework.", "Gaming is far better than doing homework.");
                                 break;
                             case 23:
-                                dialogue.setDialogue("Mom: It's directly  affecting your grades at school. " +
+                                dialogue.setDialogue("Mom: It's directly affecting your grades at school. " +
                                         "Just because you don't like it doesn't mean that it's not important for you to do. ");
                                 break;
                             case 24:
@@ -524,6 +528,7 @@ public abstract class GameLoop {
                                 break;
                             case 38:
                                 dialogue.setDialogue("You: Is that it? What about the weekdays?");
+                                break;
                             case 39:
                                 dialogue.setDialogue("Mom: You need to get your grades up. " +
                                         "So, every time your average goes up by 2 percent, you'll be able to use the computer for 30 more minutes each day.");
@@ -747,13 +752,6 @@ public abstract class GameLoop {
         return nearDoor;
     }
 
-    public void setDialogueAndOptions(String a, String b, String c, String d) {
-        dialogueWithOptions.setDialogue(a);
-        dOptionZ.setOption(b);
-        dOptionX.setOption(c);
-        dOptionC.setOption(d);
-    }
-
     public void setOptions(String z, String x) {
         isChoice = true;
         dOptionZ.setOption(z);
@@ -771,7 +769,7 @@ public abstract class GameLoop {
     }
 
     public void addObjects(int flowSceneNum) throws IOException {
-        if (flowSceneNum == 1) {
+        if (flowSceneNum == 1 || flowSceneNum == 9) {
             ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom.png")));
             mom.setFitHeight(315);
             mom.setPreserveRatio(true);
