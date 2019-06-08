@@ -18,22 +18,22 @@ public class Instructions {
 
     public Scene window() {
         Text text1 = new Text("Instructions");
-        text1.setFont(Font.font("OCR A Extended", 60));
+        text1.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 60px");
         text1.setFill(Color.WHITE);
 
-        Text text2 = new Text("\n\nPress A or left arrow to move left\n\nPress D or right arrow to move right\n\nPress E to interact\n\nPress ENTER or SPACE to progress dialogue\n\nChoose dialogue using the Z, X, and C keys\n\n");
-        text2.setFont(Font.font("OCR A Extended", 40));
+        Text text2 = new Text("\nPress A or left arrow to move left\nPress D or right arrow to move right\nPress E to interact\nPress ENTER or SPACE to progress dialogue\nChoose dialogue using the Z, X, and C keys\n");
+        text2.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 40px");
         text2.setFill(Color.WHITE);
 
         backToMenu = new Button("Main Menu");
-        backToMenu.setFont(Font.font("OCR A Extended", 20));
-        backToMenu.setStyle("-fx-background-color: #3a3a3a");
+        backToMenu.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 30px");
         backToMenu.setTextFill(Color.WHITE);
 
-        VBox layout1 = new VBox(70);
+        VBox layout1 = new VBox(10);
         layout1.setAlignment(Pos.CENTER);
         layout1.getChildren().addAll(text1, text2, backToMenu);
         layout1.setStyle("-fx-background-color: black");
+        layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
 
         return new Scene(layout1, 1280, 720);
     }

@@ -36,8 +36,9 @@ public class Dialogue {
         Text text = new Text(dialogue);
         text.setX(300);
         text.setY(options ? 475 : 610);
-        text.setFont(Font.font("OCR A Extended", 17));
+        text.setStyle("-fx-font-family: 'Quicksand', sans-serif; -fx-font-size: 18");
         text.setWrappingWidth(670);
         dialogueGroup = new Group(viewDialogueBox, text);
+        dialogueGroup.getStylesheets().add("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
     }
 }

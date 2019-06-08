@@ -26,24 +26,22 @@ public class ChooseName {
     public Scene window() {
 
         error = new Text ("Your name may not contain special characters or numbers.");
-        error.setFont(Font.font("OCR A Extended", 20));
+        error.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         error.setFill(Color.BLACK);
 
         Text prompt = new Text ("Enter your name:");
-        prompt.setFont(Font.font("OCR A Extended", 50));
+        prompt.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 50px");
         prompt.setFill(Color.WHITE);
 
         choose = new TextField();
         choose.setAlignment(Pos.CENTER);
 
         confirm = new Button("Confirm");
-        confirm.setFont(Font.font("OCR A Extended", 20));
-        confirm.setStyle("-fx-background-color: #3a3a3a");
+        confirm.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         confirm.setTextFill(Color.WHITE);
 
         back = new Button ("Back to Menu");
-        back.setFont(Font.font("OCR A Extended", 20));
-        back.setStyle("-fx-background-color: #3a3a3a");
+        back.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         back.setTextFill(Color.WHITE);
 
         VBox layout1 = new VBox (100);
@@ -57,6 +55,7 @@ public class ChooseName {
         layout1.setPadding(new Insets(10, 400, 10, 400));
         layout1.getChildren().addAll(prompt, error, choose, layout2);
         layout1.setStyle("-fx-background-color: black");
+        layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
 
         return new Scene (layout1, 1280, 720);
     }

@@ -44,7 +44,7 @@ public class Level1 extends GameLoop {
     @Override
     public void initStage(int flowSceneNum) {
         player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-        player.reposition(150, scene.getHeight() - 370);
+        player.reposition(150, scene.getHeight() - 380);
     }
 
 }

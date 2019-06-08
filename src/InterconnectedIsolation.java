@@ -40,11 +40,6 @@ public class InterconnectedIsolation extends Application {
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
 
-        Level1 level1 = new Level1(window, 2298, 720, 2, 1);
-        Level1 l1 = new Level1(window, 2405, 720, 1, 2);
-        Cutscene cut = new Cutscene(window, 2405, 720, 1, 3);
-
-
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
         menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
@@ -63,9 +58,13 @@ public class InterconnectedIsolation extends Application {
                 }
             }
             if (!error) {
-                level1.display();
-                //l1.display();
-                //cut.display();
+                Player.setName(choose.getName());
+                //new Level1(window, 2298, 720, 2, 1).display();
+                //new Cutscene(window, 2405, 720, 1, 3).display();
+                //new Level2(window, 2405, 720, 1, 5).display();
+                //new Level2(window, true, 2298, 720, 2, 6).display();
+                //new Level2(window, false, 2298, 720, 2, 7).display();
+                new Level3(window, false, 2298, 720, 0, 8).display();
             }
         });
 

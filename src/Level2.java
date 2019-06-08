@@ -17,8 +17,8 @@ public class Level2 extends GameLoop {
     Image background;
     ImageView backgroundView;
 
-    public Level2(Stage primaryStage, int width, int height, int scene, int flowSceneNum){
-        super(primaryStage, true, scene, flowSceneNum);
+    public Level2(Stage primaryStage, boolean scrollable, int width, int height, int scene, int flowSceneNum){
+        super(primaryStage, scrollable, scene, flowSceneNum);
         setStageWidth(width);
         setStageHeight(height);
     }
@@ -26,7 +26,7 @@ public class Level2 extends GameLoop {
     public void initBackground(int sceneNum) throws IOException {
         Player.hasBag = false;
         if (sceneNum == 2) {
-            background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
+            background = new Image(new FileInputStream("assets/images/scene2_door_closed.png"));
             setCanInteract(true);
             setCanExit(false);
         }
@@ -43,13 +43,13 @@ public class Level2 extends GameLoop {
 
     @Override
     public void initStage(int flowSceneNum) {
-        if (flowSceneNum == 4) {
+        if (flowSceneNum == 5) {
             player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-            player.reposition(150, scene.getHeight() - 370);
+            player.reposition(1360, scene.getHeight() - 380);
         }
-        else {
+        else if (flowSceneNum == 6) {
             player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
-            player.reposition(scene.getWidth() - 150, scene.getHeight() - 370);
+            player.reposition(2100, scene.getHeight() - 380);
         }
     }
 

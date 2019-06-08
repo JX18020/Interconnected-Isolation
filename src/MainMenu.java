@@ -20,22 +20,19 @@ public class MainMenu {
 
     public Scene window() {
         playButton = new Button("Play");
-        playButton.setFont(Font.font("OCR A Extended", 20));
-        playButton.setStyle("-fx-background-color: #3a3a3a");
+        playButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 30px");
         playButton.setTextFill(Color.WHITE);
 
         instructionsButton = new Button("How To Play");
-        instructionsButton.setFont(Font.font("OCR A Extended", 20));
-        instructionsButton.setStyle("-fx-background-color: #3a3a3a");
+        instructionsButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         instructionsButton.setTextFill(Color.WHITE);
 
         exitButton = new Button("Exit");
-        exitButton.setFont(Font.font("OCR A Extended", 20));
-        exitButton.setStyle("-fx-background-color: #3a3a3a");
+        exitButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         exitButton.setTextFill(Color.WHITE);
 
         Text text = new Text("Interconnected Isolation\n");
-        text.setFont(Font.font("OCR A Extended", 70));
+        text.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 70px");
         text.setFill(Color.WHITE);
 
         VBox layout1 = new VBox(70);
@@ -43,6 +40,8 @@ public class MainMenu {
         layout1.setPadding(new Insets(10, 10, 100, 10));
         layout1.getChildren().addAll(text, playButton, instructionsButton, exitButton);
         layout1.setStyle("-fx-background-color: black");
+        layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
+
         return new Scene(layout1, 1280, 720);
     }
 

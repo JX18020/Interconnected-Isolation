@@ -30,8 +30,9 @@ public class DialogueOption {
         Text text = new Text(s);
         text.setX(300);
         text.setY(y + 30);
-        text.setFont(Font.font("OCR A Extended", 17));
+        text.setStyle("-fx-font-family: 'Quicksand', sans-serif; -fx-font-size: 18");
         text.setWrappingWidth(670);
         optionGroup = new Group(OptionView, text);
+        optionGroup.getStylesheets().add("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
     }
 }

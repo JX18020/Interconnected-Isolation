@@ -20,6 +20,7 @@ public class Player {
     private ArrayList<Image> animation, animation2, animation3, animation4;
     private Image playerStand, playerStandL, playerStandBag, playerStandBagL;
     ImageView playerView;
+    private static String name;
 
     static boolean hasBag;
     private boolean facingRight;
@@ -58,7 +59,7 @@ public class Player {
             playerView = new ImageView(playerStandBag);
         else
             playerView = new ImageView(playerStand);
-        playerView.setFitHeight(320);
+        playerView.setFitHeight(333);
         playerView.setPreserveRatio(true);
         componentsGroup.getChildren().add(playerView);
         facingRight = true;
@@ -173,5 +174,13 @@ public class Player {
         if (hasBag)
             return facingRight ? playerStandBag : playerStandBagL;
         return facingRight ? playerStand : playerStandL;
+    }
+
+    public static void setName(String playerName) {
+        name = playerName;
+    }
+
+    public static String getName() {
+        return name;
     }
 }
