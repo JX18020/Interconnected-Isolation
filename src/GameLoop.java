@@ -626,7 +626,6 @@ public abstract class GameLoop {
                         lastDialogue = System.currentTimeMillis();
                         hasDialogue = true;
                         root.getChildren().add(dialogue.dialogueGroup);
-                        System.out.println (dialogueNum);
                         if (dialogueNum++ > 11) {
                             callFriend = false;
                         }
