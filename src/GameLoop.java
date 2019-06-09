@@ -15,6 +15,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 /**
  * Keeps track of all the camera movements and player movements
@@ -64,6 +65,8 @@ public abstract class GameLoop {
     private boolean level1Done;
     private boolean letGo;
 
+    private boolean callFriend;
+
     ArrayList<ArrayList<Obj>> objects;
 
     private int dialogueNum;
@@ -73,10 +76,11 @@ public abstract class GameLoop {
     private String objChoiceName = "";
     private boolean itsFun;
 
-    private double lastComputerUsage;
-    private double lastSeatUsage;
+    private double lastUsage;
     private double lastDialogue;
     private double time;
+
+    private ImageView laundry, homework, plates, trash;
 
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
         letGo = true;
@@ -110,7 +114,8 @@ public abstract class GameLoop {
                         "Mom took off the blinds a couple weeks ago. " +
                                 "She said I need more natural light in my room. " +
                                 "I don’t really like it. " +
-                                "It makes it so there’s always a glare on my monitor."),
+                                "It makes it so there’s always a glare on my monitor.",
+                        "It's a nice day outside."),
                 new Obj("guitar", 780, 900, 120,
                         "I haven’t touched this thing in years. " +
                                 "It’s probably way out of tune by now. " +
@@ -143,7 +148,8 @@ public abstract class GameLoop {
                                 "Why sleep when you game and have fun? " +
                                 "Like I’m not even conscious when I sleep so how can I enjoy it? " +
                                 "I guess that’s the definition of sleeping. " +
-                                "Being unconscious I mean."),
+                                "Being unconscious I mean.",
+                        "Maybe I'll sleep at 10 tonight."),
                 new Obj("dresser", 2250, 2405, 330, "Why do I even have this? " +
                         "There are barely any clothes in here. " +
                         "I mean it sort of makes a good nightstand right? " +
@@ -206,7 +212,7 @@ public abstract class GameLoop {
                             componentsGroup.setTranslateX(Math.floor(componentsGroup.getTranslateX() + player.getSpeed()));
                     }
                 }
-                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8)
+                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && flowSceneNum < 11)
                     checkForCollisions();
 
                 if (!hasObjects) {
@@ -228,8 +234,12 @@ public abstract class GameLoop {
                                     setOptions("Respond", "Ignore");
                                     break;
                                 case 2:
-                                    if (dialogueChoice == 'z')
-                                        dialogue.setDialogue("You: sIt was good.");
+                                    if (dialogueChoice == 'z') {
+                                        dialogue.setDialogue("You: It was good.");
+                                        InterconnectedIsolation.improveNum++;
+                                    }
+                                    else
+                                        dialogueNum++;
                                     break;
                             }
                         }
@@ -556,7 +566,7 @@ public abstract class GameLoop {
                         hasDialogue = true;
                         if (dialogueNum++ > 43) {
                             stop();
-                            new Level3(InterconnectedIsolation.window, false, 2298, 720, 0, 8).display();
+                            new Level3(InterconnectedIsolation.window, false, 2298, 720, 0, 8, true, true, true, false).display();
                         }
                         letGo = false;
                     }
@@ -565,13 +575,115 @@ public abstract class GameLoop {
 
                 if (flowSceneNum == 8 && System.currentTimeMillis() - time > 8000) {
                     stop();
-                    new Level3(InterconnectedIsolation.window, true, 2298, 720, 2, 9).display();
+                    new Level3(InterconnectedIsolation.window, true, 2298, 720, 2, 9, true, true, true, false).display();
                 }
 
-                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && checkForInteraction() && canInteract) {
+                if (flowSceneNum == 10 && callFriend) {
+                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
+                        switch (dialogueNum) {
+                            case 0:
+                            case 1:
+                            case 2:
+                                dialogue.setDialogue("...");
+                                break;
+                            case 3:
+                                dialogue.setDialogue("Friend: Hello?");
+                                break;
+                            case 4:
+                                dialogue.setDialogue("You: Hi.");
+                                break;
+                            case 5:
+                                dialogue.setDialogue("Friend: Who is this? " +
+                                        "I don’t have this number saved.");
+                                break;
+                            case 6:
+                                dialogue.setDialogue("You: It's " + player.getName() + ".");
+                                break;
+                            case 7:
+                                dialogue.setDialogue("Friend: Oh hey " + player.getName() + ", it’s been a while. " +
+                                        "What’s going on?");
+                                break;
+                            case 8:
+                                dialogue.setDialogue("You: Nothing much, I just wanted to check in with you since it’s been a long time.");
+                                break;
+                            case 9:
+                                dialogue.setDialogue("Friend: Yeah it’s nice to talk to you again. " +
+                                        "I’m glad you’re doing alright.");
+                                break;
+                            case 10:
+                                dialogue.setDialogue("You: We should meet up sometime. " +
+                                        "School’s almost over.");
+                                break;
+                            case 11:
+                                dialogue.setDialogue("Friend: Yeah that’s a great idea. " +
+                                        "Hey I’ve got to go now. Bye!");
+                                break;
+                            case 12:
+                                dialogue.setDialogue("You: Bye.");
+                                break;
+                        }
+
+                        lastDialogue = System.currentTimeMillis();
+                        hasDialogue = true;
+                        root.getChildren().add(dialogue.dialogueGroup);
+                        System.out.println (dialogueNum);
+                        if (dialogueNum++ > 11) {
+                            callFriend = false;
+                        }
+                        letGo = false;
+                    }
+                }
+
+                if (flowSceneNum == 11) {
+                    componentsGroup.setTranslateX(-750);
+                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
+                        if (dialogueNum == 0) {
+                            dialogue.setDialogue("Mom: Hey " + player.getName() + ". " +
+                                    "I just came to check on you. " +
+                                    "It’s been a few months since we’ve had that talk, and I just wanted to see if you’ve improved on your situation or not.");
+                        }
+                        if (Level3.playedGames) {
+                            if (dialogueNum == 1) {
+                                dialogue.setDialogue("Mom: It would be great if you stopped playing for a little bit and talked to me.");
+                            }
+                        }
+
+                        lastDialogue = System.currentTimeMillis();
+                        hasDialogue = true;
+                        root.getChildren().add(dialogue.dialogueGroup);
+                        if (dialogueNum++ > 1 && Level3.playedGames || dialogueNum++ > 0 && !Level3.playedGames) {
+                            stop();
+                            new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 12, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
+                        }
+                        letGo = false;
+                    }
+                }
+
+                if (flowSceneNum == 12) {
+                    componentsGroup.setTranslateX(-750);
+                    if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
+                        if (InterconnectedIsolation.improveNum < 5)
+                            dialogue.setDialogue("Mom: I see you’ve tried to make an effort to improve. " +
+                                    "I know it’s not easy but I think you can improve a lot more. ");
+                        else
+                            dialogue.setDialogue("Mom: I’m really proud of how far you’ve come. " +
+                                            "I know it’s not easy. I think that both you and me have benefitted from the changes you’ve decided to make.");
+
+                        lastDialogue = System.currentTimeMillis();
+                        hasDialogue = true;
+                            root.getChildren().add(dialogue.dialogueGroup);
+                        if (dialogueNum++ > 0) {
+                            stop();
+                            InterconnectedIsolation.window.setScene(new EndScreen().window());
+                        }
+                        letGo = false;
+                    }
+                }
+
+                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && flowSceneNum < 11 && checkForInteraction() && canInteract) {
                     if (!hasArrow) {
                         if (sceneNum == 1)
-                            componentsGroup.getChildren().add(7, arrow);
+                            componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 1, arrow);
                         else
                             componentsGroup.getChildren().add(1, arrow);
                         hasArrow = true;
@@ -579,6 +691,30 @@ public abstract class GameLoop {
                     if (ePressed) {
                         for (Obj o : objects.get(sceneNum & 1)) {
                             if (o.near) {
+                                if (flowSceneNum == 10) {
+                                    switch (o.objName) {
+                                        case "laundry":
+                                            setOptions("Do laundry", "Leave it");
+                                            break;
+                                        case "homework":
+                                            setOptions("Do homework", "Leave it for tomorrow");
+                                            break;
+                                        case "dresser":
+                                            setOptions("Organize clothes in dresser", "Leave it how it is");
+                                            break;
+                                        case "plates":
+                                            setOptions("Clean up", "Leave them there");
+                                            break;
+                                        case "picture":
+                                            setOptions("Call friend", "Put it back on the shelf");
+                                            break;
+                                        case "trash":
+                                            setOptions("Empty bin", "Leave it for later");
+                                            break;
+                                        case "guitar":
+                                            setOptions("Tune it", "Leave");
+                                    }
+                                }
                                 boolean allDone = false;
                                 o.interacted = true;
                                 if (o.objName.equals("computer")) {
@@ -589,27 +725,40 @@ public abstract class GameLoop {
                                             break;
                                         }
                                     }
-                                    if (allDone) {
-                                        dialogue.setDialogue("Okay time to hop on. " +
-                                                "My teammates are probably home by now. " +
-                                                "I think we were in the middle of a quest when someone had to leave? " +
-                                                "I can’t really remember.");
-                                    } else {
-                                        dialogue.setDialogue("I should hop on soon. " +
-                                                "My teammates usually get home a bit after I do. " +
-                                                "They’re like my closest friends, even if I haven’t seen them in real life. " +
-                                                "People at school don’t know me like they do.");
+                                    if (flowSceneNum == 2) {
+                                        if (allDone) {
+                                            dialogue.setDialogue("Okay time to hop on. " +
+                                                    "My teammates are probably home by now. " +
+                                                    "I think we were in the middle of a quest when someone had to leave? " +
+                                                    "I can’t really remember.");
+                                        } else {
+                                            dialogue.setDialogue("I should hop on soon. " +
+                                                    "My teammates usually get home a bit after I do. " +
+                                                    "They’re like my closest friends, even if I haven’t seen them in real life. " +
+                                                    "People at school don’t know me like they do.");
+                                        }
+                                    } else if (flowSceneNum == 10) {
+                                        if (allDone) {
+                                            setOptions("Play games", "Leave it");
+                                        } else {
+                                            dialogue.setDialogue("Hmm, not right now.");
+                                        }
                                     }
-                                    lastComputerUsage = System.currentTimeMillis();
-                                } else dialogue.setDialogue(o.dialogue);
+                                    lastUsage = System.currentTimeMillis();
+                                } else {
+                                    if (flowSceneNum == 2 || flowSceneNum == 6)
+                                        dialogue.setDialogue(o.dialogue);
+                                    else if (flowSceneNum == 10)
+                                        dialogue.setDialogue(o.dialogue2);
+                                }
                                 if (allDone) {
                                     level1Done = true;
                                 }
                                 if (o.objName.equals("seat")) {
-                                    objChoiceName = "seat";
                                     setOptions("Sit down", "Keep looking around");
-                                    lastSeatUsage = System.currentTimeMillis();
+                                    lastUsage = System.currentTimeMillis();
                                 }
+                                objChoiceName = o.objName;
                             }
                         }
                         if (!hasDialogue) {
@@ -625,7 +774,7 @@ public abstract class GameLoop {
                     hasArrow = false;
                 }
 
-                if (level1Done && (enterPressed || zPressed || xPressed || cPressed) && System.currentTimeMillis() - lastComputerUsage > 200) {
+                if (level1Done && (enterPressed || zPressed || xPressed || cPressed) && System.currentTimeMillis() - lastUsage > 200) {
                     stop();
                     new Cutscene(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
                 }
@@ -639,6 +788,30 @@ public abstract class GameLoop {
                             if (objChoiceName.equals("seat") && zPressed) {
                                 stop();
                                 new Level2(InterconnectedIsolation.window, false, 2298, 720, 2, 7).display();
+                            } else if (!objChoiceName.equals("") && zPressed) {
+                                switch (objChoiceName) {
+                                    case "laundry":
+                                        componentsGroup.getChildren().remove(laundry);
+                                        break;
+                                    case "homework":
+                                        componentsGroup.getChildren().remove(homework);
+                                        break;
+                                    case "plates":
+                                        componentsGroup.getChildren().remove(plates);
+                                        break;
+                                    case "trash":
+                                        componentsGroup.getChildren().remove(trash);
+                                        break;
+                                    case "picture":
+                                        callFriend = true;
+                                        break;
+                                    case "computer":
+                                        new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), true).display();
+                                        break;
+                                }
+                                InterconnectedIsolation.improveNum++;
+                            } else if (objChoiceName.equals("computer") && xPressed) {
+                                new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
                             }
                             objChoiceName = "";
                             isChoice = false;
@@ -655,7 +828,7 @@ public abstract class GameLoop {
                     }
                 }
 
-                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && checkForDoor() && canExit) {
+                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && flowSceneNum < 11 && checkForDoor() && canExit) {
                     if (!hasArrowRed) {
                         componentsGroup.getChildren().add(arrowRed);
                         hasArrowRed = true;
@@ -663,11 +836,11 @@ public abstract class GameLoop {
                     if (ePressed) {
                         stop();
                         if (flowSceneNum == 1) {
-                            componentsGroup.getChildren().remove(arrowRed);
                             new Level1(InterconnectedIsolation.window, 2405, 720, 1, 2).display();
                         } else if (flowSceneNum == 5) {
-                            componentsGroup.getChildren().remove(arrowRed);
                             new Level2(InterconnectedIsolation.window, true, 2298, 720, 2, 6).display();
+                        } else if (flowSceneNum == 9) {
+                            new Level3(InterconnectedIsolation.window, true, 2405, 720, 1, 10, true, true, true, false).display();
                         }
                     }
                 } else {
@@ -676,7 +849,7 @@ public abstract class GameLoop {
                     nearDoor = false;
                 }
 
-                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8) {
+                if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && flowSceneNum < 11) {
                     if (rightPressed && player.getCanMoveRight()) {
                         player.playerView.setImage(player.getPlayerRight());
                         player.moveRight();
@@ -718,8 +891,8 @@ public abstract class GameLoop {
         boolean ret = false;
         for (Obj o : objects.get(sceneNum & 1)) {
             if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted ||
-                    (o.objName.equals("computer") && System.currentTimeMillis() - lastComputerUsage > 200 && !hasDialogue) ||
-                    (o.objName.equals("seat") && System.currentTimeMillis() - lastSeatUsage > 200 && !hasDialogue))) {
+                    (o.objName.equals("computer") || o.objName.equals("seat"))
+                            && System.currentTimeMillis() - lastUsage > 200 && !hasDialogue)) {
                 o.near = true;
                 arrow.setX((o.posl + o.posr) / 2.0);
                 arrow.setY(o.arrowY);
@@ -770,7 +943,7 @@ public abstract class GameLoop {
 
     public void addObjects(int flowSceneNum) throws IOException {
         if (flowSceneNum == 1 || flowSceneNum == 9) {
-            ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom.png")));
+            ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom_flip.png")));
             mom.setFitHeight(315);
             mom.setPreserveRatio(true);
             mom.setX(600);
@@ -779,8 +952,8 @@ public abstract class GameLoop {
             componentsGroup.getChildren().add(1, mom);
         }
 
-        if (flowSceneNum >= 2 && flowSceneNum <= 5) {
-            ImageView laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
+        if (flowSceneNum >= 2 && flowSceneNum <= 5 || flowSceneNum >= 10) {
+            laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
             laundry.setX(279);
@@ -798,48 +971,72 @@ public abstract class GameLoop {
             picture.setX(1098);
             picture.setY(369);
 
-            ImageView plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
-            plates.setFitHeight(72);
-            plates.setPreserveRatio(true);
-            plates.setX(1179);
-            plates.setY(396);
+            if (flowSceneNum < 11 || Level3.hasPlates) {
+                plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
+                plates.setFitHeight(72);
+                plates.setPreserveRatio(true);
+                plates.setX(1179);
+                plates.setY(396);
+                componentsGroup.getChildren().add(1, plates);
+            }
 
-            ImageView homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
-            homework.setFitHeight(72);
-            homework.setPreserveRatio(true);
-            homework.setX(1583);
-            homework.setY(396);
+            if (flowSceneNum < 11 || Level3.hasHomework) {
+                homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
+                homework.setFitHeight(72);
+                homework.setPreserveRatio(true);
+                homework.setX(1583);
+                homework.setY(396);
+                componentsGroup.getChildren().add(1, homework);
+            }
 
-            ImageView trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
-            trash.setFitHeight(135);
-            trash.setPreserveRatio(true);
-            trash.setX(927);
-            trash.setY(486);
+            if (flowSceneNum < 11 || Level3.hasTrash) {
+                trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
+                trash.setFitHeight(135);
+                trash.setPreserveRatio(true);
+                trash.setX(927);
+                trash.setY(486);
+                componentsGroup.getChildren().add(1, trash);
+            }
 
             componentsGroup.getChildren().add(1, laundry);
             componentsGroup.getChildren().add(1, guitar);
             componentsGroup.getChildren().add(1, picture);
-            componentsGroup.getChildren().add(1, plates);
-            componentsGroup.getChildren().add(1, homework);
-            componentsGroup.getChildren().add(1, trash);
 
-            if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 5) {
-                ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
-                bag.setFitHeight(117);
-                bag.setPreserveRatio(true);
-                bag.setX(1565);
-                bag.setY(505);
+        }
+        if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 5 || flowSceneNum == 11 || flowSceneNum == 12) {
+            ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
+            bag.setFitHeight(117);
+            bag.setPreserveRatio(true);
+            bag.setX(1565);
+            bag.setY(505);
 
-                componentsGroup.getChildren().add(1, bag);
+            componentsGroup.getChildren().add(1, bag);
 
-                if (flowSceneNum == 3 || flowSceneNum == 4) {
-                    ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
-                    playerAtComputer.setFitHeight(315);
-                    playerAtComputer.setPreserveRatio(true);
-                    playerAtComputer.setX(1323);
-                    playerAtComputer.setY(288);
+            if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 11 && Level3.playedGames) {
+                ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
+                playerAtComputer.setFitHeight(315);
+                playerAtComputer.setPreserveRatio(true);
+                playerAtComputer.setX(1323);
+                playerAtComputer.setY(288);
 
-                    componentsGroup.getChildren().add(1, playerAtComputer);
+                componentsGroup.getChildren().add(1, playerAtComputer);
+            }
+            if (flowSceneNum == 11 || flowSceneNum == 12) {
+                ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom.png")));
+                mom.setFitHeight(315);
+                mom.setPreserveRatio(true);
+                mom.setX(900);
+                mom.setY(358);
+
+                componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 2, mom);
+                if (flowSceneNum == 11 && !Level3.playedGames || flowSceneNum == 12) {
+                    ImageView player = new ImageView(new Image(new FileInputStream("assets/images/player_flip.png")));
+                    player.setFitHeight(333);
+                    player.setPreserveRatio(true);
+                    player.setX(1360);
+                    player.setY(340);
+
+                    componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 2, player);
                 }
             }
         }

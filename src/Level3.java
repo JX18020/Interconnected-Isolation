@@ -23,10 +23,16 @@ public class Level3 extends GameLoop {
     ImageView backgroundView;
     Rectangle rect;
 
-    public Level3(Stage primaryStage, boolean scrollable, int width, int height, int scene, int flowSceneNum){
+    static boolean hasHomework, hasTrash, hasPlates, playedGames;
+
+    public Level3(Stage primaryStage, boolean scrollable, int width, int height, int scene, int flowSceneNum, boolean hasHomework, boolean hasPlates, boolean hasTrash, boolean playedGames){
         super(primaryStage, scrollable, scene, flowSceneNum);
         setStageWidth(width);
         setStageHeight(height);
+        this.hasHomework = hasHomework;
+        this.hasPlates = hasPlates;
+        this.hasTrash = hasTrash;
+        this.playedGames = playedGames;
     }
 
     public void initBackground(int sceneNum) throws IOException {
@@ -60,7 +66,7 @@ public class Level3 extends GameLoop {
 
     @Override
     public void initStage(int flowSceneNum) {
-        if (flowSceneNum >= 9) {
+        if (flowSceneNum == 9 || flowSceneNum == 10) {
             player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
             player.reposition(150, scene.getHeight() - 370);
         }

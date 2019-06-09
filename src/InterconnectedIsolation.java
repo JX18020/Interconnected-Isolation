@@ -16,7 +16,9 @@ import java.util.*;
 public class InterconnectedIsolation extends Application {
 
     static Stage window;
-    Scene splashScreen, mainMenu, instructions, chooseName;
+    Scene splashScreen, instructions, chooseName;
+    static Scene mainMenu, endScreen;
+    static int improveNum;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -40,6 +42,10 @@ public class InterconnectedIsolation extends Application {
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
 
+        EndScreen end = new EndScreen();
+        endScreen = end.window();
+
+
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
         menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
@@ -59,12 +65,15 @@ public class InterconnectedIsolation extends Application {
             }
             if (!error) {
                 Player.setName(choose.getName());
+                improveNum = 0;
                 //new Level1(window, 2298, 720, 2, 1).display();
                 //new Cutscene(window, 2405, 720, 1, 3).display();
                 //new Level2(window, 2405, 720, 1, 5).display();
                 //new Level2(window, true, 2298, 720, 2, 6).display();
                 //new Level2(window, false, 2298, 720, 2, 7).display();
-                new Level3(window, false, 2298, 720, 0, 8).display();
+                //new Level3(window, false, 2298, 720, 0, 8).display();
+                new Level3(window, true, 2405, 720, 1, 10, true, true, true, false).display();
+                //new Level3(window, false, 2405, 720, 1, 11, true, true, true, true).display();
             }
         });
 
