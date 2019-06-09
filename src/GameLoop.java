@@ -445,8 +445,8 @@ public abstract class GameLoop {
         this.sceneNum = sceneNum;
         this.flowSceneNum = flowSceneNum;
         try {
-            arrow = new ImageView(new Image(new FileInputStream("assets/images/arrow.png")));
-            arrowRed = new ImageView(new Image(new FileInputStream("assets/images/arrow_red.png")));
+            arrow = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/arrow.png")));
+            arrowRed = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/arrow_red.png")));
             initBackground(sceneNum);
         } catch (IOException e) {
         }
@@ -1287,7 +1287,7 @@ public abstract class GameLoop {
      */
     public void addObjects(int flowSceneNum) throws IOException {
         if (flowSceneNum == 1 || flowSceneNum == 9) {
-            ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom_flip.png")));
+            ImageView mom = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom_flip.png")));
             mom.setFitHeight(315);
             mom.setPreserveRatio(true);
             mom.setX(600);
@@ -1297,26 +1297,26 @@ public abstract class GameLoop {
         }
 
         if (flowSceneNum >= 2 && flowSceneNum <= 5 || flowSceneNum >= 10) {
-            laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
+            laundry = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
             laundry.setX(279);
             laundry.setY(441);
 
-            ImageView guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
+            ImageView guitar = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/guitar.png")));
             guitar.setFitHeight(396);
             guitar.setPreserveRatio(true);
             guitar.setX(774);
             guitar.setY(205);
 
-            ImageView picture = new ImageView(new Image(new FileInputStream("assets/images/picture.png")));
+            ImageView picture = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/picture.png")));
             picture.setFitHeight(63);
             picture.setPreserveRatio(true);
             picture.setX(1098);
             picture.setY(369);
 
             if (flowSceneNum < 11 || Level3.isHasPlates()) {
-                plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
+                plates = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/plates.png")));
                 plates.setFitHeight(72);
                 plates.setPreserveRatio(true);
                 plates.setX(1179);
@@ -1325,7 +1325,7 @@ public abstract class GameLoop {
             }
 
             if (flowSceneNum < 11 || Level3.isHasHomework()) {
-                homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
+                homework = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/unfinished_homework.png")));
                 homework.setFitHeight(72);
                 homework.setPreserveRatio(true);
                 homework.setX(1583);
@@ -1334,7 +1334,7 @@ public abstract class GameLoop {
             }
 
             if (flowSceneNum < 11 || Level3.isHasTrash()) {
-                trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
+                trash = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/trash.png")));
                 trash.setFitHeight(135);
                 trash.setPreserveRatio(true);
                 trash.setX(927);
@@ -1348,7 +1348,7 @@ public abstract class GameLoop {
 
         }
         if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 5 || flowSceneNum == 11 || flowSceneNum == 12) {
-            ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
+            ImageView bag = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/bag.png")));
             bag.setFitHeight(117);
             bag.setPreserveRatio(true);
             bag.setX(1565);
@@ -1357,7 +1357,7 @@ public abstract class GameLoop {
             componentsGroup.getChildren().add(1, bag);
 
             if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 11 && Level3.isPlayedGames()) {
-                ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
+                ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_sitting_at_chair.png")));
                 playerAtComputer.setFitHeight(315);
                 playerAtComputer.setPreserveRatio(true);
                 playerAtComputer.setX(1323);
@@ -1366,7 +1366,7 @@ public abstract class GameLoop {
                 componentsGroup.getChildren().add(1, playerAtComputer);
             }
             if (flowSceneNum == 11 || flowSceneNum == 12) {
-                ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom.png")));
+                ImageView mom = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom.png")));
                 mom.setFitHeight(315);
                 mom.setPreserveRatio(true);
                 mom.setX(900);
@@ -1374,7 +1374,7 @@ public abstract class GameLoop {
 
                 componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 2, mom);
                 if (flowSceneNum == 11 && !Level3.isPlayedGames() || flowSceneNum == 12) {
-                    ImageView player = new ImageView(new Image(new FileInputStream("assets/images/player_flip.png")));
+                    ImageView player = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_flip.png")));
                     player.setFitHeight(333);
                     player.setPreserveRatio(true);
                     player.setX(1360);
@@ -1385,7 +1385,7 @@ public abstract class GameLoop {
             }
         }
         if (flowSceneNum == 6 || flowSceneNum == 7) {
-            ImageView momAtTable = new ImageView(new Image(new FileInputStream("assets/images/mom_sitting_at_table.png")));
+            ImageView momAtTable = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom_sitting_at_table.png")));
             momAtTable.setFitHeight(315);
             momAtTable.setPreserveRatio(true);
             momAtTable.setX(1269);
@@ -1393,7 +1393,7 @@ public abstract class GameLoop {
 
             componentsGroup.getChildren().add(1, momAtTable);
             if (flowSceneNum == 7) {
-                ImageView playerAtTable = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_table.png")));
+                ImageView playerAtTable = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_sitting_at_table.png")));
                 playerAtTable.setFitHeight(315);
                 playerAtTable.setPreserveRatio(true);
                 playerAtTable.setX(763);

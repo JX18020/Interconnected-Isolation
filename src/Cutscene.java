@@ -51,7 +51,7 @@ public class Cutscene extends GameLoop {
     @Override
     public void initBackground(int sceneNum) throws IOException {
         Player.setHasBag(false);
-        background = new ImageView(new Image(new FileInputStream("assets/images/scene1_nighttime.png")));
+        background = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/scene1_nighttime.png")));
         setCanInteract(false);
         setCanExit(true);
         background.setPreserveRatio(true);

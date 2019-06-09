@@ -36,7 +36,7 @@ public class DialogueOption {
      */
     public DialogueOption(char option) {
         try {
-            OptionBox = new Image(new FileInputStream("assets/images/choice_" + option + ".png"));
+            OptionBox = new Image(new FileInputStream("Interconnected-Isolation/assets/images/choice_" + option + ".png"));
         } catch (IOException e) {
         }
         OptionView = new ImageView(OptionBox);

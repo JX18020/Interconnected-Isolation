@@ -88,7 +88,7 @@ public class EndScreen {
             }
         }
 
-        PrintWriter out = new PrintWriter(new FileWriter("../assets/files/records.txt"));
+        PrintWriter out = new PrintWriter(new FileWriter("Interconnected-Isolation/assets/files/records.txt"));
         if (arr.size() < 10) {
             for (int i = 0; i < arr.size(); i++) {
                 out.println(arr.get(i));

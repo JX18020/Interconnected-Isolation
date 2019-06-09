@@ -59,7 +59,6 @@ public class ConfirmBox {
         yesButton.setTextFill(Color.WHITE);
 
         Button noButton = new Button("No");
-        noButton.setFont(Font.font("OCR A Extended", 16));
         noButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Quicksand', sans-serif; -fx-font-size: 18px");
         noButton.setTextFill(Color.WHITE);
 

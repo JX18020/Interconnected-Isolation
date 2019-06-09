@@ -43,7 +43,7 @@ public class Dialogue {
      */
     public Dialogue() {
         try {
-            dialogueBox = new Image(new FileInputStream("assets/images/dialogue_box.png"));
+            dialogueBox = new Image(new FileInputStream("Interconnected-Isolation/assets/images/dialogue_box.png"));
         } catch (IOException e) {
         }
         viewDialogueBox = new ImageView(dialogueBox);

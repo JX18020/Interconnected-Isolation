@@ -44,7 +44,7 @@ public class SplashScreen implements Screen {
      * @since 1.0
      */
     public Scene window() throws IOException {
-        Image image = new Image(new FileInputStream("../assets/images/splash_screen.png"));
+        Image image = new Image(new FileInputStream("Interconnected-Isolation/assets/images/splash_screen.png"));
 
         ImageView imageView = new ImageView(image);
         imageView.setFitHeight(720);
