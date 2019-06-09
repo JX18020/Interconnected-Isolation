@@ -18,70 +18,347 @@ import java.util.Arrays;
 import java.util.logging.Level;
 
 /**
- * Keeps track of all the camera movements and player movements
+ * Keeps track of all the camera movements and player movements.
+ * <p>
+ * References:
+ * <br>Dillon, A. (2015). Picasso (Version 2) [Software]. Retrieved from https://github.com/Hopding/Picasso.
+ * </p>
  *
  * @author Julia Xie
  * @author Christopher Trevisan
- * @version June 3, 2019
+ * @version 1.11
+ *
+ * <p>
+ * 1.2 - Julia Xie
+ * <br>Date: 2019/05/29
+ * <br>Time Spent: 3 hours
+ * <br>Added GameLoop constructor.
+ * <br>Added EventHandler anonymous classes.
+ * <br>Added abstract initStage() and initBackground() methods.
+ * <br>Added display() method.
+ * </p>
+ * <p>
+ * 1.3 - Julia Xie
+ * <br>Date: 2019/05/30
+ * <br>Time Spent: 2 hours
+ * <br>Added checkForCollisions() method.
+ * <br>Added checkForCollisionsOnRight() method.
+ * <br>Added checkForCollisionsOnLeft() method.
+ * <br>Added setStageWidth() method.
+ * <br>Added setStageHeight() method.
+ * </p>
+ * <p>
+ * 1.5 - Julia Xie
+ * <br>Date: 2019/06/01
+ * <br>Time Spent: 30 minutes
+ * <br>Modified display() method.
+ * <br>Modified constructor.
+ * <br>Added checkForInteraction() method.
+ * <br>Added checkForDoor() method.
+ * </p>
+ * <p>
+ * 1.6 - Julia Xie
+ * <br>Date: 2019/06/03
+ * <br>Time Spent: 2 hours
+ * <br>Added setCanExit() method.
+ * <br>Added setCanInteract() method.
+ * <br>Added addObjects() method.
+ * </p>
+ * <p>
+ * 1.7 - Julia Xie
+ * <br>Date: 2019/06/04
+ * <br>Time Spent: 3 hours
+ * <br>Modified addObjects() method.
+ * <br>Modified checkForInteraction() method.
+ * <br>Modified constructor.
+ * </p>
+ * <p>
+ * 1.8 - Julia Xie
+ * <br>Date: 2019/06/05
+ * <br>Time Spent: 2 hours
+ * <br>Modified constructor.
+ * </p>
+ * <p>
+ * 1.8 - Chris Trevisan
+ * <br>Date: 2019/06/05
+ * <br>Time Spent: 1 hour
+ * <br>Modified checkForInteraction() method.
+ * <br>Modified constructor.
+ * </p>
+ * <p>
+ * 1.9 - Chris Trevisan
+ * <br>Date: 2019/06/06
+ * <br>Time Spent: 1 hour
+ * <br>Modified constructor
+ * </p>
+ * <p>
+ * 1.9 - Julia Xie
+ * <br>Date: 2019/06/06
+ * <br>Time Spent: 2 hours
+ * <br>Modified constructor.
+ * </p>
+ * <p>
+ * 1.10 - Julia Xie
+ * <br>Date: 2019/06/07
+ * <br>Time Spent: 2 hours
+ * <br>Modified constructor.
+ * <br>Modified addObjects() method.
+ * </p>
+ * <p>
+ * 1.10 - Chris Trevisan
+ * <br>Date: 2019/06/07
+ * <br>Time Spent: 1 hour
+ * <br>Modified constructor.
+ * </p>
+ * <p>
+ * 1.11 - Julia Xie
+ * <br>Date: 2019/06/08
+ * <br>Time Spent: 10 hours
+ * <br>Modified constructor.
+ * <br>Added setOptions() methods.
+ * <br>Modified addObjects() method.
+ * </p>
+ * @since 1.2
  */
 public abstract class GameLoop {
+    /**
+     * The stage which the game appears on.
+     */
     private Stage stage;
+    /**
+     * The scene of the game.
+     */
     Scene scene;
+    /**
+     * The main group of all the components of the game.
+     */
     Group root;
+    /**
+     * The group which contains the boundaries of the player.
+     */
     private Group boundsGroup;
+    /**
+     * The group which contains all components which move in the background.
+     */
     Group componentsGroup;
 
+    /**
+     * The image of a blue arrow.
+     */
     private ImageView arrow;
+    /**
+     * The image of a red arrow.
+     */
     private ImageView arrowRed;
 
+    /**
+     * The scene number.
+     */
     private int sceneNum;
+    /**
+     * The number of scene changes there has currently been.
+     */
     private int flowSceneNum;
 
+    /**
+     * The width of the stage.
+     */
     private double stageWidth;
+    /**
+     * The height of the stage.
+     */
     private double stageHeight;
 
+    /**
+     * The movable player.
+     */
     Player player;
 
-    Dialogue dialogue, dialogueWithOptions;
-    DialogueOption dOptionZ, dOptionC, dOptionX;
+    /**
+     * The dialogue which appears in the game.
+     */
+    private Dialogue dialogue;
+    /**
+     * The 3 dialogue options which the player can choose.
+     */
+    private DialogueOption dOptionZ, dOptionC, dOptionX;
 
+    /**
+     * Whether or not the right key or d is pressed.
+     */
     private boolean rightPressed;
+    /**
+     * Whether or not the left key or a is pressed.
+     */
     private boolean leftPressed;
+    /**
+     * Whether or not e is pressed.
+     */
     private boolean ePressed;
+    /**
+     * Whether or not ENTER or SPACE is pressed.
+     */
     private boolean enterPressed;
+    /**
+     * Whether or not z is pressed.
+     */
     private boolean zPressed;
+    /**
+     * Whether or not x is pressed.
+     */
     private boolean xPressed;
+    /**
+     * Whether or not c is pressed.
+     */
     private boolean cPressed;
 
+    /**
+     * Whether or not the player is able to interact with objects.
+     */
     private boolean canInteract;
+    /**
+     * Whether or not the player is allowed to exit the scene.
+     */
     private boolean canExit;
 
+    /**
+     * Whether or not the scene has an arrow already.
+     */
     private boolean hasArrow;
+    /**
+     * Whether or not the scene has a red arrow already.
+     */
     private boolean hasArrowRed;
+    /**
+     * Whether or not the scene has generated the objects already.
+     */
     private boolean hasObjects;
+    /**
+     * Whether or not the screen has dialogue on it.
+     */
     private boolean hasDialogue;
+    /**
+     * Whether or not the dialogue is choice-based.
+     */
     private boolean isChoice;
+    /**
+     * Whether or not the player is near a door.
+     */
     private boolean nearDoor;
+    /**
+     * Whether or not level 1 is done.
+     */
     private boolean level1Done;
+    /**
+     * Whether or not a key has been let go.
+     */
     private boolean letGo;
 
+    /**
+     * Whether or not the player has chosen to call a friend.
+     */
     private boolean callFriend;
 
-    ArrayList<ArrayList<Obj>> objects;
+    /**
+     * An ArrayList which contains 2 ArrayLists of displayable objects.
+     */
+    private ArrayList<ArrayList<Obj>> objects;
 
+    /**
+     * The number of dialogue prompts which have been displayed.
+     */
     private int dialogueNum;
 
+    /**
+     * The number of options available in a choice dialogue.
+     */
     private int numOfOpt;
+    /**
+     * The choice chosen in a choice dialogue.
+     */
     private char dialogueChoice;
+    /**
+     * The name of the object where a choice has been made about it.
+     */
     private String objChoiceName = "";
+    /**
+     * Whether or not the player choose the "it's fun" option in one of the choice dialogues.
+     */
     private boolean itsFun;
 
+    /**
+     * The time in milliseconds where something was last used.
+     */
     private double lastUsage;
+    /**
+     * The time in milliseconds where the dialogue was last skipped.
+     */
     private double lastDialogue;
+    /**
+     * The time in milliseconds that the scene started.
+     */
     private double time;
 
+    /**
+     * Images of the laundry, homework, plates and trash.
+     */
     private ImageView laundry, homework, plates, trash;
 
+    /**
+     * Constructor for the GameLoop class.
+     * Initializes all objects and runs an AnimationTimer which controls the game.
+     * <p>
+     * 1.5 - Julia Xie
+     * <br>Added blue arrow if the player is near an object and a red arrow if the player is near a door.
+     * <br>Added a mechanic where if the player is near an object and pressed e on the keyboard, an event is triggered.
+     * </p>
+     * <p>
+     * 1.7 - Julia Xie
+     * <br>Added blue arrow for more objects.
+     * </p>
+     * <p>
+     * 1.8 - Julia Xie
+     * <br>Added showing the dialogue with the dialogue box when something is interacted with.
+     * <br>Added the specific dialogue options for objects.
+     * </p>
+     * <p>
+     * 1.8 - Chris Trevisan
+     * <br>Created ArrayLists which contained all of the objects.
+     * </p>
+     * <p>
+     * 1.9 - Chris Trevisan
+     * <br>Hard-coded special dialogue case for the computer object.
+     * <br>Added in the dialogue options mechanic.
+     * </p>
+     * <p>
+     * 1.9 - Julia Xie
+     * <br>Added all dialogue, object coordinates, arrow coordinates, and names to the objects in scene 1.
+     * </p>
+     * <p>
+     * 1.10 - Julia Xie
+     * <br>Added a cutscene with dialogue.
+     * </p>
+     * <p>
+     * 1.10 - Chris Trevisan
+     * <br>Fixed bug with the cutscene dialogue and added dialogue progression for dialogue options.
+     * </p>
+     * <p>
+     * 1.11 - Julia Xie
+     * <br>Added all dialogue, object coordinates, arrow coordinates, and names to the objects in scene 2.
+     * <br>Added dialogue when the player first enters the door.
+     * <br>Added dialogue for the cutscene.
+     * <br>Added all dialogue for Level 2, including the choice dialogues, which can lead to different dialogue from the mom.
+     * <br>Added flow through all the doors, interacting with objects, and the option to sit in Level 2 scene 2.
+     * <br>Added all dialogue for Level 3.
+     * <br>Added the cutscene at the end of the game.
+     * </p>
+     *
+     * @param primaryStage the stage which the game appears in
+     * @param scrollable   whether or not the scene is scrollable
+     * @param sceneNum     the scene number
+     * @param flowSceneNum the number of scene changes so far
+     * @since 1.2
+     */
     public GameLoop(Stage primaryStage, boolean scrollable, int sceneNum, int flowSceneNum) {
         letGo = true;
         objects = new ArrayList<>();
@@ -190,8 +467,7 @@ public abstract class GameLoop {
 
         boundsGroup.getChildren().addAll(leftBounds, rightBounds);
 
-        dialogue = new Dialogue(false);
-        dialogueWithOptions = new Dialogue(true);
+        dialogue = new Dialogue();
         dOptionZ = new DialogueOption('a');
         dOptionX = new DialogueOption('b');
         dOptionC = new DialogueOption('c');
@@ -236,9 +512,8 @@ public abstract class GameLoop {
                                 case 2:
                                     if (dialogueChoice == 'z') {
                                         dialogue.setDialogue("You: It was good.");
-                                        InterconnectedIsolation.improveNum++;
-                                    }
-                                    else
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
+                                    } else
                                         dialogueNum++;
                                     break;
                             }
@@ -282,7 +557,7 @@ public abstract class GameLoop {
                         hasDialogue = true;
                         if (dialogueNum++ > 4) {
                             stop();
-                            new Cutscene(InterconnectedIsolation.window, 2405, 720, 1, 4).display();
+                            new Cutscene(InterconnectedIsolation.getWindow(), 2405, 720, 1, 4).display();
                         }
                         letGo = false;
                     }
@@ -328,7 +603,7 @@ public abstract class GameLoop {
                         hasDialogue = true;
                         if (dialogueNum++ > 7) {
                             stop();
-                            new Level2(InterconnectedIsolation.window, true, 2405, 720, 1, 5).display();
+                            new Level2(InterconnectedIsolation.getWindow(), true, 2405, 720, 1, 5).display();
                         }
                         letGo = false;
                     }
@@ -566,7 +841,7 @@ public abstract class GameLoop {
                         hasDialogue = true;
                         if (dialogueNum++ > 43) {
                             stop();
-                            new Level3(InterconnectedIsolation.window, false, 2298, 720, 0, 8, true, true, true, false).display();
+                            new Level3(InterconnectedIsolation.getWindow(), false, 2298, 720, 0, 8, true, true, true, false).display();
                         }
                         letGo = false;
                     }
@@ -575,7 +850,7 @@ public abstract class GameLoop {
 
                 if (flowSceneNum == 8 && System.currentTimeMillis() - time > 8000) {
                     stop();
-                    new Level3(InterconnectedIsolation.window, true, 2298, 720, 2, 9, true, true, true, false).display();
+                    new Level3(InterconnectedIsolation.getWindow(), true, 2298, 720, 2, 9, true, true, true, false).display();
                 }
 
                 if (flowSceneNum == 10 && callFriend) {
@@ -641,7 +916,7 @@ public abstract class GameLoop {
                                     "I just came to check on you. " +
                                     "It’s been a few months since we’ve had that talk, and I just wanted to see if you’ve improved on your situation or not.");
                         }
-                        if (Level3.playedGames) {
+                        if (Level3.isPlayedGames()) {
                             if (dialogueNum == 1) {
                                 dialogue.setDialogue("Mom: It would be great if you stopped playing for a little bit and talked to me.");
                             }
@@ -650,9 +925,9 @@ public abstract class GameLoop {
                         lastDialogue = System.currentTimeMillis();
                         hasDialogue = true;
                         root.getChildren().add(dialogue.dialogueGroup);
-                        if (dialogueNum > 1 && Level3.playedGames || dialogueNum > 0 && !Level3.playedGames) {
+                        if (dialogueNum > 1 && Level3.isPlayedGames() || dialogueNum > 0 && !Level3.isPlayedGames()) {
                             stop();
-                            new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 12, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
+                            new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 12, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
                         }
                         dialogueNum++;
                         letGo = false;
@@ -662,19 +937,19 @@ public abstract class GameLoop {
                 if (flowSceneNum == 12) {
                     componentsGroup.setTranslateX(-750);
                     if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
-                        if (InterconnectedIsolation.improveNum < 5)
+                        if (InterconnectedIsolation.getImproveNum() < 5)
                             dialogue.setDialogue("Mom: I see you’ve tried to make an effort to improve. " +
                                     "I know it’s not easy but I think you can improve a lot more. ");
                         else
                             dialogue.setDialogue("Mom: I’m really proud of how far you’ve come. " +
-                                            "I know it’s not easy. I think that both you and me have benefitted from the changes you’ve decided to make.");
+                                    "I know it’s not easy. I think that both you and me have benefitted from the changes you’ve decided to make.");
 
                         lastDialogue = System.currentTimeMillis();
                         hasDialogue = true;
-                            root.getChildren().add(dialogue.dialogueGroup);
+                        root.getChildren().add(dialogue.dialogueGroup);
                         if (dialogueNum++ > 0) {
                             stop();
-                            InterconnectedIsolation.window.setScene(new EndScreen().window());
+                            InterconnectedIsolation.getWindow().setScene(new EndScreen().window());
                         }
                         letGo = false;
                     }
@@ -690,9 +965,9 @@ public abstract class GameLoop {
                     }
                     if (ePressed) {
                         for (Obj o : objects.get(sceneNum & 1)) {
-                            if (o.near) {
+                            if (o.isNear()) {
                                 if (flowSceneNum == 10) {
-                                    switch (o.objName) {
+                                    switch (o.getObjName()) {
                                         case "laundry":
                                             setOptions("Do laundry", "Leave it");
                                             break;
@@ -716,11 +991,11 @@ public abstract class GameLoop {
                                     }
                                 }
                                 boolean allDone = false;
-                                o.interacted = true;
-                                if (o.objName.equals("computer")) {
+                                o.setInteracted(true);
+                                if (o.getObjName().equals("computer")) {
                                     allDone = true;
                                     for (Obj o2 : objects.get(sceneNum & 1)) {
-                                        if (o2 != o && !o2.interacted) {
+                                        if (o2 != o && !o2.isInteracted()) {
                                             allDone = false;
                                             break;
                                         }
@@ -747,18 +1022,18 @@ public abstract class GameLoop {
                                     lastUsage = System.currentTimeMillis();
                                 } else {
                                     if (flowSceneNum == 2 || flowSceneNum == 6)
-                                        dialogue.setDialogue(o.dialogue);
+                                        dialogue.setDialogue(o.getDialogue());
                                     else if (flowSceneNum == 10)
-                                        dialogue.setDialogue(o.dialogue2);
+                                        dialogue.setDialogue(o.getDialogue2());
                                 }
                                 if (allDone) {
                                     level1Done = true;
                                 }
-                                if (o.objName.equals("seat")) {
+                                if (o.getObjName().equals("seat")) {
                                     setOptions("Sit down", "Keep looking around");
                                     lastUsage = System.currentTimeMillis();
                                 }
-                                objChoiceName = o.objName;
+                                objChoiceName = o.getObjName();
                             }
                         }
                         if (!hasDialogue) {
@@ -776,7 +1051,7 @@ public abstract class GameLoop {
 
                 if (level1Done && (enterPressed || zPressed || xPressed || cPressed) && System.currentTimeMillis() - lastUsage > 200) {
                     stop();
-                    new Cutscene(InterconnectedIsolation.window, 2405, 720, 1, 3).display();
+                    new Cutscene(InterconnectedIsolation.getWindow(), 2405, 720, 1, 3).display();
                 }
 
 
@@ -787,7 +1062,7 @@ public abstract class GameLoop {
                             hasDialogue = false;
                             if (objChoiceName.equals("seat") && zPressed) {
                                 stop();
-                                new Level2(InterconnectedIsolation.window, false, 2298, 720, 2, 7).display();
+                                new Level2(InterconnectedIsolation.getWindow(), false, 2298, 720, 2, 7).display();
                             } else if (!objChoiceName.equals("") && zPressed) {
                                 switch (objChoiceName) {
                                     case "laundry":
@@ -806,12 +1081,12 @@ public abstract class GameLoop {
                                         callFriend = true;
                                         break;
                                     case "computer":
-                                        new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), true).display();
+                                        new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), true).display();
                                         break;
                                 }
-                                InterconnectedIsolation.improveNum++;
+                                InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                             } else if (objChoiceName.equals("computer") && xPressed) {
-                                new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
+                                new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
                             }
                             objChoiceName = "";
                             isChoice = false;
@@ -836,11 +1111,11 @@ public abstract class GameLoop {
                     if (ePressed) {
                         stop();
                         if (flowSceneNum == 1) {
-                            new Level1(InterconnectedIsolation.window, 2405, 720, 1, 2).display();
+                            new Level1(InterconnectedIsolation.getWindow(), 2405, 720, 1, 2).display();
                         } else if (flowSceneNum == 5) {
-                            new Level2(InterconnectedIsolation.window, true, 2298, 720, 2, 6).display();
+                            new Level2(InterconnectedIsolation.getWindow(), true, 2298, 720, 2, 6).display();
                         } else if (flowSceneNum == 9) {
-                            new Level3(InterconnectedIsolation.window, true, 2405, 720, 1, 10, true, true, true, false).display();
+                            new Level3(InterconnectedIsolation.getWindow(), true, 2405, 720, 1, 10, true, true, true, false).display();
                         }
                     }
                 } else {
@@ -862,6 +1137,12 @@ public abstract class GameLoop {
         }.start();
     }
 
+    /**
+     * Checks if the player is colliding with something.
+     * If there is a collision on the left, the player can no longer move left, and id there is a collision on the right, the player can no longer move right.
+     *
+     * @since 1.3
+     */
     private void checkForCollisions() {
         if (checkForCollisionOnLeft()) {
             player.setCanMoveLeft(false);
@@ -875,35 +1156,66 @@ public abstract class GameLoop {
         }
     }
 
+    /**
+     * @return whether or not the player is colliding with the wall on the right.
+     * @since 1.3
+     */
     public boolean checkForCollisionOnRight() {
         if (player.getMaxX() >= stageWidth - 20)
             return true;
         return false;
     }
 
+    /**
+     * @return whether or not the player is colliding with the wall on the left.
+     * @since 1.3
+     */
     public boolean checkForCollisionOnLeft() {
         if (player.getMinX() <= 120)
             return true;
         return false;
     }
 
+    /**
+     * Checks if the player is near an object.
+     * If the player is near an object, the x and y coordinates of the arrow are set appropriately.
+     * <p>
+     * 1.7 - Julia Xie
+     * <br>Added checking for more objects.
+     * <br>Added mechanic where the player is only able to interact with objects once.
+     * </p>
+     * <p>
+     * 1.8 - Chris Trevisan
+     * <br>Combined all objects into one ArrayList
+     * </p>
+     *
+     * @return whether or not the player is near an object
+     * @since 1.5
+     */
     public boolean checkForInteraction() {
         boolean ret = false;
         for (Obj o : objects.get(sceneNum & 1)) {
-            if (player.getAverageX() > o.posl && player.getAverageX() < o.posr && (!o.interacted ||
-                    (o.objName.equals("computer") || o.objName.equals("seat"))
+            if (player.getAverageX() > o.getPosl() && player.getAverageX() < o.getPosr() && (!o.isInteracted() ||
+                    (o.getObjName().equals("computer") || o.getObjName().equals("seat"))
                             && System.currentTimeMillis() - lastUsage > 200 && !hasDialogue)) {
-                o.near = true;
-                arrow.setX((o.posl + o.posr) / 2.0);
-                arrow.setY(o.arrowY);
+                o.setNear(true);
+                arrow.setX((o.getPosl() + o.getPosr()) / 2.0);
+                arrow.setY(o.getArrowY());
                 ret = true;
             } else {
-                o.near = false;
+                o.setNear(false);
             }
         }
         return ret;
     }
 
+    /**
+     * Checks if the player is near a door.
+     * If the player is near a door, the x and y coordinates of the red arrow are set appropriately.
+     *
+     * @return whether or not the player is near a door
+     * @since 1.5
+     */
     public boolean checkForDoor() {
         if (sceneNum == 2) {
             if (player.getAverageX() > 2020 && player.getAverageX() < 2220) {
@@ -925,6 +1237,12 @@ public abstract class GameLoop {
         return nearDoor;
     }
 
+    /**
+     * Sets the dialogue options.
+     * @param z the first dialogue option
+     * @param x the second dialogue option
+     * @since 1.11
+     */
     public void setOptions(String z, String x) {
         isChoice = true;
         dOptionZ.setOption(z);
@@ -933,6 +1251,13 @@ public abstract class GameLoop {
         numOfOpt = 2;
     }
 
+    /**
+     * Sets the dialogue options.
+     * @param z the first dialogue option
+     * @param x the second dialogue option
+     * @param c the third dialogue option
+     * @since 1.11
+     */
     public void setOptions(String z, String x, String c) {
         isChoice = true;
         dOptionZ.setOption(z);
@@ -941,6 +1266,25 @@ public abstract class GameLoop {
         numOfOpt = 3;
     }
 
+    /**
+     * Creates all the object sprites and adds them to the background if the scene needs it.
+     * <p>
+     * 1.7 - Julia Xie
+     * <br>Added laundry, guitar, picture, plates, homework, trash, and bag sprites.
+     * </p>
+     * <p>
+     * 1.10 - Julia Xie
+     * <br>Added more sprites.
+     * </p>
+     * <p>
+     * 1.11 - Julia Xie
+     * <br>Added the rest of the sprites for the game.
+     * </p>
+     *
+     * @param flowSceneNum the number of scene changes
+     * @throws IOException if there is an input or output exception when looking for an image
+     * @since 1.6
+     */
     public void addObjects(int flowSceneNum) throws IOException {
         if (flowSceneNum == 1 || flowSceneNum == 9) {
             ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom_flip.png")));
@@ -971,7 +1315,7 @@ public abstract class GameLoop {
             picture.setX(1098);
             picture.setY(369);
 
-            if (flowSceneNum < 11 || Level3.hasPlates) {
+            if (flowSceneNum < 11 || Level3.isHasPlates()) {
                 plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
                 plates.setFitHeight(72);
                 plates.setPreserveRatio(true);
@@ -980,7 +1324,7 @@ public abstract class GameLoop {
                 componentsGroup.getChildren().add(1, plates);
             }
 
-            if (flowSceneNum < 11 || Level3.hasHomework) {
+            if (flowSceneNum < 11 || Level3.isHasHomework()) {
                 homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
                 homework.setFitHeight(72);
                 homework.setPreserveRatio(true);
@@ -989,7 +1333,7 @@ public abstract class GameLoop {
                 componentsGroup.getChildren().add(1, homework);
             }
 
-            if (flowSceneNum < 11 || Level3.hasTrash) {
+            if (flowSceneNum < 11 || Level3.isHasTrash()) {
                 trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
                 trash.setFitHeight(135);
                 trash.setPreserveRatio(true);
@@ -1012,7 +1356,7 @@ public abstract class GameLoop {
 
             componentsGroup.getChildren().add(1, bag);
 
-            if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 11 && Level3.playedGames) {
+            if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 11 && Level3.isPlayedGames()) {
                 ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
                 playerAtComputer.setFitHeight(315);
                 playerAtComputer.setPreserveRatio(true);
@@ -1029,7 +1373,7 @@ public abstract class GameLoop {
                 mom.setY(358);
 
                 componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 2, mom);
-                if (flowSceneNum == 11 && !Level3.playedGames || flowSceneNum == 12) {
+                if (flowSceneNum == 11 && !Level3.isPlayedGames() || flowSceneNum == 12) {
                     ImageView player = new ImageView(new Image(new FileInputStream("assets/images/player_flip.png")));
                     player.setFitHeight(333);
                     player.setPreserveRatio(true);
@@ -1060,8 +1404,23 @@ public abstract class GameLoop {
         }
     }
 
+    /**
+     * Initializes the stage with the player.
+     * Sets the player's position.
+     *
+     * @param flowSceneNum the number of stage changes so far
+     * @since 1.2
+     */
     public abstract void initStage(int flowSceneNum);
 
+    /**
+     * Initializes the background with a picture or colour.
+     * Sets constraints based on the scene number.
+     *
+     * @param sceneNum the scene number
+     * @throws IOException if an input or output exception occurs when looking for an image
+     * @since 1.2
+     */
     public abstract void initBackground(int sceneNum) throws IOException;
 
     EventHandler onPressHandler = new EventHandler<KeyEvent>() {
@@ -1138,22 +1497,47 @@ public abstract class GameLoop {
         }
     };
 
+    /**
+     * @param width the width of the scene
+     * @since 1.3
+     */
     public void setStageWidth(int width) {
         stageWidth = width;
     }
 
+    /**
+     * @param stageHeight the height of the scene
+     * @since 1.3
+     */
     public void setStageHeight(double stageHeight) {
         this.stageHeight = stageHeight;
     }
 
+    /**
+     * @param canExit whether or not the player can exit the scene
+     * @since 1.6
+     */
     public void setCanExit(boolean canExit) {
         this.canExit = canExit;
     }
 
+    /**
+     * @param canInteract whether or not the player can interact with objects in the scene
+     * @since 1.6
+     */
     public void setCanInteract(boolean canInteract) {
         this.canInteract = canInteract;
     }
 
+    /**
+     * Displays the scene on the stage.
+     * <p>
+     * 1.5 - Julia Xie
+     * <br>Added fade transition between scenes
+     * </p>
+     *
+     * @since 1.2
+     */
     public void display() {
         FadeTransition fade = new FadeTransition(Duration.millis(4000), root);
         fade.setFromValue(0);

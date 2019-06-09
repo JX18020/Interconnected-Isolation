@@ -8,10 +8,34 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class PlayerRecords {
+/**
+ * Creates a scene which displays all of the player records.
+ *
+ * @author Julia Xie
+ * @version 1.11
+ * <p>
+ * 1.11 - Julia Xie
+ * <br>Date: 2019/06/08
+ * <br>Time Spent: 1 hour
+ * <br>Added window() scene.
+ * <br>Added getClear() method.
+ * </p>
+ * @since 1.11
+ */
+public class PlayerRecords implements Screen {
 
+    /**
+     * Buttons which the user can click.
+     */
     private Button backToMenu, clear;
 
+    /**
+     * Creates and formats the scene for the player records scene.
+     * Adds all buttons and text.
+     *
+     * @return the player records scene
+     * @since 1.11
+     */
     public Scene window() {
         BorderPane layout1 = new BorderPane();
         GridPane layout2 = new GridPane();
@@ -77,18 +101,19 @@ public class PlayerRecords {
         layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
         layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Quicksand&display=swap");
 
-        backToMenu.setOnAction(e -> InterconnectedIsolation.window.setScene(InterconnectedIsolation.mainMenu));
+        backToMenu.setOnAction(e -> InterconnectedIsolation.getWindow().setScene(InterconnectedIsolation.getMainMenu()));
         clear.setOnAction(e -> {
-            InterconnectedIsolation.clearRecords();;
+            InterconnectedIsolation.clearRecords();
+            ;
         });
 
         return new Scene(layout1, 1280, 720);
     }
 
-    public Button getBackToMenu() {
-        return backToMenu;
-    }
-
+    /**
+     * @return the clear button
+     * @since 1.11
+     */
     public Button getClear() {
         return clear;
     }

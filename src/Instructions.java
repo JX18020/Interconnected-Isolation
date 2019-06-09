@@ -7,15 +7,53 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- * Creates instructions screen
+ * Creates scene which displays instructions.
  *
  * @author Julia Xie
- * @version May 23, 2019
+ * @version 1.11
+ * <p>
+ * 1.0 - Julia Xie
+ * <br>Date: 2019/05/24
+ * <br>Time Spent: 1.5 hours
+ * <br>Added window() method.
+ * </p>
+ * <p>
+ * 1.1 - Julia Xie
+ * <br>Date: 2019/05/24
+ * <br>Time Spent: 30 minutes
+ * <br>Modified window() method.
+ * <br>Added getBackToMenu() method.
+ * </p>
+ * <p>
+ * 1.9 - Julia Xie
+ * <br>Date:2019/06/06
+ * <br>Time Spent: 10 minutes
+ * <br>Modified window() method.
+ * </p>
+ * @since 1.0
  */
-public class Instructions {
+public class Instructions implements Screen {
 
+    /**
+     * The button which allows the user to return to the main menu.
+     */
     private Button backToMenu;
 
+    /**
+     * Creates and formats the scene for the instructions screen.
+     * Adds all buttons and text.
+     * <p>
+     * 1.1 - Julia Xie
+     * <br>Changed the fonts and colours of the buttons and text.
+     * </p>
+     * <p>
+     * 1.9 - Julia Xie
+     * <br>Added more instructions to reflect the mechanics of the game.
+     * </p>
+     *
+     * @return the instructions scene
+     * @since 1.0
+     */
     public Scene window() {
         Text text1 = new Text("Instructions");
         text1.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 60px");
@@ -38,6 +76,10 @@ public class Instructions {
         return new Scene(layout1, 1280, 720);
     }
 
+    /**
+     * @return the backToMenu button
+     * @since 1.1
+     */
     public Button getBackToMenu() {
         return backToMenu;
     }

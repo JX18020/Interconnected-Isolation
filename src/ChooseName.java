@@ -10,26 +10,55 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 /**
- *  Creates choosing name menu screen
+ * Creates choosing name menu screen
  *
  * @author Julia Xie
- * @version May 31, 2019
+ * @version 1.11
+ * <p>
+ * 1.4 - Julia Xie
+ * <br>Date: 2019/05/31
+ * <br>Time Spent: 2 hours
+ * <br>Added window() method.
+ * <br>Added getName() method.
+ * <br>Added getConfirm() method.
+ * <br>Added getBack() method.
+ * </p>
+ * @since 1.4
  */
-public class ChooseName {
+public class ChooseName implements Screen {
 
+    /**
+     * The name entered into the text field.
+     */
     private String name;
 
+    /**
+     * The confirm and back buttons.
+     */
     private Button confirm, back;
+    /**
+     * The textfield where the user enter's their name.
+     */
     private TextField choose;
+    /**
+     * The Text that shows up if there is an error.
+     */
     private Text error;
 
+    /**
+     * Creates and formats the screen for the choosing name scene.
+     * Adds all buttons and text.
+     *
+     * @return the choosing name scene
+     * @since 1.4
+     */
     public Scene window() {
 
-        error = new Text ("Your name may not contain spaces, special characters or numbers.");
+        error = new Text("Your name may not contain spaces, special characters or numbers.");
         error.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         error.setFill(Color.BLACK);
 
-        Text prompt = new Text ("Enter your name:");
+        Text prompt = new Text("Enter your name:");
         prompt.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 50px");
         prompt.setFill(Color.WHITE);
 
@@ -40,11 +69,11 @@ public class ChooseName {
         confirm.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         confirm.setTextFill(Color.WHITE);
 
-        back = new Button ("Back to Menu");
+        back = new Button("Back to Menu");
         back.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         back.setTextFill(Color.WHITE);
 
-        VBox layout1 = new VBox (100);
+        VBox layout1 = new VBox(100);
 
         FlowPane layout2 = new FlowPane();
         layout2.setHgap(100);
@@ -57,9 +86,13 @@ public class ChooseName {
         layout1.setStyle("-fx-background-color: black");
         layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
 
-        return new Scene (layout1, 1280, 720);
+        return new Scene(layout1, 1280, 720);
     }
 
+    /**
+     * @return the name from the text field
+     * @since 1.4
+     */
     public String getName() {
         return name;
     }
@@ -68,18 +101,34 @@ public class ChooseName {
         this.name = name;
     }
 
+    /**
+     * @return the confirm button
+     * @since 1.4
+     */
     public Button getConfirm() {
         return confirm;
     }
 
+    /**
+     * @return the back button
+     * @since 1.4
+     */
     public Button getBack() {
         return back;
     }
 
+    /**
+     * @return the choose textfield
+     * @since 1.11
+     */
     public TextField getChoose() {
         return choose;
     }
 
+    /**
+     * @return the error text
+     * @since 1.11
+     */
     public Text getError() {
         return error;
     }

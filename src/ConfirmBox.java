@@ -7,15 +7,40 @@ import javafx.scene.control.*;
 import javafx.geometry.*;
 
 /**
- * Creates comfirm popup
+ * Creates a popup which asks for confirmation from the user.
  *
  * @author Julia Xie
- * @version May 17, 2019
+ * @version 1.11
+ * <p>
+ * 1.0 - Julia Xie
+ * <br>Date: 2019/05/24
+ * <br>Time spent: 30 minutes
+ * <br>Added display() method.
+ * </p>
+ * <p>
+ * 1.1 - Julia Xie
+ * <br>Date: 2019/05/28
+ * <br>Time spent: 30 minutes
+ * <br>Modified display() method.
+ * </p>
+ * @since 1.0
  */
 public class ConfirmBox {
 
-    static boolean answer;
+    /**
+     * Stores whether the user clicked yes or no.
+     */
+    private static boolean answer;
 
+    /**
+     * Creates the layout of the popup and displays it.
+     * <p>1.1 - Changed the colours and fonts of the text and buttons.</p>
+     *
+     * @param title   the title of the window
+     * @param message the message displayed in the box
+     * @return whether the user clicked yes or no
+     * @since 1.0
+     */
     public static boolean display(String title, String message) {
         Stage window = new Stage();
 

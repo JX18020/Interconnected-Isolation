@@ -7,43 +7,89 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
- * Controls the flow of Level1
+ * Initializes the proper background and scene for Level1.
+ * <p>
+ * References:
+ * <br>Dillon, A. (2015). Picasso (Version 2) [Software]. Retrieved from https://github.com/Hopding/Picasso.
+ * </p>
  *
  * @author Julia Xie
- * @version June 3
+ * @version 1.11
+ * <p>
+ * 1.1 - Julia Xie
+ * <br>Date: 2019/05/28
+ * <br>Time Spent: 5 minutes
+ * <br>Created class.
+ * </p>
+ * <p>
+ * 1.2 - Julia Xie
+ * <br>Date: 2019/50/29
+ * <br>Time Spent: 30 minutes
+ * <br>Added constructor.
+ * <br>Added initBackground() method.
+ * <br>Added initStage() method.
+ * </p>
+ * @since 1.1
  */
 public class Level1 extends GameLoop {
 
-    Image background;
-    ImageView backgroundView;
+    /**
+     * The image of the background.
+     */
+    private ImageView background;
 
-    public Level1(Stage primaryStage, int width, int height, int scene, int flowSceneNum){
+    /**
+     * Constructor for the Level1 class.
+     * Calls the constructor of the superclass and sets the width and height of the stage.
+     *
+     * @param primaryStage  the stage which the scene appears on
+     * @param width         the width of the stage
+     * @param height        the height of the stage
+     * @param scene         the scene number
+     * @param flowSceneNum  the number of scene changes
+     * @since 1.2
+     */
+    public Level1(Stage primaryStage, int width, int height, int scene, int flowSceneNum) {
         super(primaryStage, true, scene, flowSceneNum);
         setStageWidth(width);
         setStageHeight(height);
     }
 
+    /**
+     * Initializes the background with a picture or colour.
+     * Sets constraints based on the scene number.
+     *
+     * @param sceneNum the scene number
+     * @throws IOException if an input or output exception occurs when looking for an image
+     * @since 1.2
+     */
+    @Override
     public void initBackground(int sceneNum) throws IOException {
-        Player.hasBag = true;
+        Player.setHasBag(true);
         if (sceneNum == 2) {
-            background = new Image(new FileInputStream("assets/images/scene2_door_open.png"));
+            background = new ImageView (new Image(new FileInputStream("assets/images/scene2_door_open.png")));
             setCanInteract(false);
             setCanExit(true);
-        }
-        else {
-            background = new Image(new FileInputStream("assets/images/scene1_daytime.png"));
+        } else {
+            background = new ImageView(new Image(new FileInputStream("assets/images/scene1_daytime.png")));
             setCanInteract(true);
             setCanExit(false);
         }
-        backgroundView = new ImageView(background);
-        backgroundView.setPreserveRatio(true);
-        backgroundView.fitHeightProperty().bind(scene.heightProperty());
-        componentsGroup.getChildren().add(backgroundView);
+        background.setPreserveRatio(true);
+        background.fitHeightProperty().bind(scene.heightProperty());
+        componentsGroup.getChildren().add(background);
     }
 
+    /**
+     * Initializes the stage with the player.
+     * Sets the player's position.
+     *
+     * @param flowSceneNum the number of stage changes so far
+     * @since 1.2
+     */
     @Override
     public void initStage(int flowSceneNum) {
-        player = new Player(componentsGroup, backgroundView.getFitWidth(), backgroundView.getFitHeight());
+        player = new Player(componentsGroup, background.getFitWidth(), background.getFitHeight());
         player.reposition(150, scene.getHeight() - 380);
     }
 

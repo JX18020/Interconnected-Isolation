@@ -8,18 +8,78 @@ import javafx.stage.Stage;
 import java.util.*;
 
 /**
- * Main class which runs the flow of the game
+ * Creates the main stage for the game where all of the scenes are added.
+ * Controls the flow of the game.
  *
  * @author Julia Xie
- * @version June 3, 2019
+ * @version 1.11
+ * <p>
+ * 1.0 - Julia Xie
+ * <br>Date: 2019/05/24
+ * <br>Time Spent: 2 hours
+ * <br>Added start() method.
+ * <br>Added closeProgram() method.
+ * <br>Added main method.
+ * </p>
+ * <p>
+ * 1.4 - Julia Xie
+ * <br>Date: 2019/05/31
+ * <br>Time Spent: 1 hour
+ * <br>Modified start() method.
+ * </p>
+ * <p>
+ * 1.11 - Julia Xie
+ * <br>Date: 2019/06/08
+ * <br>Time Spent: 1 hour
+ * <br>Modified start() method.
+ * <br>Added clearRecord() method.
+ * </p>
+ * @since 1.0
  */
 public class InterconnectedIsolation extends Application {
 
-    static Stage window;
-    Scene splashScreen, instructions, playerRecords, chooseName;
-    static Scene mainMenu;
-    static int improveNum;
+    /**
+     * The main stage where all the scenes appear.
+     */
+    private static Stage window;
+    /**
+     * The splash screen scene which appears in the stage.
+     */
+    private Scene splashScreen;
+    /**
+     * The instructions scene which appears in the stage.
+     */
+    private Scene instructions;
+    /**
+     * The chooing name scene which appears in the stage.
+     */
+    private Scene chooseName;
+    /**
+     * The main menu scene which appears in the stage.
+     */
+    private static Scene mainMenu;
+    /**
+     * The number of aspects the player chooses improve.
+     * Acts like a score.
+     */
+    private static int improveNum;
 
+    /**
+     * Creates all instances of screens and controls their flow.
+     * It also controls all of the button functions.
+     * <p>
+     * 1.4 - Julia Xie
+     * <br>Added an errortrap for the chooing name scene so that the user cannot enter special characters or numbers.
+     * </p>
+     * <p>
+     * 1.11 - Julia Xie
+     * <br>Finalized the flow of the game.
+     * </p>
+     *
+     * @param primaryStage the main stage that the scenes appear on
+     * @throws Exception if any exception occurs
+     * @since 1.0
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
 
@@ -40,7 +100,7 @@ public class InterconnectedIsolation extends Application {
         mainMenu = menu.window();
 
         PlayerRecords records = new PlayerRecords();
-        playerRecords = records.window();
+        records.window();
 
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
@@ -91,12 +151,24 @@ public class InterconnectedIsolation extends Application {
         window.show();
     }
 
+    /**
+     * Creates a ConfirmBox which asks if the user really wants to exit.
+     * The window only closes if the user chooses to click the yes button.
+     *
+     * @since 1.0
+     */
     public void closeProgram() {
         boolean answer = ConfirmBox.display("Exit", "Are you sure you want to exit?");
         if (answer)
             window.close();
     }
 
+    /**
+     * Creates a ConfirmBox which asks if the user really wants to clear all records.
+     * The window only closes if the user chooses to click the yes button.
+     *
+     * @since 1.11
+     */
     public static void clearRecords() {
         boolean answer = ConfirmBox.display("Clear Records", "Are you sure you want to clear all records?");
         if (answer) {
@@ -105,6 +177,44 @@ public class InterconnectedIsolation extends Application {
         }
     }
 
+    /**
+     * @return the main stage
+     * @since 1.11
+     */
+    public static Stage getWindow() {
+        return window;
+    }
+
+    /**
+     * @return the main menu scene
+     * @since 1.11
+     */
+    public static Scene getMainMenu() {
+        return mainMenu;
+    }
+
+    /**
+     * @return the number of improvements
+     * @since 1.11
+     */
+    public static int getImproveNum() {
+        return improveNum;
+    }
+
+    /**
+     * @param num the number of improvements
+     * @since 1.11
+     */
+    public static void setImproveNum(int num) {
+        improveNum = num;
+    }
+
+    /**
+     * Launches the program.
+     *
+     * @param args an array of String which contain command-line arguments
+     * @since 1.0
+     */
     public static void main(String[] args) {
         launch(args);
     }
