@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  */
 public class MainMenu {
 
-    private Button playButton, instructionsButton, exitButton;
+    private Button playButton, instructionsButton, recordsButton, exitButton;
 
     public Scene window() {
         playButton = new Button("Play");
@@ -27,6 +27,10 @@ public class MainMenu {
         instructionsButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         instructionsButton.setTextFill(Color.WHITE);
 
+        recordsButton = new Button("Player Records");
+        recordsButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
+        recordsButton.setTextFill(Color.WHITE);
+
         exitButton = new Button("Exit");
         exitButton.setStyle("-fx-background-color: #3a3a3a; -fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         exitButton.setTextFill(Color.WHITE);
@@ -35,10 +39,10 @@ public class MainMenu {
         text.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 70px");
         text.setFill(Color.WHITE);
 
-        VBox layout1 = new VBox(70);
+        VBox layout1 = new VBox(50);
         layout1.setAlignment(Pos.BOTTOM_CENTER);
         layout1.setPadding(new Insets(10, 10, 100, 10));
-        layout1.getChildren().addAll(text, playButton, instructionsButton, exitButton);
+        layout1.getChildren().addAll(text, playButton, instructionsButton, recordsButton, exitButton);
         layout1.setStyle("-fx-background-color: black");
         layout1.getStylesheets().add("https://fonts.googleapis.com/css?family=Megrim&display=swap");
 
@@ -51,6 +55,10 @@ public class MainMenu {
 
     public Button getInstructionsButton() {
         return instructionsButton;
+    }
+
+    public Button getRecordsButton() {
+        return recordsButton;
     }
 
     public Button getExitButton() {

@@ -650,10 +650,11 @@ public abstract class GameLoop {
                         lastDialogue = System.currentTimeMillis();
                         hasDialogue = true;
                         root.getChildren().add(dialogue.dialogueGroup);
-                        if (dialogueNum++ > 1 && Level3.playedGames || dialogueNum++ > 0 && !Level3.playedGames) {
+                        if (dialogueNum > 1 && Level3.playedGames || dialogueNum > 0 && !Level3.playedGames) {
                             stop();
                             new Level3(InterconnectedIsolation.window, false, 2405, 720, 1, 12, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
                         }
+                        dialogueNum++;
                         letGo = false;
                     }
                 }

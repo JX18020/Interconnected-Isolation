@@ -1,18 +1,16 @@
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
 
-import java.io.FileInputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Controls the flow of Level3
@@ -44,10 +42,43 @@ public class EndScreen {
 
         backToMenu.setOnAction(e -> InterconnectedIsolation.window.setScene(InterconnectedIsolation.mainMenu));
 
+        try {
+            storeResults();
+        } catch (IOException e) {
+        }
+
         return new Scene(layout1, 1280, 720);
     }
 
-    public Button getBackToMenu() {
-        return backToMenu;
+    public void storeResults() throws IOException {
+        ArrayList<Record> arr = RecordsList.readRecords();
+        arr.add(new Record(Player.getName(), (int) (Math.round(InterconnectedIsolation.improveNum / 9.0 * 100))));
+
+        if (arr.size() > 1) {
+            int n = arr.size();
+            for (int i = 1; i < n; i++) {
+                Record key = arr.get(i);
+
+                int j = i - 1;
+                while (j >= 0 && arr.get(j).getPercent() < key.getPercent()) {
+                    arr.set(j + 1, arr.get(j));
+                    j = j - 1;
+                }
+                arr.set(j + 1, key);
+            }
+        }
+
+        PrintWriter out = new PrintWriter(new FileWriter("assets/files/records.txt"));
+        if (arr.size()< 10) {
+            for (int i = 0; i < arr.size(); i++) {
+                out.println(arr.get(i));
+            }
+        } else {
+            for (int i = 0; i < 10; i++) {
+                out.println(arr.get(i));
+            }
+        }
+
+        out.close();
     }
 }

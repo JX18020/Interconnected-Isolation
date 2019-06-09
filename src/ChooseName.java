@@ -25,7 +25,7 @@ public class ChooseName {
 
     public Scene window() {
 
-        error = new Text ("Your name may not contain special characters or numbers.");
+        error = new Text ("Your name may not contain spaces, special characters or numbers.");
         error.setStyle("-fx-font-family: 'Megrim', cursive; -fx-font-size: 24px");
         error.setFill(Color.BLACK);
 

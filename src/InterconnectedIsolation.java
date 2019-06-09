@@ -16,8 +16,8 @@ import java.util.*;
 public class InterconnectedIsolation extends Application {
 
     static Stage window;
-    Scene splashScreen, instructions, chooseName;
-    static Scene mainMenu, endScreen;
+    Scene splashScreen, instructions, playerRecords, chooseName;
+    static Scene mainMenu;
     static int improveNum;
 
     @Override
@@ -39,41 +39,39 @@ public class InterconnectedIsolation extends Application {
         MainMenu menu = new MainMenu();
         mainMenu = menu.window();
 
+        PlayerRecords records = new PlayerRecords();
+        playerRecords = records.window();
+
         ChooseName choose = new ChooseName();
         chooseName = choose.window();
-
-        EndScreen end = new EndScreen();
-        endScreen = end.window();
-
 
         howToPlay.getBackToMenu().setOnAction(e -> window.setScene(mainMenu));
         menu.getPlayButton().setOnAction(e -> window.setScene(chooseName));
         menu.getInstructionsButton().setOnAction(e -> window.setScene(instructions));
+        menu.getRecordsButton().setOnAction(e -> window.setScene(records.window()));
         menu.getExitButton().setOnAction(e -> closeProgram());
+        records.getClear().setOnAction(e -> {
+            clearRecords();
+            window.setScene(records.window());
+        });
         choose.getBack().setOnAction(e -> {
             choose.getError().setFill(Color.BLACK);
             window.setScene(mainMenu);
         });
         choose.getConfirm().setOnAction(e -> {
-            boolean error = false;
+            boolean error = true;
             choose.setName(choose.getChoose().getText());
             for (int i = 0; i < choose.getName().length(); i++) {
-                if ((choose.getName().charAt(i) < 65 || choose.getName().charAt(i) > 90 && choose.getName().charAt(i) < 97 || choose.getName().charAt(i) > 122) && choose.getName().charAt(i) != 32 && choose.getName().charAt(i) != 39 && choose.getName().charAt(i) != 45) {
-                    choose.getError().setFill(Color.WHITE);
-                    error = true;
+                if ((choose.getName().charAt(i) >= 65 && choose.getName().charAt(i) <= 90 || choose.getName().charAt(i) >= 97 && choose.getName().charAt(i) <= 122) || choose.getName().charAt(i) == 39 && choose.getName().charAt(i) == 45) {
+                    error = false;
                 }
             }
             if (!error) {
                 Player.setName(choose.getName());
                 improveNum = 0;
-                //new Level1(window, 2298, 720, 2, 1).display();
-                //new Cutscene(window, 2405, 720, 1, 3).display();
-                //new Level2(window, 2405, 720, 1, 5).display();
-                //new Level2(window, true, 2298, 720, 2, 6).display();
-                //new Level2(window, false, 2298, 720, 2, 7).display();
-                //new Level3(window, false, 2298, 720, 0, 8).display();
-                new Level3(window, true, 2405, 720, 1, 10, true, true, true, false).display();
-                //new Level3(window, false, 2405, 720, 1, 11, true, true, true, true).display();
+                new Level1(window, 2298, 720, 2, 1).display();
+            } else {
+                choose.getError().setFill(Color.WHITE);
             }
         });
 
@@ -93,10 +91,18 @@ public class InterconnectedIsolation extends Application {
         window.show();
     }
 
-    public static void closeProgram() {
+    public void closeProgram() {
         boolean answer = ConfirmBox.display("Exit", "Are you sure you want to exit?");
         if (answer)
             window.close();
+    }
+
+    public static void clearRecords() {
+        boolean answer = ConfirmBox.display("Clear Records", "Are you sure you want to clear all records?");
+        if (answer) {
+            RecordsList.clearRecords();
+            window.setScene(mainMenu);
+        }
     }
 
     public static void main(String[] args) {
