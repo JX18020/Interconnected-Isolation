@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Interconnected-Isolation:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Interconnected_Isolation_jar</output-path>
+    <root id="archive" name="Interconnected-Isolation.jar">
+      <element id="module-output" name="Interconnected-Isolation" />
+    </root>
+  </artifact>
+</component>

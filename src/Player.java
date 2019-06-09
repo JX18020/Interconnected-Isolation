@@ -165,18 +165,18 @@ public class Player {
         animation3 = new ArrayList<>();
         animation4 = new ArrayList<>();
         try {
-            playerStandL = new Image(new FileInputStream("assets/images/player_flip.png"));
-            playerStand = new Image(new FileInputStream("assets/images/player.png"));
-            playerStandBagL = new Image(new FileInputStream("assets/images/player_bag_flip.png"));
-            playerStandBag = new Image(new FileInputStream("assets/images/player_bag.png"));
+            playerStandL = new Image(new FileInputStream("../assets/images/player_flip.png"));
+            playerStand = new Image(new FileInputStream("../assets/images/player.png"));
+            playerStandBagL = new Image(new FileInputStream("../assets/images/player_bag_flip.png"));
+            playerStandBag = new Image(new FileInputStream("../assets/images/player_bag.png"));
             for (int x = 1; x <= 8; x++)
-                animation2.add(new Image(new FileInputStream("assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
+                animation2.add(new Image(new FileInputStream("../assets/images/walk_cycle_player_left/player_walking_" + x + ".png")));
             for (int x = 1; x <= 8; x++)
-                animation.add(new Image(new FileInputStream("assets/images/walk_cycle_player/player_walking_" + x + ".png")));
+                animation.add(new Image(new FileInputStream("../assets/images/walk_cycle_player/player_walking_" + x + ".png")));
             for (int x = 1; x <= 8; x++)
-                animation4.add(new Image(new FileInputStream("assets/images/walk_cycle_player_bag_left/player_walking_bag_" + x + ".png")));
+                animation4.add(new Image(new FileInputStream("../assets/images/walk_cycle_player_bag_left/player_walking_bag_" + x + ".png")));
             for (int x = 1; x <= 8; x++)
-                animation3.add(new Image(new FileInputStream("assets/images/walk_cycle_player_bag/player_walking_bag_" + x + ".png")));
+                animation3.add(new Image(new FileInputStream("../assets/images/walk_cycle_player_bag/player_walking_bag_" + x + ".png")));
         } catch (IOException e) {
             System.out.println("oopsio");
         }
