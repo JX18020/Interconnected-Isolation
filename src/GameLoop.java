@@ -1101,25 +1101,30 @@ public abstract class GameLoop {
                                 switch (objChoiceName) {
                                     case "laundry":
                                         componentsGroup.getChildren().remove(laundry);
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "homework":
                                         componentsGroup.getChildren().remove(homework);
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "plates":
                                         componentsGroup.getChildren().remove(plates);
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "trash":
                                         componentsGroup.getChildren().remove(trash);
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "picture":
                                         callFriend = true;
+                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "computer":
                                         new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), true).display();
                                         break;
                                 }
-                                InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                             } else if (objChoiceName.equals("computer") && xPressed) {
+                                InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                 new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
                             }
                             objChoiceName = "";

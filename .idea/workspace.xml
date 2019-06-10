@@ -41,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="653" column="36" selection-start-line="653" selection-start-column="36" selection-end-line="653" selection-end-column="36" />
+            <state relative-caret-position="224">
+              <caret line="1101" column="51" selection-start-line="1101" selection-start-column="51" selection-end-line="1101" selection-end-column="51" />
             </state>
           </provider>
         </entry>
@@ -259,6 +259,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -270,7 +271,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -360,11 +360,12 @@
       <workItem from="1560085293546" duration="24858000" />
       <workItem from="1560149031770" duration="499000" />
       <workItem from="1560149820913" duration="151000" />
+      <workItem from="1560189911846" duration="126000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85939000" />
+    <option name="totallyTimeSpent" value="86065000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -378,7 +379,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.19932885" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20201342" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -546,8 +547,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="653" column="36" selection-start-line="653" selection-start-column="36" selection-end-line="653" selection-end-column="36" />
+        <state relative-caret-position="224">
+          <caret line="1101" column="51" selection-start-line="1101" selection-start-column="51" selection-end-line="1101" selection-end-column="51" />
         </state>
       </provider>
     </entry>
