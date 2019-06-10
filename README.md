@@ -1,5 +1,10 @@
 # Interconnected-Isolation
 ICS4U0 ISP
 <p>
-  This is an Intellij project. To run it in DrJava, move the assets folder into the src folder and run InterconnectedIsolation.java.
+To run in DrJava:
+	Project Root -> /Interconnected-Isolation/src
+	Working Directory -> CD root
+</p>
+<p>
+This game was created by Julia Xie and Christopher Trevisan.
 </p>
