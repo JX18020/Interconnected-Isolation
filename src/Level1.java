@@ -67,11 +67,11 @@ public class Level1 extends GameLoop {
     public void initBackground(int sceneNum) throws IOException {
         Player.setHasBag(true);
         if (sceneNum == 2) {
-            background = new ImageView (new Image(new FileInputStream("assets/images/scene2_door_open.png")));
+            background = new ImageView (new Image(new FileInputStream("Interconnected-Isolation/assets/images/scene2_door_open.png")));
             setCanInteract(false);
             setCanExit(true);
         } else {
-            background = new ImageView(new Image(new FileInputStream("assets/images/scene1_daytime.png")));
+            background = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/scene1_daytime.png")));
             setCanInteract(true);
             setCanExit(false);
         }
