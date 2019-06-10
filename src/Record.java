@@ -14,7 +14,7 @@
  * </p>
  * @since 1.11
  */
-public class Record {
+public class Record{
     private String name;
     private int percent;
 
@@ -53,4 +53,5 @@ public class Record {
     public String toString() {
         return name + " " + percent;
     }
+
 }
