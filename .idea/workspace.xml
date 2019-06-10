@@ -41,8 +41,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="224">
-              <caret line="1101" column="51" selection-start-line="1101" selection-start-column="51" selection-end-line="1101" selection-end-column="51" />
+            <state relative-caret-position="208">
+              <caret line="1114" column="52" selection-start-line="1114" selection-start-column="52" selection-end-line="1114" selection-end-column="52" />
+              <folding>
+                <element signature="e#15824#59591#0" expanded="true" />
+                <element signature="e#59590#59591#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -259,18 +263,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="Interconnected-Isolation" type="58d84e3e:PackageViewProjectNode" />
-              <item name="Interconnected-Isolation" type="616d4139:PackageViewModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -287,6 +279,18 @@
               <item name="Interconnected-Isolation" type="b2602c69:ProjectViewProjectNode" />
               <item name="Interconnected-Isolation" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Interconnected-Isolation" type="58d84e3e:PackageViewProjectNode" />
+              <item name="Interconnected-Isolation" type="616d4139:PackageViewModuleNode" />
             </path>
           </expand>
           <select />
@@ -361,11 +365,12 @@
       <workItem from="1560149031770" duration="499000" />
       <workItem from="1560149820913" duration="151000" />
       <workItem from="1560189911846" duration="126000" />
+      <workItem from="1560190864998" duration="410000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86065000" />
+    <option name="totallyTimeSpent" value="86475000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -379,7 +384,7 @@
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20201342" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20469798" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -547,8 +552,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/GameLoop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="224">
-          <caret line="1101" column="51" selection-start-line="1101" selection-start-column="51" selection-end-line="1101" selection-end-column="51" />
+        <state relative-caret-position="208">
+          <caret line="1114" column="52" selection-start-line="1114" selection-start-column="52" selection-end-line="1114" selection-end-column="52" />
+          <folding>
+            <element signature="e#15824#59591#0" expanded="true" />
+            <element signature="e#59590#59591#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

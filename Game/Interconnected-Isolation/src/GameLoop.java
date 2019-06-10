@@ -759,7 +759,7 @@ public abstract class GameLoop {
                                     setOptions("It's fun.", "I'd rather not think about anything else.", "I like talking to me friends there.");
                                 } else
                                     setOptions("No really, it's fun.", "I'd rather not think about anything else.", "I like talking to me friends there.");
-                                twoOptions=false;
+                                twoOptions = false;
                                 break;
                             case 26:
                                 if (dialogueChoice == 'z') {
@@ -1101,28 +1101,25 @@ public abstract class GameLoop {
                                 switch (objChoiceName) {
                                     case "laundry":
                                         componentsGroup.getChildren().remove(laundry);
-                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "homework":
                                         componentsGroup.getChildren().remove(homework);
-                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "plates":
                                         componentsGroup.getChildren().remove(plates);
-                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "trash":
                                         componentsGroup.getChildren().remove(trash);
-                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "picture":
                                         callFriend = true;
-                                        InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                         break;
                                     case "computer":
                                         new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), true).display();
                                         break;
                                 }
+                                if (!objChoiceName.equals("computer"))
+                                    InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                             } else if (objChoiceName.equals("computer") && xPressed) {
                                 InterconnectedIsolation.setImproveNum(InterconnectedIsolation.getImproveNum() + 1);
                                 new Level3(InterconnectedIsolation.getWindow(), false, 2405, 720, 1, 11, componentsGroup.getChildren().contains(homework), componentsGroup.getChildren().contains(plates), componentsGroup.getChildren().contains(trash), false).display();
@@ -1278,6 +1275,7 @@ public abstract class GameLoop {
 
     /**
      * Sets the dialogue options.
+     *
      * @param z the first dialogue option
      * @param x the second dialogue option
      * @since 1.11
@@ -1292,6 +1290,7 @@ public abstract class GameLoop {
 
     /**
      * Sets the dialogue options.
+     *
      * @param z the first dialogue option
      * @param x the second dialogue option
      * @param c the third dialogue option
