@@ -58,12 +58,13 @@ public class InterconnectedIsolation extends Application {
      * The main menu scene which appears in the stage.
      */
     private static Scene mainMenu;
+    private Scene MiniGame;
     /**
      * The number of aspects the player chooses improve.
      * Acts like a score.
      */
     private static int improveNum;
-
+    public static boolean moonwalk;
     /**
      * Creates all instances of screens and controls their flow.
      * It also controls all of the button functions.
@@ -89,7 +90,7 @@ public class InterconnectedIsolation extends Application {
             closeProgram();
         });
         window.setTitle("Interconnected Isolation");
-
+        window.setResizable(false);
         SplashScreen splash = new SplashScreen();
         splashScreen = splash.window();
 
@@ -128,6 +129,7 @@ public class InterconnectedIsolation extends Application {
             }
             if (!error) {
                 Player.setName(choose.getName());
+                moonwalk = Player.getName().equals("moonwalk");
                 improveNum = 0;
                 new Level1(window, 2298, 720, 2, 1).display();
             } else {
