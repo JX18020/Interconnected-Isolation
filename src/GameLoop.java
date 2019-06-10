@@ -259,6 +259,8 @@ public abstract class GameLoop {
      */
     private boolean callFriend;
 
+    private boolean twoOptions;
+
     /**
      * An ArrayList which contains 2 ArrayLists of displayable objects.
      */
@@ -432,6 +434,7 @@ public abstract class GameLoop {
                         "I mean it sort of makes a good nightstand right? " +
                         "I’m too lazy to move it anyways.")
         })));
+        twoOptions = false;
         stage = primaryStage;
         root = new Group();
         scene = new Scene(root, 1280, 720, Color.BLACK);
@@ -445,8 +448,8 @@ public abstract class GameLoop {
         this.sceneNum = sceneNum;
         this.flowSceneNum = flowSceneNum;
         try {
-            arrow = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/arrow.png")));
-            arrowRed = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/arrow_red.png")));
+            arrow = new ImageView(new Image(new FileInputStream("assets/images/arrow.png")));
+            arrowRed = new ImageView(new Image(new FileInputStream("assets/images/arrow_red.png")));
             initBackground(sceneNum);
         } catch (IOException e) {
         }
@@ -501,6 +504,7 @@ public abstract class GameLoop {
 
                 if (flowSceneNum == 1 || flowSceneNum == 9) {
                     if (!hasDialogue && System.currentTimeMillis() - lastDialogue > 200 && letGo) {
+                        enterPressed = false;
                         if (dialogueNum == 0) {
                             dialogue.setDialogue("Mom: Hello, " + player.getName() + "! How was school?");
                         }
@@ -508,6 +512,7 @@ public abstract class GameLoop {
                             switch (dialogueNum) {
                                 case 1:
                                     setOptions("Respond", "Ignore");
+                                    twoOptions = true;
                                     break;
                                 case 2:
                                     if (dialogueChoice == 'z') {
@@ -524,8 +529,10 @@ public abstract class GameLoop {
                             hasDialogue = true;
                             if (!isChoice)
                                 root.getChildren().add(dialogue.dialogueGroup);
-                            else
-                                root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup, dOptionC.optionGroup);
+                            else {
+                                root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup);
+                                if (!twoOptions) root.getChildren().add(dOptionC.optionGroup);
+                            }
                             dialogueNum++;
                             letGo = false;
                         }
@@ -634,6 +641,7 @@ public abstract class GameLoop {
                                         "Why do you care about what I do so much? " +
                                                 "It’s my life.",
                                         "...");
+                                twoOptions = false;
                                 break;
                             case 4:
                                 if (dialogueChoice == 'z')
@@ -659,6 +667,7 @@ public abstract class GameLoop {
                                 break;
                             case 7:
                                 setOptions("Yes", "No");
+                                twoOptions = true;
                             case 8:
                                 if (dialogueChoice == 'z')
                                     dialogueNum++;
@@ -671,6 +680,7 @@ public abstract class GameLoop {
                                 break;
                             case 10:
                                 setOptions("No, how am I addicted? It's just a hobby.", "Yeah, but it's not like I'm doing drugs or something.");
+                                twoOptions = true;
                                 break;
                             case 11:
                                 if (dialogueChoice == 'z')
@@ -685,6 +695,7 @@ public abstract class GameLoop {
                                 break;
                             case 13:
                                 setOptions("No, not at all.", "Yeah, I guess.");
+                                twoOptions = true;
                                 break;
                             case 14:
                                 if (dialogueChoice == 'z')
@@ -700,6 +711,7 @@ public abstract class GameLoop {
                                 break;
                             case 16:
                                 setOptions("Not really, I'm not yelling at you or anything.", "Yeah, maybe. But it's only because I'm in the middle of something.");
+                                twoOptions = true;
                                 break;
                             case 17:
                                 if (dialogueChoice == 'z')
@@ -717,6 +729,7 @@ public abstract class GameLoop {
                                 break;
                             case 19:
                                 setOptions("I'm still eating and sleeping enough to get me through the day.", "I just forget sometimes. ");
+                                twoOptions = true;
                                 break;
                             case 20:
                                 if (dialogueChoice == 'z')
@@ -732,6 +745,7 @@ public abstract class GameLoop {
                                 break;
                             case 22:
                                 setOptions("I just really don't like homework.", "Gaming is far better than doing homework.");
+                                twoOptions = true;
                                 break;
                             case 23:
                                 dialogue.setDialogue("Mom: It's directly affecting your grades at school. " +
@@ -745,6 +759,7 @@ public abstract class GameLoop {
                                     setOptions("It's fun.", "I'd rather not think about anything else.", "I like talking to me friends there.");
                                 } else
                                     setOptions("No really, it's fun.", "I'd rather not think about anything else.", "I like talking to me friends there.");
+                                twoOptions=false;
                                 break;
                             case 26:
                                 if (dialogueChoice == 'z') {
@@ -767,6 +782,7 @@ public abstract class GameLoop {
                                 break;
                             case 27:
                                 setOptions("My internet friends are more fun to talk to.", "I have more in common with my internet friends.");
+                                twoOptions = true;
                                 break;
                             case 28:
                                 dialogue.setDialogue("Mom: You could try to get to know your friends at school better. " +
@@ -785,6 +801,7 @@ public abstract class GameLoop {
                                 break;
                             case 32:
                                 setOptions("Why though? I can control myself.", "Okay fine.");
+                                twoOptions = true;
                                 break;
                             case 33:
                                 if (dialogueChoice == 'z')
@@ -799,6 +816,7 @@ public abstract class GameLoop {
                                 break;
                             case 35:
                                 setOptions("That's so strict.", "Is there any way I'd be able to use it more?");
+                                twoOptions = true;
                                 break;
                             case 36:
                                 if (dialogueChoice == 'z')
@@ -836,8 +854,10 @@ public abstract class GameLoop {
                         }
                         if (!isChoice)
                             root.getChildren().add(dialogue.dialogueGroup);
-                        else
-                            root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup, dOptionC.optionGroup);
+                        else {
+                            root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup);
+                            if (!twoOptions) root.getChildren().add(dOptionC.optionGroup);
+                        }
                         hasDialogue = true;
                         if (dialogueNum++ > 43) {
                             stop();
@@ -942,7 +962,7 @@ public abstract class GameLoop {
                                     "I know it’s not easy but I think you can improve a lot more. ");
                         else
                             dialogue.setDialogue("Mom: I’m really proud of how far you’ve come. " +
-                                    "I know it’s not easy. I think that both you and me have benefitted from the changes you’ve decided to make.");
+                                    "I know it’s not easy. I think that both you and me have benefited from the changes you’ve decided to make.");
 
                         lastDialogue = System.currentTimeMillis();
                         hasDialogue = true;
@@ -964,30 +984,40 @@ public abstract class GameLoop {
                         hasArrow = true;
                     }
                     if (ePressed) {
+                        leftPressed = false;
+                        rightPressed = false;
+                        enterPressed = false;
                         for (Obj o : objects.get(sceneNum & 1)) {
                             if (o.isNear()) {
                                 if (flowSceneNum == 10) {
                                     switch (o.getObjName()) {
                                         case "laundry":
                                             setOptions("Do laundry", "Leave it");
+                                            twoOptions = true;
                                             break;
                                         case "homework":
                                             setOptions("Do homework", "Leave it for tomorrow");
+                                            twoOptions = true;
                                             break;
                                         case "dresser":
                                             setOptions("Organize clothes in dresser", "Leave it how it is");
+                                            twoOptions = true;
                                             break;
                                         case "plates":
                                             setOptions("Clean up", "Leave them there");
+                                            twoOptions = true;
                                             break;
                                         case "picture":
                                             setOptions("Call friend", "Put it back on the shelf");
+                                            twoOptions = true;
                                             break;
                                         case "trash":
                                             setOptions("Empty bin", "Leave it for later");
+                                            twoOptions = true;
                                             break;
                                         case "guitar":
                                             setOptions("Tune it", "Leave");
+                                            twoOptions = true;
                                     }
                                 }
                                 boolean allDone = false;
@@ -1015,6 +1045,7 @@ public abstract class GameLoop {
                                     } else if (flowSceneNum == 10) {
                                         if (allDone) {
                                             setOptions("Play games", "Leave it");
+                                            twoOptions = true;
                                         } else {
                                             dialogue.setDialogue("Hmm, not right now.");
                                         }
@@ -1031,6 +1062,7 @@ public abstract class GameLoop {
                                 }
                                 if (o.getObjName().equals("seat")) {
                                     setOptions("Sit down", "Keep looking around");
+                                    twoOptions = true;
                                     lastUsage = System.currentTimeMillis();
                                 }
                                 objChoiceName = o.getObjName();
@@ -1039,8 +1071,10 @@ public abstract class GameLoop {
                         if (!hasDialogue) {
                             if (!isChoice)
                                 root.getChildren().add(dialogue.dialogueGroup);
-                            else
-                                root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup, dOptionC.optionGroup);
+                            else {
+                                root.getChildren().addAll(dOptionZ.optionGroup, dOptionX.optionGroup);
+                                if (!twoOptions) root.getChildren().add(dOptionC.optionGroup);
+                            }
                             hasDialogue = true;
                         }
                     }
@@ -1126,10 +1160,10 @@ public abstract class GameLoop {
 
                 if (flowSceneNum != 3 && flowSceneNum != 4 && flowSceneNum != 7 && flowSceneNum != 8 && flowSceneNum < 11) {
                     if (rightPressed && player.getCanMoveRight()) {
-                        player.playerView.setImage(player.getPlayerRight());
+                        player.playerView.setImage(InterconnectedIsolation.moonwalk ? player.getPlayerLeft() : player.getPlayerRight());
                         player.moveRight();
                     } else if (leftPressed && player.getCanMoveLeft()) {
-                        player.playerView.setImage(player.getPlayerLeft());
+                        player.playerView.setImage(InterconnectedIsolation.moonwalk ? player.getPlayerRight() : player.getPlayerLeft());
                         player.moveLeft();
                     } else player.playerView.setImage(player.getPlayerStand());
                 }
@@ -1287,7 +1321,7 @@ public abstract class GameLoop {
      */
     public void addObjects(int flowSceneNum) throws IOException {
         if (flowSceneNum == 1 || flowSceneNum == 9) {
-            ImageView mom = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom_flip.png")));
+            ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom_flip.png")));
             mom.setFitHeight(315);
             mom.setPreserveRatio(true);
             mom.setX(600);
@@ -1297,26 +1331,26 @@ public abstract class GameLoop {
         }
 
         if (flowSceneNum >= 2 && flowSceneNum <= 5 || flowSceneNum >= 10) {
-            laundry = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/laundry.png")));
+            laundry = new ImageView(new Image(new FileInputStream("assets/images/laundry.png")));
             laundry.setFitHeight(153);
             laundry.setPreserveRatio(true);
             laundry.setX(279);
             laundry.setY(441);
 
-            ImageView guitar = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/guitar.png")));
+            ImageView guitar = new ImageView(new Image(new FileInputStream("assets/images/guitar.png")));
             guitar.setFitHeight(396);
             guitar.setPreserveRatio(true);
             guitar.setX(774);
             guitar.setY(205);
 
-            ImageView picture = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/picture.png")));
+            ImageView picture = new ImageView(new Image(new FileInputStream("assets/images/picture.png")));
             picture.setFitHeight(63);
             picture.setPreserveRatio(true);
             picture.setX(1098);
             picture.setY(369);
 
             if (flowSceneNum < 11 || Level3.isHasPlates()) {
-                plates = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/plates.png")));
+                plates = new ImageView(new Image(new FileInputStream("assets/images/plates.png")));
                 plates.setFitHeight(72);
                 plates.setPreserveRatio(true);
                 plates.setX(1179);
@@ -1325,7 +1359,7 @@ public abstract class GameLoop {
             }
 
             if (flowSceneNum < 11 || Level3.isHasHomework()) {
-                homework = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/unfinished_homework.png")));
+                homework = new ImageView(new Image(new FileInputStream("assets/images/unfinished_homework.png")));
                 homework.setFitHeight(72);
                 homework.setPreserveRatio(true);
                 homework.setX(1583);
@@ -1334,7 +1368,7 @@ public abstract class GameLoop {
             }
 
             if (flowSceneNum < 11 || Level3.isHasTrash()) {
-                trash = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/trash.png")));
+                trash = new ImageView(new Image(new FileInputStream("assets/images/trash.png")));
                 trash.setFitHeight(135);
                 trash.setPreserveRatio(true);
                 trash.setX(927);
@@ -1348,7 +1382,7 @@ public abstract class GameLoop {
 
         }
         if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 5 || flowSceneNum == 11 || flowSceneNum == 12) {
-            ImageView bag = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/bag.png")));
+            ImageView bag = new ImageView(new Image(new FileInputStream("assets/images/bag.png")));
             bag.setFitHeight(117);
             bag.setPreserveRatio(true);
             bag.setX(1565);
@@ -1357,7 +1391,7 @@ public abstract class GameLoop {
             componentsGroup.getChildren().add(1, bag);
 
             if (flowSceneNum == 3 || flowSceneNum == 4 || flowSceneNum == 11 && Level3.isPlayedGames()) {
-                ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_sitting_at_chair.png")));
+                ImageView playerAtComputer = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_chair.png")));
                 playerAtComputer.setFitHeight(315);
                 playerAtComputer.setPreserveRatio(true);
                 playerAtComputer.setX(1323);
@@ -1366,7 +1400,7 @@ public abstract class GameLoop {
                 componentsGroup.getChildren().add(1, playerAtComputer);
             }
             if (flowSceneNum == 11 || flowSceneNum == 12) {
-                ImageView mom = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom.png")));
+                ImageView mom = new ImageView(new Image(new FileInputStream("assets/images/mom.png")));
                 mom.setFitHeight(315);
                 mom.setPreserveRatio(true);
                 mom.setX(900);
@@ -1374,7 +1408,7 @@ public abstract class GameLoop {
 
                 componentsGroup.getChildren().add(componentsGroup.getChildren().size() - 2, mom);
                 if (flowSceneNum == 11 && !Level3.isPlayedGames() || flowSceneNum == 12) {
-                    ImageView player = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_flip.png")));
+                    ImageView player = new ImageView(new Image(new FileInputStream("assets/images/player_flip.png")));
                     player.setFitHeight(333);
                     player.setPreserveRatio(true);
                     player.setX(1360);
@@ -1385,7 +1419,7 @@ public abstract class GameLoop {
             }
         }
         if (flowSceneNum == 6 || flowSceneNum == 7) {
-            ImageView momAtTable = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/mom_sitting_at_table.png")));
+            ImageView momAtTable = new ImageView(new Image(new FileInputStream("assets/images/mom_sitting_at_table.png")));
             momAtTable.setFitHeight(315);
             momAtTable.setPreserveRatio(true);
             momAtTable.setX(1269);
@@ -1393,7 +1427,7 @@ public abstract class GameLoop {
 
             componentsGroup.getChildren().add(1, momAtTable);
             if (flowSceneNum == 7) {
-                ImageView playerAtTable = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/player_sitting_at_table.png")));
+                ImageView playerAtTable = new ImageView(new Image(new FileInputStream("assets/images/player_sitting_at_table.png")));
                 playerAtTable.setFitHeight(315);
                 playerAtTable.setPreserveRatio(true);
                 playerAtTable.setX(763);
