@@ -69,11 +69,11 @@ public class Level2 extends GameLoop {
     public void initBackground(int sceneNum) throws IOException {
         Player.setHasBag(false);
         if (sceneNum == 2) {
-            background = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/scene2_door_closed.png")));
+            background = new ImageView(new Image(new FileInputStream("assets/images/scene2_door_closed.png")));
             setCanInteract(true);
             setCanExit(false);
         } else {
-            background = new ImageView(new Image(new FileInputStream("Interconnected-Isolation/assets/images/scene1_nighttime.png")));
+            background = new ImageView(new Image(new FileInputStream("assets/images/scene1_nighttime.png")));
             setCanInteract(false);
             setCanExit(true);
         }
@@ -94,9 +94,11 @@ public class Level2 extends GameLoop {
         if (flowSceneNum == 5) {
             player = new Player(componentsGroup, background.getFitWidth(), background.getFitHeight());
             player.reposition(1360, scene.getHeight() - 380);
+            componentsGroup.setTranslateX(-650);
         } else if (flowSceneNum == 6) {
             player = new Player(componentsGroup, background.getFitWidth(), background.getFitHeight());
             player.reposition(2100, scene.getHeight() - 380);
+            componentsGroup.setTranslateX(-1000);
         }
     }
 
