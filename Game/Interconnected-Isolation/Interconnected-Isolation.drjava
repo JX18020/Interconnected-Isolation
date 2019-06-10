@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<drjava version="drjava-20160913-225446">
+  <project autorefresh="true" main="src.InterconnectedIsolation" root="src/" work="../">
+    <createjar file=""/>
+    <source>
+      <file active="true" name="InterconnectedIsolation.java" package="" timestamp="09-Jun-2019 15:07:57">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="EndScreen.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="SplashScreen.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="ChooseName.java" package="" timestamp="09-Jun-2019 15:07:57">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Cutscene.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="ConfirmBox.java" package="" timestamp="09-Jun-2019 15:34:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Dialogue.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="DialogueOption.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="GameLoop.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Instructions.java" package="" timestamp="09-Jun-2019 15:07:57">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Level1.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Level2.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Level3.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="MainMenu.java" package="" timestamp="09-Jun-2019 15:07:57">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Obj.java" package="" timestamp="09-Jun-2019 15:12:49">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Player.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="PlayerRecords.java" package="" timestamp="09-Jun-2019 15:12:49">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Record.java" package="" timestamp="09-Jun-2019 14:56:21">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="RecordsList.java" package="" timestamp="09-Jun-2019 15:43:50">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+      <file name="Screen.java" package="" timestamp="09-Jun-2019 15:12:49">
+        <select from="0" to="0"/>
+        <scroll column="0" row="0"/>
+      </file>
+    </source>
+    <included/>
+    <excluded/>
+    <collapsed/>
+    <classpath/>
+    <breakpoints/>
+    <watches/>
+    <bookmarks/>
+    <preferences/>
+  </project>
+</drjava>
