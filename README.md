@@ -2,7 +2,9 @@
 
 ## Running the program
 To run in DrJava:
+
 Project Root: /Interconnected-Isolation/src
+
 Working Directory: CD root
 
 ## References
